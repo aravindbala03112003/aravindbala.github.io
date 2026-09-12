@@ -1,0 +1,31 @@
+<svg width="280" height="150" viewBox="0 0 280 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="human-panel" x1="43" y1="31" x2="215" y2="133" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#78A7FF" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#7B5EFF" stop-opacity=".08"/>
+    </linearGradient>
+    <linearGradient id="human-line" x1="59" y1="54" x2="210" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D5FF6E"/>
+      <stop offset="1" stop-color="#75A7FF"/>
+    </linearGradient>
+    <filter id="human-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+  </defs>
+  <circle cx="204" cy="41" r="24" fill="#75A7FF" fill-opacity=".12" filter="url(#human-glow)"/>
+  <circle cx="62" cy="114" r="20" fill="#D5FF6E" fill-opacity=".11" filter="url(#human-glow)"/>
+  <rect x="38" y="28" width="194" height="104" rx="17" fill="url(#human-panel)" stroke="#B8CEFF" stroke-opacity=".42"/>
+  <path d="M38 54H232" stroke="#B8CEFF" stroke-opacity=".28"/>
+  <circle cx="55" cy="41" r="3" fill="#D5FF6E"/>
+  <circle cx="66" cy="41" r="3" fill="#B6C7E6" fill-opacity=".65"/>
+  <circle cx="77" cy="41" r="3" fill="#B6C7E6" fill-opacity=".35"/>
+  <circle cx="82" cy="83" r="18" fill="#D5FF6E" fill-opacity=".18" stroke="#D5FF6E" stroke-opacity=".7"/>
+  <circle cx="82" cy="78" r="7" fill="#D5FF6E" fill-opacity=".9"/>
+  <path d="M69 99C72.5 91.5 78 88 82 88C86 88 91.5 91.5 95 99" stroke="#D5FF6E" stroke-width="4" stroke-linecap="round"/>
+  <rect x="118" y="68" width="78" height="8" rx="4" fill="url(#human-line)"/>
+  <rect x="118" y="84" width="58" height="7" rx="3.5" fill="#DCE8FF" fill-opacity=".55"/>
+  <rect x="118" y="98" width="68" height="7" rx="3.5" fill="#DCE8FF" fill-opacity=".26"/>
+  <path d="M210 69V110" stroke="url(#human-line)" stroke-width="2" stroke-dasharray="4 5"/>
+  <circle cx="210" cy="65" r="6" fill="#75A7FF" stroke="#DCE8FF" stroke-opacity=".7"/>
+  <circle cx="210" cy="114" r="6" fill="#D5FF6E" stroke="#DCE8FF" stroke-opacity=".7"/>
+</svg>

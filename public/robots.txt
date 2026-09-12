@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://portfolio-ebon-nine-39.vercel.app/sitemap.xml

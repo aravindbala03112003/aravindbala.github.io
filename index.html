@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" class="dark" data-theme="dark" style="color-scheme: dark; background-color: #07101f;">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#07101f" />
+    <meta name="description" content="Aravind Bala — Software Developer creating clear, resilient products where thoughtful interaction meets practical engineering." />
+    <meta name="keywords" content="Aravind Bala, Software Developer, Full Stack Developer, React, Java, Spring Boot, Portfolio, India" />
+    <meta name="author" content="Aravind Bala" />
+    
+    <!-- Permanent Dark Mode Pre-styling: Zero white flash on initial paint -->
+    <style>
+      :root, html, body, #root {
+        background-color: #07101f !important;
+        color: #f4f6fb !important;
+        color-scheme: dark !important;
+      }
+    </style>
+
+    <!-- Permanent Dark Mode Sanitizer -->
+    <script>
+      (function() {
+        try {
+          localStorage.removeItem('theme');
+          localStorage.removeItem('portfolio-theme');
+          sessionStorage.removeItem('theme');
+          sessionStorage.removeItem('portfolio-theme');
+        } catch (e) {}
+        document.documentElement.dataset.theme = 'dark';
+        document.documentElement.classList.add('dark');
+      })();
+    </script>
+    
+    <!-- OpenGraph Meta Tags -->
+    <meta property="og:title" content="Aravind Bala — Software Developer" />
+    <meta property="og:description" content="Interfaces with intent, code with character. Explore selected work and technical projects by Aravind Bala." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://portfolio-ebon-nine-39.vercel.app" />
+    <meta property="og:image" content="https://portfolio-ebon-nine-39.vercel.app/images/profile/aravind-bala.jpg" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Aravind Bala — Software Developer" />
+    <meta name="twitter:description" content="Interfaces with intent, code with character. Explore selected work and technical projects." />
+    <meta name="twitter:image" content="https://portfolio-ebon-nine-39.vercel.app/images/profile/aravind-bala.jpg" />
+    
+    <link rel="canonical" href="https://portfolio-ebon-nine-39.vercel.app" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Aravind Portfolio" />
+    <meta name="application-name" content="Aravind Bala Portfolio" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <title>Aravind Bala — Software Developer</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

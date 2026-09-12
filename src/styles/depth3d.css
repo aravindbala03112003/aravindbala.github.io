@@ -1,0 +1,2121 @@
+/* ==========================================================================
+   ARAVIND BALA PORTFOLIO — 3D DEPTH & ANIMATION LAYER (depth3d.css)
+   Non-destructive, additive 3D physical depth layer.
+   Colors: Electric Cyan (#75a7ff) | Neon Lime (#d5ff6e) | Soft Violet (#a855f7)
+   ========================================================================== */
+
+:root {
+  --mouse-3d-x: 0;
+  --mouse-3d-y: 0;
+  --mouse-3d-px: 0px;
+  --mouse-3d-py: 0px;
+  --depth-perspective: 1000px;
+}
+
+/* --------------------------------------------------------------------------
+   01. GLOBAL 3D UTILITIES & OVERLAY SAFETY
+   -------------------------------------------------------------------------- */
+.depth-3d-layer,
+.depth-3d-orbital-ring,
+.depth-3d-particle,
+.depth-3d-grid-plane,
+.depth-3d-sheen {
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   02. NAVBAR — MICRO 3D DEPTH (Section 4)
+   -------------------------------------------------------------------------- */
+.nav {
+  transform-style: preserve-3d;
+  perspective: 800px;
+}
+
+.brand-name {
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-logo-wrap {
+  perspective: 600px;
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+}
+
+.brand-logo-wrap img {
+  transform: translateZ(4px);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+}
+
+.nav-links button.active {
+  transform: translateZ(4px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), 0 0 12px rgba(117, 167, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .brand-name:hover {
+    transform: translateZ(4px);
+  }
+
+  .brand-logo-button:hover .brand-logo-wrap {
+    transform: rotateX(calc(var(--mouse-3d-y) * -4deg)) rotateY(calc(var(--mouse-3d-x) * 6deg)) scale(1.04);
+    filter: drop-shadow(0 6px 16px rgba(117, 167, 255, 0.4)) drop-shadow(0 0 8px rgba(213, 255, 110, 0.25));
+  }
+
+  .brand-logo-button:hover .brand-logo-wrap img {
+    transform: translateZ(8px);
+  }
+
+  /* Nav Links & Buttons — Micro Elevation & 3D Shadow */
+  .nav-links button {
+    transform: translateZ(0);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+  }
+
+  .nav-links button:hover {
+    transform: translateY(-1.5px) translateZ(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 10px rgba(117, 167, 255, 0.15);
+  }
+
+  .command-trigger {
+    transform: translateZ(0);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .command-trigger:hover {
+    transform: translateY(-1.5px) translateZ(4px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), 0 0 12px rgba(117, 167, 255, 0.2);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   03. HERO — 3D DEPTH ENVIRONMENT (Section 3)
+   -------------------------------------------------------------------------- */
+.hero {
+  perspective: var(--depth-perspective);
+  transform-style: preserve-3d;
+  --hero-dolly-z: 0px;
+  --hero-grid-scale: 1;
+  --hero-scroll-opacity: 1;
+}
+
+/* Volumetric Deep Space Fog Plane */
+.hero-3d-deep-fog {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 48%, transparent 0%, rgba(7, 16, 31, 0.45) 50%, #07101f 95%);
+  transform: translateZ(-80px);
+  z-index: 1;
+}
+
+.hero-grid {
+  transform: scale(var(--hero-grid-scale, 1)) translateZ(calc(var(--hero-dolly-z, 0px) * -0.2));
+  transition: transform 0.1s ease-out;
+}
+
+/* 3D Atmospheric Orbital Rings (Decorative Overlay) */
+.hero-3d-orbital-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-3d-orbital-ring {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.hero-3d-ring-primary {
+  width: 720px;
+  height: 720px;
+  margin-top: -360px;
+  margin-left: -360px;
+  border: 1px solid rgba(117, 167, 255, 0.14);
+  box-shadow: 0 0 24px rgba(117, 167, 255, 0.08), inset 0 0 24px rgba(117, 167, 255, 0.05);
+  transform: rotateX(68deg) rotateY(18deg) translateZ(10px) translate3d(calc(var(--mouse-3d-px) * 0.4), calc(var(--mouse-3d-py) * 0.4), 0);
+  animation: heroRingDrift 28s linear infinite;
+}
+
+.hero-3d-ring-secondary {
+  width: 980px;
+  height: 980px;
+  margin-top: -490px;
+  margin-left: -490px;
+  border: 1px dashed rgba(213, 255, 110, 0.1);
+  box-shadow: 0 0 32px rgba(213, 255, 110, 0.05);
+  transform: rotateX(74deg) rotateY(-22deg) translateZ(-15px) translate3d(calc(var(--mouse-3d-px) * -0.5), calc(var(--mouse-3d-py) * -0.5), 0);
+  animation: heroRingDriftRev 36s linear infinite;
+}
+
+.hero-3d-ring-accent {
+  width: 460px;
+  height: 460px;
+  margin-top: -230px;
+  margin-left: -230px;
+  border: 1px solid rgba(168, 85, 247, 0.12);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.08);
+  transform: rotateX(60deg) rotateZ(35deg) translateZ(25px) translate3d(calc(var(--mouse-3d-px) * 0.6), calc(var(--mouse-3d-py) * 0.6), 0);
+  animation: heroRingDrift 22s linear infinite;
+}
+
+@keyframes heroRingDrift {
+  0% { transform: rotateX(68deg) rotateY(18deg) rotateZ(0deg) translate3d(calc(var(--mouse-3d-px) * 0.4), calc(var(--mouse-3d-py) * 0.4), 0); }
+  100% { transform: rotateX(68deg) rotateY(18deg) rotateZ(360deg) translate3d(calc(var(--mouse-3d-px) * 0.4), calc(var(--mouse-3d-py) * 0.4), 0); }
+}
+
+@keyframes heroRingDriftRev {
+  0% { transform: rotateX(74deg) rotateY(-22deg) rotateZ(360deg) translate3d(calc(var(--mouse-3d-px) * -0.5), calc(var(--mouse-3d-py) * -0.5), 0); }
+  100% { transform: rotateX(74deg) rotateY(-22deg) rotateZ(0deg) translate3d(calc(var(--mouse-3d-px) * -0.5), calc(var(--mouse-3d-py) * -0.5), 0); }
+}
+
+/* Perspective Horizon Floor Grid */
+.hero-3d-perspective-grid {
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  right: 0;
+  height: 220px;
+  background-image: 
+    linear-gradient(to right, rgba(117, 167, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(117, 167, 255, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  transform: perspective(500px) rotateX(68deg);
+  transform-origin: bottom center;
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 90%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 90%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Floating Spatial Tech Accent Badges */
+.hero-3d-tech-badge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(12, 23, 41, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(117, 167, 255, 0.28);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45), 0 0 16px rgba(117, 167, 255, 0.16);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #75a7ff;
+  pointer-events: none;
+  z-index: 4;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.hero-3d-tech-badge .badge-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #d5ff6e;
+  box-shadow: 0 0 8px #d5ff6e;
+  animation: techBadgePulse 2.4s ease-in-out infinite;
+}
+
+@keyframes techBadgePulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px #d5ff6e; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.tech-badge-left {
+  top: 26%;
+  right: 42%;
+  transform: translateZ(22px) translate3d(calc(var(--mouse-3d-px) * 0.6), calc(var(--mouse-3d-py) * 0.6), 0);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tech-badge-right {
+  bottom: 24%;
+  right: 14%;
+  transform: translateZ(16px) translate3d(calc(var(--mouse-3d-px) * -0.5), calc(var(--mouse-3d-py) * -0.5), 0);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #d5ff6e;
+  border-color: rgba(213, 255, 110, 0.28);
+}
+
+.tech-badge-center {
+  top: 14%;
+  right: 20%;
+  transform: translateZ(28px) translate3d(calc(var(--mouse-3d-px) * 0.35), calc(var(--mouse-3d-py) * 0.35), 0);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #a855f7;
+  border-color: rgba(168, 85, 247, 0.32);
+}
+
+/* Subtle Hero Stage Parallax */
+.hero-cinematic-developer-stage {
+  transform: translate3d(calc(var(--mouse-3d-px) * -0.4), calc(var(--mouse-3d-py) * -0.4), var(--hero-dolly-z, 0px));
+  will-change: transform;
+}
+
+.hero-inner {
+  transform: translateZ(calc(var(--hero-dolly-z, 0px) * 0.4));
+  opacity: var(--hero-scroll-opacity, 1);
+  will-change: transform, opacity;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero-dev-photo-wrap {
+    transform-style: preserve-3d;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero:hover .hero-dev-photo-wrap {
+    transform: rotateX(calc(var(--mouse-3d-y) * -1.5deg)) rotateY(calc(var(--mouse-3d-x) * 1.8deg)) translateZ(8px);
+  }
+
+  .hero-copy {
+    transform: translate3d(calc(var(--mouse-3d-px) * 0.25), calc(var(--mouse-3d-py) * 0.25), 0);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   04. ABOUT / SELF INTRO — MULTI-LAYER DEPTH (Section 5)
+   -------------------------------------------------------------------------- */
+.about {
+  perspective: var(--depth-perspective);
+  position: relative;
+  --about-parallax-bg: 0px;
+  --about-parallax-fg: 0px;
+}
+
+.about-3d-depth-stage {
+  position: absolute;
+  inset: -60px 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  transform: translateY(var(--about-parallax-bg, 0px)) translateZ(-50px);
+  will-change: transform;
+}
+
+/* Layer 1: Ambient Architectural Blueprint Grid */
+.about-3d-blueprint-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(117, 167, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(117, 167, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.6) 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.6) 0%, transparent 75%);
+}
+
+.about-depth-plane {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at calc(50% + var(--mouse-3d-px) * 2) calc(45% + var(--mouse-3d-py) * 2), rgba(117, 167, 255, 0.04) 0%, transparent 65%);
+  will-change: background;
+}
+
+.about-depth-shape {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(40px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.about-depth-shape.ds-1 {
+  width: 280px;
+  height: 280px;
+  top: 10%;
+  right: 5%;
+  background: radial-gradient(circle, rgba(117, 167, 255, 0.12) 0%, transparent 70%);
+  transform: translate3d(calc(var(--mouse-3d-px) * 0.8), calc(var(--mouse-3d-py) * 0.8), 0);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-depth-shape.ds-2 {
+  width: 220px;
+  height: 220px;
+  bottom: 15%;
+  left: 10%;
+  background: radial-gradient(circle, rgba(213, 255, 110, 0.09) 0%, transparent 70%);
+  transform: translate3d(calc(var(--mouse-3d-px) * -0.7), calc(var(--mouse-3d-py) * -0.7), 0);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Layer 3: Foreground Floating Telemetry Glass Chips */
+.about-floating-telemetry {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  transform: translateY(var(--about-parallax-fg, 0px)) translateZ(35px);
+  will-change: transform;
+}
+
+.telemetry-chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(12, 23, 41, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  color: #e2e8f0;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.telemetry-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot-cyan {
+  background: #75a7ff;
+  box-shadow: 0 0 8px #75a7ff;
+}
+
+.dot-lime {
+  background: #d5ff6e;
+  box-shadow: 0 0 8px #d5ff6e;
+}
+
+.dot-purple {
+  background: #a855f7;
+  box-shadow: 0 0 8px #a855f7;
+}
+
+.chip-left {
+  top: 18%;
+  left: 4%;
+  border-color: rgba(117, 167, 255, 0.28);
+  transform: translate3d(calc(var(--mouse-3d-px) * 0.5), calc(var(--mouse-3d-py) * 0.5), 0);
+}
+
+.chip-right {
+  top: 38%;
+  right: 5%;
+  border-color: rgba(213, 255, 110, 0.28);
+  transform: translate3d(calc(var(--mouse-3d-px) * -0.6), calc(var(--mouse-3d-py) * -0.6), 0);
+}
+
+.chip-bottom {
+  bottom: 8%;
+  left: 8%;
+  border-color: rgba(168, 85, 247, 0.28);
+  transform: translate3d(calc(var(--mouse-3d-px) * 0.4), calc(var(--mouse-3d-py) * 0.4), 0);
+}
+
+@media (max-width: 900px) {
+  .about-floating-telemetry {
+    display: none;
+  }
+}
+
+.about-cards {
+  transform-style: preserve-3d;
+}
+
+.value-card.glass-tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .value-card.glass-tilt-card:hover {
+    transform: translateY(-4px) translateZ(8px) rotateX(calc(var(--mouse-3d-y) * -2deg)) rotateY(calc(var(--mouse-3d-x) * 2deg));
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(117, 167, 255, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .value-card.glass-tilt-card .value-visual {
+    transform: translateZ(6px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .value-card.glass-tilt-card:hover .value-visual {
+    transform: translateZ(14px);
+  }
+
+  .value-card.glass-tilt-card .value-number {
+    transform: translateZ(4px);
+    transition: transform 0.35s ease;
+  }
+
+  .value-card.glass-tilt-card:hover .value-number {
+    transform: translateZ(10px);
+  }
+}
+
+.stats-band {
+  transform-style: preserve-3d;
+}
+
+.stats-band > div {
+  transform-style: preserve-3d;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease;
+}
+
+/* --------------------------------------------------------------------------
+   04b. ARCHITECTURE CONSTELLATION & DATA FLOW TOPOLOGY
+   -------------------------------------------------------------------------- */
+.arch-constellation-container {
+  margin: 56px 0 44px 0;
+  padding: 24px 28px;
+  border-radius: 20px;
+  background: rgba(10, 18, 32, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 2;
+}
+
+.arch-constellation-header {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.arch-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.arch-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: #75a7ff;
+}
+
+.arch-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #75a7ff;
+  box-shadow: 0 0 8px #75a7ff;
+  animation: techBadgePulse 2s ease-in-out infinite;
+}
+
+.arch-title {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin: 0;
+}
+
+.arch-flow-filters {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.arch-filter-btn {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto !important;
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(15, 26, 46, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  transition: all 0.22s ease;
+}
+
+.arch-filter-btn:hover {
+  color: #f1f5f9;
+  border-color: rgba(117, 167, 255, 0.35);
+  background: rgba(117, 167, 255, 0.08);
+}
+
+.arch-filter-btn.active {
+  color: #07101f;
+  background: #d5ff6e;
+  border-color: #d5ff6e;
+  font-weight: 600;
+  box-shadow: 0 0 14px rgba(213, 255, 110, 0.3);
+}
+
+.arch-pipeline-board {
+  position: relative;
+  z-index: 1;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.arch-vector-track {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  z-index: 1;
+  pointer-events: none !important;
+}
+
+.arch-vector-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none !important;
+}
+
+.arch-pulse-path {
+  animation: archPulseMove 6s linear infinite;
+}
+
+.arch-pulse-path.path-active {
+  animation-duration: 2.5s;
+  stroke-width: 3.5;
+  filter: drop-shadow(0 0 8px #75a7ff);
+}
+
+@keyframes archPulseMove {
+  0% { stroke-dashoffset: 168; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.arch-nodes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.arch-node-card {
+  position: relative;
+  border-radius: 16px;
+  background: rgba(12, 22, 39, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.arch-node-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.arch-node-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.arch-node-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--node-accent);
+  font-weight: 600;
+}
+
+.arch-node-badge {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  letter-spacing: 0.06em;
+}
+
+.arch-node-title {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+}
+
+.arch-node-desc {
+  font-size: 11.5px;
+  color: #94a3b8;
+  line-height: 1.45;
+  margin: 0 0 14px 0;
+  flex-grow: 1;
+}
+
+.arch-node-techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.arch-tech-chip {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 2.5px 7px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: #cbd5e1;
+  transition: all 0.2s ease;
+}
+
+.arch-node-card:hover .arch-tech-chip {
+  background: rgba(117, 167, 255, 0.1);
+  border-color: rgba(117, 167, 255, 0.25);
+  color: #f1f5f9;
+}
+
+.arch-node-metric {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--node-accent);
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.metric-indicator {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--node-accent);
+  box-shadow: 0 0 6px var(--node-accent);
+}
+
+.arch-flow-arrow {
+  position: absolute;
+  right: -14px;
+  top: 36px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(15, 26, 46, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #75a7ff;
+  font-size: 10px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Hover & Active States */
+.arch-node-card:hover,
+.arch-node-card.is-highlighted {
+  transform: translateY(-6px) translateZ(20px) scale(1.02);
+  border-color: var(--node-accent);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(117, 167, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.arch-node-card.is-dimmed {
+  opacity: 0.35;
+  transform: scale(0.98);
+  filter: grayscale(40%);
+}
+
+@media (max-width: 1024px) {
+  .arch-nodes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .arch-vector-track,
+  .arch-flow-arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .arch-nodes-grid {
+    grid-template-columns: 1fr;
+  }
+  .arch-constellation-container {
+    margin: 40px 0 36px 0;
+    padding: 18px 14px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   05. TOOLKIT / SKILLS — 3D DEPTH CARDS (Section 6)
+   -------------------------------------------------------------------------- */
+.skills-grid {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.skill-group {
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  position: relative;
+}
+
+/* Subtle 3D Glass Edge Refraction */
+.skill-group::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transition: opacity 0.35s ease, border-color 0.35s ease;
+  opacity: 0.7;
+}
+
+.skill-group h3,
+.skill-group .card-number {
+  transform-style: preserve-3d;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skill-list {
+  transform-style: preserve-3d;
+}
+
+.skill-chip-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .skill-group:hover {
+    transform: translateY(-4px) translateZ(8px) rotateX(var(--card-tilt-x, 0deg)) rotateY(var(--card-tilt-y, 0deg));
+    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.65), 0 0 32px rgba(117, 167, 255, 0.2), 0 0 14px rgba(213, 255, 110, 0.12);
+  }
+
+  .skill-group:hover::after {
+    opacity: 1;
+    border-color: rgba(117, 167, 255, 0.32);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.22), 0 0 14px rgba(117, 167, 255, 0.18);
+  }
+
+  .skill-group:hover h3 {
+    transform: translateZ(10px);
+  }
+
+  .skill-group:hover .card-number {
+    transform: translateZ(8px);
+  }
+
+  .skill-chip-3d:hover {
+    transform: translateY(-2px) translateZ(14px) scale(1.04);
+    background: color-mix(in srgb, var(--blue) 16%, rgba(12, 23, 41, 0.9)) !important;
+    border-color: rgba(117, 167, 255, 0.45) !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), 0 0 16px rgba(117, 167, 255, 0.32) !important;
+  }
+
+  .skill-chip-3d:hover i {
+    transform: translateZ(4px) translate(2px, -2px);
+    color: var(--lime);
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   06. HOW I CAN HELP / SERVICES — 3D PHYSICAL DEPTH (Section 7)
+   -------------------------------------------------------------------------- */
+.service-cards-grid {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.service-card {
+  transform-style: preserve-3d;
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.38s ease, border-color 0.38s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover {
+    transform: translateY(-4px) translateZ(8px) rotateX(calc(var(--mouse-3d-y) * -2deg)) rotateY(calc(var(--mouse-3d-x) * 2.5deg));
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.55), 0 0 32px rgba(117, 167, 255, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+
+  .service-card:hover .service-action-pill {
+    transform: translateZ(6px);
+  }
+
+  .service-card:hover .service-schematic-stage {
+    transform: translateZ(5px);
+    transition: transform 0.35s ease;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   07. EXPERIENCE & TIMELINE — GPU-ACCELERATED SYNCHRONIZED ARCHITECTURE
+   -------------------------------------------------------------------------- */
+.holographic-timeline {
+  position: relative !important;
+  transform: none !important;
+  perspective: none !important;
+  transform-style: flat !important;
+  will-change: auto !important;
+}
+
+/* Subtle Static Guide Rail */
+.cyber-beam-track {
+  position: absolute !important;
+  left: var(--timeline-anchor-x) !important;
+  transform: translateX(-50%) !important;
+  width: 2px !important;
+  top: 36px !important;
+  bottom: 36px !important;
+  background: rgba(117, 167, 255, 0.14) !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  border-radius: 999px;
+}
+
+/* Progressive Scroll-Synchronized Glowing Energy Beam (GPU scaleY, ZERO Layout Reflow) */
+.cyber-beam-fill {
+  position: absolute !important;
+  left: var(--timeline-anchor-x) !important;
+  top: 36px !important;
+  bottom: 36px !important;
+  width: 2.5px !important;
+  background: linear-gradient(180deg, #75a7ff 0%, #38bdf8 65%, #d5ff6e 100%) !important;
+  box-shadow: 0 0 12px rgba(117, 167, 255, 0.85), 0 0 24px rgba(213, 255, 110, 0.6) !important;
+  border-radius: 999px;
+  z-index: 2 !important;
+  pointer-events: none !important;
+  transform-origin: top center !important;
+  transform: translateX(-50%) scaleY(var(--beam-scale, 0.04)) !important;
+  will-change: transform !important;
+  transition: none !important; /* Instantaneous 60fps compositor tracking without lag */
+}
+
+/* Traveling Photon Pulse Head at Beam Tip */
+.cyber-beam-pulse-head {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 10px #ffffff, 0 0 18px #d5ff6e, 0 0 28px #75a7ff;
+  animation: photonPulseGlow 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes photonPulseGlow {
+  0% { transform: translateX(-50%) scale(0.9); opacity: 0.85; }
+  100% { transform: translateX(-50%) scale(1.35); opacity: 1; filter: drop-shadow(0 0 8px #d5ff6e); }
+}
+
+/* Timeline Item Container — Physically Stable Hitbox & Crisp Subpixel Typography */
+.cyber-timeline-item {
+  transform: none !important;
+  transform-style: flat !important;
+  transition: background 0.25s ease, opacity 0.3s ease, border-color 0.25s ease !important;
+  outline: none;
+  position: relative;
+}
+
+/* Clean, Highly Legible Future Milestones (No Blurriness or Extreme Fading) */
+.cyber-timeline-item.is-pending {
+  opacity: 0.72 !important;
+  transform: none !important;
+}
+
+/* Passed Milestones: Fully Grounded and Readable */
+.cyber-timeline-item.is-passed {
+  opacity: 0.92 !important;
+  transform: none !important;
+}
+
+/* Active Milestone: Focused Radiant Accent */
+.cyber-timeline-item.is-active {
+  opacity: 1 !important;
+  transform: none !important;
+  background: color-mix(in srgb, var(--blue) 12%, transparent) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 0 18px rgba(117, 167, 255, 0.16) !important;
+}
+
+/* Timeline Year Column */
+.timeline-year {
+  transition: color 0.25s ease !important;
+  transform: none !important;
+}
+
+.is-active .timeline-year {
+  color: #d5ff6e !important;
+  text-shadow: 0 0 12px rgba(213, 255, 110, 0.5) !important;
+}
+
+/* Node Wrapper & Circular Node (Anchored Precisely on the Beam Line) */
+.cyber-node-wrapper {
+  grid-column: 2 !important;
+  justify-self: center !important;
+  align-self: start !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 24px !important;
+  height: 24px !important;
+  margin-top: 1px !important;
+  z-index: 3 !important;
+  transform: none !important; /* Node wrapper NEVER moves on hover */
+}
+
+.cyber-node {
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+  background: #0c1729 !important;
+  border: 2px solid rgba(117, 167, 255, 0.4) !important;
+  box-shadow: none !important;
+  transform: scale(1) !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease !important;
+}
+
+/* Passed Node: Stably Illuminated with Lime Core */
+.is-passed .cyber-node {
+  background: var(--lime) !important;
+  border-color: var(--bg) !important;
+  box-shadow: 0 0 0 3px rgba(213, 255, 110, 0.35), 0 0 16px rgba(213, 255, 110, 0.8) !important;
+}
+
+/* Active Node: Focused Glowing Energy State */
+.is-active .cyber-node {
+  background: #ffffff !important;
+  border-color: var(--blue) !important;
+  transform: scale(1.24) !important;
+  box-shadow: 0 0 0 4px rgba(117, 167, 255, 0.5), 0 0 24px rgba(117, 167, 255, 0.95), 0 0 36px rgba(213, 255, 110, 0.65) !important;
+}
+
+/* Active Expanding Pulse Ring */
+.cyber-node-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid var(--blue);
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9);
+}
+
+.is-active .cyber-node-ring {
+  opacity: 1;
+  animation: activeNodePulseRing 2.2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+@keyframes activeNodePulseRing {
+  0% { transform: scale(0.85); opacity: 0.85; border-color: #75a7ff; }
+  60% { transform: scale(1.6); opacity: 0; border-color: #d5ff6e; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Stable Interactive Hover States (NO Hitbox Shaking / No Displaced Dots) */
+@media (hover: hover) and (pointer: fine) {
+  .cyber-timeline-item:hover {
+    background: color-mix(in srgb, var(--blue) 10%, transparent) !important;
+    transform: none !important; /* Outer hitbox is 100% stable */
+  }
+
+  .cyber-timeline-item:hover .cyber-node {
+    transform: scale(1.24) !important;
+    box-shadow: 0 0 0 4px rgba(117, 167, 255, 0.45), 0 0 22px rgba(117, 167, 255, 0.9) !important;
+    background: var(--blue) !important;
+  }
+
+  .cyber-timeline-item:hover .timeline-card-content {
+    transform: translateX(4px) !important;
+  }
+}
+
+.timeline-card-content {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: none;
+}
+
+/* Document Button: Always Clickable and Elevated */
+.timeline-doc-btn {
+  transform: translateZ(0);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .timeline-doc-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 18px rgba(117, 167, 255, 0.3) !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   08. PROJECTS / WORK — 3D LAYERED PHYSICAL PREVIEW
+   -------------------------------------------------------------------------- */
+.projects {
+  perspective: 1400px;
+}
+
+.project-card {
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Moving Specular Sheen across Project Card */
+.project-3d-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: radial-gradient(
+    circle 320px at var(--card-mouse-x, 50%) var(--card-mouse-y, 50%),
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-3d-sheen {
+  opacity: 1;
+}
+
+/* Subtle Animated Border Glow */
+.project-3d-border-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  border: 1px solid transparent;
+  z-index: 6;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.project-card:hover .project-3d-border-glow {
+  border-color: rgba(117, 167, 255, 0.35);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 0 20px rgba(117, 167, 255, 0.15);
+}
+
+.project-art {
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-content {
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-index {
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-metric {
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    transform: translateY(-5px) translateZ(8px) rotateX(var(--card-tilt-x, 0deg)) rotateY(var(--card-tilt-y, 0deg));
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), 0 0 35px rgba(117, 167, 255, 0.2);
+  }
+
+  .project-card:hover .project-art {
+    transform: translateZ(14px) scale(1.02);
+  }
+
+  .project-card:hover .project-content {
+    transform: translateZ(10px);
+  }
+
+  .project-card:hover .project-index {
+    transform: translateZ(8px);
+  }
+
+  .project-card:hover .project-metric {
+    transform: translateZ(18px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(117, 167, 255, 0.25);
+  }
+
+  .project-card:hover .project-bottom button {
+    transform: translateZ(12px) scale(1.06);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* Domain-Bespoke 3D Floating HUD Motifs (WOW #3) */
+.project-bespoke-motif {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 4;
+  pointer-events: none;
+  transform: translateZ(20px);
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.motif-badge-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(7, 16, 31, 0.76);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: #f1f5f9;
+  transition: all 0.3s ease;
+}
+
+.motif-code {
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.motif-sub {
+  color: #94a3b8;
+  font-size: 9px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  padding-left: 6px;
+}
+
+.motif-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.motif-event .motif-badge-glass {
+  border-color: rgba(117, 167, 255, 0.3);
+}
+
+.motif-vote .motif-badge-glass {
+  border-color: rgba(213, 255, 110, 0.3);
+}
+
+.motif-finance .motif-badge-glass {
+  border-color: rgba(213, 255, 110, 0.3);
+}
+
+.motif-travel .motif-badge-glass {
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.motif-research .motif-badge-glass {
+  border-color: rgba(168, 85, 247, 0.35);
+}
+
+.project-card:hover .project-bespoke-motif {
+  transform: translateY(-2px) translateZ(28px) scale(1.04);
+}
+
+.project-card:hover .motif-badge-glass {
+  background: rgba(10, 20, 38, 0.88);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 16px rgba(117, 167, 255, 0.2);
+}
+
+/* 3D Physical Lighting & Specular Reflection for DeviceViewer Stage */
+.device-stage {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.mockup-phone,
+.mockup-laptop {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.phone-screen,
+.laptop-screen {
+  transform-style: preserve-3d;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.phone-glare,
+.laptop-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 40%, transparent 60%);
+  mix-blend-mode: overlay;
+  z-index: 10;
+}
+
+/* --------------------------------------------------------------------------
+   09. COMMUNITY / TESTIMONIALS — STABLE CARD & BESPOKE 3D BACKGROUND (Section 11)
+   -------------------------------------------------------------------------- */
+
+/* Outer Card Container: Physically 100% Stable Hitbox & Layout (NO HOVER SHAKING) */
+.testimonial-card,
+.quote-card,
+.swiper-slide-active .testimonial-card,
+.swiper-slide-active .quote-card {
+  transform: none !important;
+  transform-style: flat !important;
+  perspective: none !important;
+  will-change: auto !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .testimonial-card:hover,
+  .quote-card:hover {
+    transform: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3D BACKGROUND STAGE (Internal Visual Layer, Pointer-Events: None, Z-Index: 1)
+   -------------------------------------------------------------------------- */
+.testimonial-3d-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  border-radius: inherit !important;
+  z-index: 1 !important;
+  background: rgba(10, 18, 33, 0.7) !important;
+}
+
+.bg-spatial-gradient {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  background: radial-gradient(
+    ellipse 85% 65% at 50% 100%,
+    rgba(17, 30, 56, 0.45) 0%,
+    rgba(8, 14, 26, 0.75) 100%
+  ) !important;
+}
+
+/* Internal Motion Stage — Moves ONLY internal visual layers via smooth lerp */
+.bg-motion-stage {
+  position: absolute !important;
+  inset: -20px !important;
+  pointer-events: none !important;
+  transform: translate3d(var(--bg-offset-x, 0px), var(--bg-offset-y, 0px), 0) !important;
+  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform;
+}
+
+.bg-cursor-radial {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  background: radial-gradient(
+    circle 200px at calc(50% + var(--bg-offset-x, 0px) * 2) calc(50% + var(--bg-offset-y, 0px) * 2),
+    rgba(117, 167, 255, 0.07) 0%,
+    transparent 70%
+  ) !important;
+  opacity: 0.8 !important;
+  transition: opacity 0.35s ease !important;
+}
+
+/* ==========================================================================
+   CARD 01: ATMOSPHERIC 3D DEPTH FIELD
+   ========================================================================== */
+.card01-spatial-env {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Soft Volumetric Pulsing Light Core */
+.card01-light-core {
+  position: absolute !important;
+  top: 30% !important;
+  left: 20% !important;
+  width: 220px !important;
+  height: 220px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(
+    circle,
+    rgba(117, 167, 255, 0.14) 0%,
+    rgba(53, 145, 255, 0.05) 45%,
+    transparent 75%
+  ) !important;
+  filter: blur(20px) !important;
+  animation: c01LightPulse 9s ease-in-out infinite alternate !important;
+}
+
+@keyframes c01LightPulse {
+  0% { transform: scale(0.92) translate(-6px, -4px); opacity: 0.5; }
+  50% { transform: scale(1.08) translate(8px, 6px); opacity: 0.85; }
+  100% { transform: scale(0.98) translate(2px, -2px); opacity: 0.6; }
+}
+
+/* 3D Perspective Horizon Grid Plane */
+.card01-horizon-grid {
+  position: absolute !important;
+  bottom: -15px !important;
+  left: -20% !important;
+  width: 140% !important;
+  height: 120px !important;
+  background-image:
+    linear-gradient(rgba(117, 167, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(117, 167, 255, 0.07) 1px, transparent 1px) !important;
+  background-size: 24px 24px !important;
+  transform: perspective(260px) rotateX(62deg) !important;
+  transform-origin: bottom center !important;
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 80%) !important;
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 80%) !important;
+  opacity: 0.6 !important;
+  animation: c01GridFlow 16s linear infinite !important;
+}
+
+@keyframes c01GridFlow {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 48px; }
+}
+
+/* Faint Concentric Depth Rings */
+.card01-depth-rings {
+  position: absolute !important;
+  top: 25px !important;
+  right: 25px !important;
+  width: 130px !important;
+  height: 130px !important;
+  pointer-events: none !important;
+}
+
+.depth-ring {
+  position: absolute !important;
+  border-radius: 50% !important;
+  border: 1px dashed rgba(117, 167, 255, 0.12) !important;
+}
+
+.depth-ring.ring-1 {
+  inset: 0 !important;
+  animation: c01RingRotate 36s linear infinite !important;
+}
+
+.depth-ring.ring-2 {
+  inset: 22px !important;
+  border: 1px solid rgba(117, 167, 255, 0.08) !important;
+  animation: c01RingRotate 24s linear infinite reverse !important;
+}
+
+@keyframes c01RingRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Floating 3D Depth Particles */
+.card01-particles {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+}
+
+.c01-particle {
+  position: absolute !important;
+  border-radius: 50% !important;
+  background: #75a7ff !important;
+  box-shadow: 0 0 6px rgba(117, 167, 255, 0.8) !important;
+  opacity: 0.35 !important;
+}
+
+.c01-particle.cp1 {
+  top: 24%;
+  left: 28%;
+  width: 2.5px;
+  height: 2.5px;
+  animation: c01Drift1 8s ease-in-out infinite alternate !important;
+}
+
+.c01-particle.cp2 {
+  top: 48%;
+  left: 68%;
+  width: 3px;
+  height: 3px;
+  animation: c01Drift2 10s ease-in-out infinite alternate -2s !important;
+}
+
+.c01-particle.cp3 {
+  top: 72%;
+  left: 35%;
+  width: 2px;
+  height: 2px;
+  animation: c01Drift3 9s ease-in-out infinite alternate -4s !important;
+}
+
+.c01-particle.cp4 {
+  top: 36%;
+  left: 82%;
+  width: 2px;
+  height: 2px;
+  animation: c01Drift1 11s ease-in-out infinite alternate -6s !important;
+}
+
+@keyframes c01Drift1 { 0% { transform: translate(0, 0); } 100% { transform: translate(7px, -8px); } }
+@keyframes c01Drift2 { 0% { transform: translate(0, 0); } 100% { transform: translate(-8px, 6px); } }
+@keyframes c01Drift3 { 0% { transform: translate(0, 0); } 100% { transform: translate(6px, 9px); } }
+
+/* ==========================================================================
+   CARD 02: SUBTLE 3D ORBIT & ENERGY RING
+   ========================================================================== */
+.card02-spatial-env {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+}
+
+.card02-orbit-wrap {
+  position: absolute !important;
+  top: 10px !important;
+  right: 15px !important;
+  width: 140px !important;
+  height: 140px !important;
+  pointer-events: none !important;
+  transform: perspective(350px) rotateX(42deg) rotateY(-18deg) !important;
+  opacity: 0.8 !important;
+}
+
+.card02-orbit-svg {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: visible !important;
+}
+
+.c02-orbit-track {
+  fill: none !important;
+  stroke: rgba(213, 255, 110, 0.14) !important;
+  stroke-width: 1 !important;
+  stroke-dasharray: 4 6 !important;
+}
+
+.c02-orbit-arc {
+  fill: none !important;
+  stroke: url(#orbitGrad02) !important;
+  stroke-width: 1.6 !important;
+  stroke-dasharray: 60 210 !important;
+  stroke-linecap: round !important;
+  animation: c02ArcSpin 12s linear infinite !important;
+}
+
+@keyframes c02ArcSpin {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -270; }
+}
+
+.c02-orbit-node {
+  fill: #d5ff6e !important;
+  filter: drop-shadow(0 0 6px rgba(213, 255, 110, 0.95)) !important;
+  animation: c02NodePulse 3s ease-in-out infinite alternate !important;
+}
+
+.c02-orbit-node-secondary {
+  fill: #75a7ff !important;
+  filter: drop-shadow(0 0 5px rgba(117, 167, 255, 0.9)) !important;
+  opacity: 0.65 !important;
+}
+
+@keyframes c02NodePulse {
+  0% { r: 2.6px; opacity: 0.65; }
+  100% { r: 3.8px; opacity: 1; }
+}
+
+.card02-traveling-light {
+  position: absolute !important;
+  top: 0 !important;
+  left: -60% !important;
+  width: 40% !important;
+  height: 100% !important;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(213, 255, 110, 0.05) 50%,
+    transparent 100%
+  ) !important;
+  transform: skewX(-20deg) !important;
+  animation: c02LightSweep 8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite !important;
+}
+
+@keyframes c02LightSweep {
+  0% { transform: translateX(0) skewX(-20deg); opacity: 0; }
+  30% { opacity: 0.75; }
+  60% { opacity: 0.75; }
+  100% { transform: translateX(450%) skewX(-20deg); opacity: 0; }
+}
+
+.card02-astral-glow {
+  position: absolute !important;
+  top: 20% !important;
+  right: 15% !important;
+  width: 180px !important;
+  height: 180px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(
+    circle,
+    rgba(213, 255, 110, 0.08) 0%,
+    rgba(117, 167, 255, 0.04) 45%,
+    transparent 75%
+  ) !important;
+  filter: blur(18px) !important;
+}
+
+/* ==========================================================================
+   CARD 03: FLOWING DEPTH FIELD & CONNECTED POINT NETWORK
+   ========================================================================== */
+.card03-spatial-env {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+}
+
+.card03-cyan-glow {
+  position: absolute !important;
+  top: 25% !important;
+  left: 20% !important;
+  width: 220px !important;
+  height: 200px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(
+    circle,
+    rgba(76, 224, 210, 0.11) 0%,
+    rgba(56, 189, 248, 0.04) 50%,
+    transparent 75%
+  ) !important;
+  filter: blur(20px) !important;
+  animation: c03CyanBreathe 7s ease-in-out infinite alternate !important;
+}
+
+@keyframes c03CyanBreathe {
+  0% { transform: scale(0.92); opacity: 0.5; }
+  100% { transform: scale(1.08); opacity: 0.85; }
+}
+
+.card03-constellation-wrap {
+  position: absolute !important;
+  inset: 10px 20px !important;
+  pointer-events: none !important;
+  transform: perspective(380px) rotateX(16deg) rotateY(-8deg) !important;
+}
+
+.card03-constellation-svg {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: visible !important;
+}
+
+.c03-link {
+  stroke: url(#cyanLineGrad) !important;
+  stroke-width: 1.2 !important;
+  stroke-dasharray: 2 4 !important;
+  opacity: 0.55 !important;
+  animation: c03LinkPulse 4.5s ease-in-out infinite alternate !important;
+}
+
+.c03-link.l2 { animation-delay: -1.2s !important; }
+.c03-link.l3 { animation-delay: -2.4s !important; }
+.c03-link.l4 { animation-delay: -0.6s !important; }
+
+@keyframes c03LinkPulse {
+  0% { opacity: 0.3; stroke-width: 1; }
+  100% { opacity: 0.8; stroke-width: 1.5; }
+}
+
+.c03-node {
+  fill: #7ef2e6 !important;
+  filter: drop-shadow(0 0 5px rgba(126, 242, 230, 0.85)) !important;
+  animation: c03NodeHover 6s ease-in-out infinite alternate !important;
+}
+
+.c03-node.n2 { animation-delay: -1.5s !important; }
+.c03-node.n3 { animation-delay: -3s !important; }
+.c03-node.n5 { animation-delay: -2s !important; }
+
+@keyframes c03NodeHover {
+  0% { transform: translate(0, 0); opacity: 0.6; }
+  100% { transform: translate(3px, -4px); opacity: 1; }
+}
+
+.card03-depth-stream {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 45% !important;
+  background: radial-gradient(
+    ellipse 80% 50% at 50% 100%,
+    rgba(76, 224, 210, 0.06) 0%,
+    transparent 70%
+  ) !important;
+  pointer-events: none !important;
+}
+
+/* ==========================================================================
+   CARD 04: MINIMAL ORBITAL & LIGHT-FIELD ENVIRONMENT
+   ========================================================================== */
+.card04-spatial-env {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+}
+
+.card04-nebula-glow {
+  position: absolute !important;
+  bottom: 20% !important;
+  right: 15% !important;
+  width: 240px !important;
+  height: 200px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(
+    circle,
+    rgba(178, 140, 255, 0.12) 0%,
+    rgba(139, 92, 246, 0.05) 50%,
+    transparent 75%
+  ) !important;
+  filter: blur(22px) !important;
+  animation: c04NebulaDrift 9s ease-in-out infinite alternate !important;
+}
+
+@keyframes c04NebulaDrift {
+  0% { transform: scale(0.94) translate(4px, 4px); opacity: 0.55; }
+  100% { transform: scale(1.06) translate(-6px, -6px); opacity: 0.9; }
+}
+
+.card04-orbits-wrap {
+  position: absolute !important;
+  top: 15px !important;
+  right: 20px !important;
+  width: 150px !important;
+  height: 150px !important;
+  pointer-events: none !important;
+  transform: perspective(350px) rotateX(46deg) rotateZ(18deg) !important;
+}
+
+.card04-orbits-svg {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: visible !important;
+}
+
+.c04-ring {
+  fill: none !important;
+  stroke: url(#purpleRingGrad) !important;
+  stroke-dasharray: 6 10 !important;
+}
+
+.c04-ring.outer-ring {
+  stroke-width: 1.2 !important;
+  animation: c04OuterSpin 24s linear infinite !important;
+  transform-origin: center center !important;
+}
+
+.c04-ring.inner-ring {
+  stroke-width: 1 !important;
+  stroke-dasharray: 4 8 !important;
+  animation: c04OuterSpin 16s linear infinite reverse !important;
+  transform-origin: center center !important;
+}
+
+@keyframes c04OuterSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.c04-node {
+  fill: #b28cff !important;
+  filter: drop-shadow(0 0 6px rgba(178, 140, 255, 0.95)) !important;
+}
+
+.card04-floating-nodes {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+}
+
+.c04-star {
+  position: absolute !important;
+  border-radius: 50% !important;
+  background: #d0b8ff !important;
+  box-shadow: 0 0 5px rgba(208, 184, 255, 0.85) !important;
+  opacity: 0.35 !important;
+}
+
+.c04-star.s1 { top: 22%; left: 30%; width: 2.2px; height: 2.2px; animation: c04StarDrift 8s ease-in-out infinite alternate !important; }
+.c04-star.s2 { top: 65%; left: 24%; width: 2px; height: 2px; animation: c04StarDrift 9s ease-in-out infinite alternate -3s !important; }
+.c04-star.s3 { top: 44%; left: 74%; width: 2.8px; height: 2.8px; animation: c04StarDrift 10s ease-in-out infinite alternate -5s !important; }
+.c04-star.s4 { top: 78%; left: 62%; width: 1.8px; height: 1.8px; animation: c04StarDrift 7.5s ease-in-out infinite alternate -2s !important; }
+
+@keyframes c04StarDrift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(5px, -6px); }
+}
+
+/* ==========================================================================
+   SLIDER CONTROLS & PAGINATION ACCESSIBILITY (Unblocked, Always Clickable)
+   ========================================================================== */
+.testimonial-nav-btn {
+  z-index: 25 !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  cursor: pointer !important;
+}
+
+.testimonial-pagination-dot {
+  position: relative !important;
+  z-index: 25 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  width: 9px !important;
+  height: 9px !important;
+  transition: background-color 0.25s ease, transform 0.25s ease !important;
+}
+
+/* Expanded 28px Click/Touch Hit Target for Pagination Bullets */
+.testimonial-pagination-dot::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: -10px !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+.swiper-pagination {
+  z-index: 25 !important;
+  pointer-events: auto !important;
+}
+
+/* ==========================================================================
+   REDUCED MOTION MODE
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .card01-light-core,
+  .card01-horizon-grid,
+  .depth-ring,
+  .c01-particle,
+  .c02-orbit-arc,
+  .c02-orbit-node,
+  .card02-traveling-light,
+  .card03-cyan-glow,
+  .c03-link,
+  .c03-node,
+  .card04-nebula-glow,
+  .c04-ring,
+  .c04-star {
+    animation: none !important;
+  }
+  .bg-motion-stage {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. CONTACT — 3D DEPTH AROUND CTA (Section 12)
+   -------------------------------------------------------------------------- */
+.contact {
+  position: relative;
+  perspective: 1000px;
+}
+
+.contact-copy {
+  transform-style: preserve-3d;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-form {
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  position: relative;
+}
+
+.contact-3d-orbital-halo {
+  position: absolute;
+  top: 50%;
+  right: 15%;
+  width: 520px;
+  height: 520px;
+  margin-top: -260px;
+  border-radius: 50%;
+  border: 1px solid rgba(117, 167, 255, 0.1);
+  box-shadow: 0 0 45px rgba(117, 167, 255, 0.06), inset 0 0 35px rgba(213, 255, 110, 0.03);
+  transform: rotateX(65deg) rotateY(25deg) translateZ(-20px) translate3d(calc(var(--mouse-3d-px) * 0.4), calc(var(--mouse-3d-py) * 0.4), 0);
+  pointer-events: none;
+  animation: contactHaloSpin 32s linear infinite;
+  will-change: transform;
+}
+
+@keyframes contactHaloSpin {
+  0% { transform: rotateX(65deg) rotateY(25deg) rotateZ(0deg) translateZ(-20px) translate3d(calc(var(--mouse-3d-px) * 0.4), calc(var(--mouse-3d-py) * 0.4), 0); }
+  100% { transform: rotateX(65deg) rotateY(25deg) rotateZ(360deg) translateZ(-20px) translate3d(calc(var(--mouse-3d-px) * 0.4), calc(var(--mouse-3d-py) * 0.4), 0); }
+}
+
+/* Floating Spatial Transmission Nodes */
+.contact-spatial-nodes {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  z-index: 5;
+  pointer-events: auto;
+}
+
+.contact-spatial-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(10, 20, 36, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: #cbd5e1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateZ(10px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-spatial-node .node-beacon-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.contact-spatial-node:hover {
+  transform: translateY(-2px) translateZ(18px) scale(1.03);
+  color: #f8fafc;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5), 0 0 18px rgba(117, 167, 255, 0.25);
+}
+
+.node-github:hover {
+  border-color: rgba(117, 167, 255, 0.35);
+}
+
+.node-linkedin:hover {
+  border-color: rgba(213, 255, 110, 0.35);
+}
+
+@media (max-width: 768px) {
+  .contact-spatial-nodes {
+    position: static;
+    margin-bottom: 20px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contact-form:focus-within,
+  .contact-form:hover {
+    transform: translateY(-3px) translateZ(6px);
+    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.65), 0 0 28px rgba(117, 167, 255, 0.15);
+  }
+
+  .contact-form button[type="submit"]:hover {
+    transform: translateY(-2px) translateZ(8px);
+    box-shadow: 0 8px 24px rgba(117, 167, 255, 0.35);
+  }
+
+  .email-link:hover {
+    transform: translateY(-2px) translateZ(4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
+
+  .preview-email-trigger:hover {
+    transform: translateY(-2px) translateZ(6px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4), 0 0 16px rgba(117, 167, 255, 0.2);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. RESUME & SELF INTRO MODALS — 3D PAPER & GLASS FRAMING (Section 13 & 14)
+   -------------------------------------------------------------------------- */
+.futuristic-resume-btn {
+  transform: translateZ(0);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .futuristic-resume-btn:hover {
+    transform: translateY(-2px) translateZ(4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(117, 167, 255, 0.25);
+  }
+}
+
+.self-intro-video-frame {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(117, 167, 255, 0.18);
+}
+
+.self-intro-corner {
+  transform: translateZ(6px);
+}
+
+/* --------------------------------------------------------------------------
+   12. FOOTER — 3D SIGNATURE TOUCH (Section 15)
+   -------------------------------------------------------------------------- */
+.footer-cta {
+  perspective: 800px;
+}
+
+.footer-social a,
+.footer-social-btn {
+  transform: translateZ(0);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer-social a:hover,
+  .footer-social-btn:hover {
+    transform: translateY(-2px) translateZ(4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 0 12px rgba(117, 167, 255, 0.25);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. ACCESSIBILITY — PREFERS-REDUCED-MOTION (Section 19)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transform: none !important;
+  }
+
+  .hero-3d-orbital-ring,
+  .hero-3d-perspective-grid,
+  .hero-3d-tech-badge,
+  .about-depth-shape,
+  .contact-3d-orbital-halo,
+  .cyber-beam-pulse-head,
+  .project-3d-sheen,
+  .project-3d-border-glow {
+    display: none !important;
+  }
+
+  .cyber-timeline-item.is-pending,
+  .cyber-timeline-item.is-passed,
+  .cyber-timeline-item.is-active {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .cyber-beam-fill {
+    transform: translateX(-50%) scaleY(1) !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14. MOBILE RESPONSIVE GUARDS (Section 18 & 20)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .hero-3d-ring-primary {
+    width: 360px;
+    height: 360px;
+    margin-top: -180px;
+    margin-left: -180px;
+  }
+
+  .hero-3d-ring-secondary,
+  .hero-3d-ring-accent {
+    display: none;
+  }
+
+  .hero-3d-tech-badge {
+    display: none;
+  }
+
+  .hero-3d-perspective-grid {
+    height: 140px;
+  }
+
+  .skill-group,
+  .service-card,
+  .project-card,
+  .testimonial-card,
+  .value-card.glass-tilt-card,
+  .arch-node-card {
+    transform: none !important;
+  }
+
+  .project-3d-sheen {
+    display: none;
+  }
+}
+
+@media (hover: none) or (pointer: coarse) {
+  .project-card,
+  .skill-group,
+  .value-card.glass-tilt-card,
+  .service-card,
+  .arch-node-card {
+    transform: none !important;
+  }
+
+  .project-3d-sheen {
+    display: none !important;
+  }
+}

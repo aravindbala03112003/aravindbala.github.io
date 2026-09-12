@@ -1,0 +1,37 @@
+{
+  "name": "aravind-bala-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:apk": "node scripts/build-apk.js",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "latest",
+    "framer-motion": "^12.43.0",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.25",
+    "lottie-react": "^2.4.1",
+    "motion": "^12.43.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-icons": "^5.7.0",
+    "react-parallax-tilt": "^1.7.335",
+    "react-router-dom": "^7.18.1",
+    "swiper": "^14.0.6",
+    "tailwindcss": "^4.3.3",
+    "three": "^0.185.1",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "ffmpeg-static": "^5.3.0",
+    "vercel": "^58.3.0"
+  }
+}
