@@ -43,7 +43,7 @@ export default function Navbar({ active, onCommand }) {
         <nav className="nav container" aria-label="Main navigation">
           <div className="brand">
             <button className="profile-avatar-button brand-logo-button" onClick={() => visit('home')} aria-label="Aravind Bala Portfolio Logo">
-              <span className="profile-avatar brand-logo-wrap"><img src="/logo/portfolio-logo.png" alt="Aravind Bala Logo" /></span>
+              <span className="profile-avatar brand-logo-wrap"><img src={`${import.meta.env.BASE_URL}logo/portfolio-logo.png`} alt="Aravind Bala Logo" /></span>
             </button>
             <button className="brand-name" onClick={() => visit('home')} aria-label="Go home">
               <span className="brand-label">Aravind <b>Bala</b></span><i />
@@ -89,7 +89,7 @@ export default function Navbar({ active, onCommand }) {
       {/* Profile Photo Lightbox Modal */}
       {profileOpen && (
         <button className="profile-lightbox" onClick={() => setProfileOpen(false)} aria-label="Close profile photo">
-          <img src="/images/profile/aravind-bala.jpg" alt="Aravind Bala profile photo" />
+          <img src={`${import.meta.env.BASE_URL}images/profile/aravind-bala.jpg`} alt="Aravind Bala profile photo" />
           <span>Click anywhere to close</span>
         </button>
       )}

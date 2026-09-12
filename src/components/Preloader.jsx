@@ -14,7 +14,7 @@ export default function Preloader() {
       {loading && (
         <motion.div className="preloader" initial={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: .45 } }}>
           <div className="loader-mark">
-            <img src="/logo/portfolio-logo.png" alt="Aravind Bala" className="loader-logo-img" />
+            <img src={`${import.meta.env.BASE_URL}logo/portfolio-logo.png`} alt="Aravind Bala" className="loader-logo-img" />
             <i />
           </div>
           <p>Loading the work</p>

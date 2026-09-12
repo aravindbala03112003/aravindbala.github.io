@@ -10,7 +10,7 @@ export function Mail() { return <svg viewBox="0 0 24 24" aria-hidden="true"><pat
 export function PortfolioMark(props) {
   return (
     <img
-      src="/logo/portfolio-logo.png"
+      src={`${import.meta.env.BASE_URL}logo/portfolio-logo.png`}
       alt="Aravind Bala Logo"
       className="brand-logo"
       style={{ objectFit: 'contain', display: 'block' }}

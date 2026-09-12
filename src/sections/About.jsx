@@ -185,14 +185,14 @@ export default function About() {
           <div className="value-card glass-tilt-card reveal">
             <div className="specular-sheen" />
             <span className="value-number">01</span>
-            <div className="value-visual human-visual"><img src="/images/about/human-first.svg" alt="" aria-hidden="true" /></div>
+            <div className="value-visual human-visual"><img src={`${import.meta.env.BASE_URL}images/about/human-first.svg`} alt="" aria-hidden="true" /></div>
             <h3>Human first</h3>
             <p>Technology should make the complicated feel natural. I design and build around that belief.</p>
           </div>
           <div className="value-card glass-tilt-card reveal">
             <div className="specular-sheen" />
             <span className="value-number">02</span>
-            <div className="value-visual systems-visual"><img src="/images/about/built-to-last.svg" alt="" aria-hidden="true" /></div>
+            <div className="value-visual systems-visual"><img src={`${import.meta.env.BASE_URL}images/about/built-to-last.svg`} alt="" aria-hidden="true" /></div>
             <h3>Built to last</h3>
             <p>Clean architecture and intentional systems keep a good product good as it grows.</p>
           </div>

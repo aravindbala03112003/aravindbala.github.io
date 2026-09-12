@@ -63,7 +63,7 @@ export default function EmailPreviewModal({ isOpen, onClose, sampleName = 'Alex 
           {/* Live Rendered Email Container */}
           <div className="email-modal-body">
             <iframe
-              src="/email-template.html"
+              src={`${import.meta.env.BASE_URL}email-template.html`}
               title="Aravind Bala Auto-Response Email Preview"
               className="email-preview-iframe"
             />

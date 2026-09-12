@@ -205,7 +205,7 @@ export default function SelfIntroModal({ open, onClose }) {
             <video
               ref={videoRef}
               className="self-intro-video-element"
-              src={open ? "/self-intro/aravind%20v2.mp4" : undefined}
+              src={open ? `${import.meta.env.BASE_URL}self-intro/aravind%20v2.mp4` : undefined}
               controls
               playsInline
               preload="metadata"

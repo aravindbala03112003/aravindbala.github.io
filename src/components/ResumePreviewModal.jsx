@@ -432,7 +432,7 @@ export default function ResumePreviewModal({ isOpen, onClose }) {
                 >
                   <img
                     ref={imgRef}
-                    src="/aravindbala_resume_page-0001.jpg"
+                    src={`${import.meta.env.BASE_URL}aravindbala_resume_page-0001.jpg`}
                     alt="Aravind Bala — Software Developer Resume"
                     className="resume-preview-img"
                     loading="eager"

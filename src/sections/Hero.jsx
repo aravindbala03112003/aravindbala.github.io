@@ -142,7 +142,7 @@ export default function Hero() {
             </a>
             <a
               className={`button button-ghost futuristic-resume-btn ${isDownloading ? 'is-downloading' : ''}`}
-              href="/resume.pdf"
+              href={`${import.meta.env.BASE_URL}resume.pdf`}
               download="Aravind_Bala_Resume.pdf"
               onClick={handleResumeClick}
               aria-label="Download Aravind Bala Resume PDF and open preview"
