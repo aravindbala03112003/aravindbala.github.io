@@ -7749,3 +7749,202 @@ button.round-cta.conversation-portal:hover .portal-border-frame {
 
 
 
+
+
+/* ==========================================================================
+   EMAIL SECTION — ORIGINAL PREMIUM VISUAL RESTORATION
+   Visual-only override. EmailJS functionality and all other sections remain untouched.
+   ========================================================================== */
+
+.contact-form {
+  position: relative;
+  z-index: 2;
+  padding: 30px 32px;
+  border: 1px solid rgba(117, 167, 255, 0.22) !important;
+  border-radius: 24px !important;
+  background:
+    linear-gradient(145deg,
+      rgba(17, 31, 54, 0.94) 0%,
+      rgba(8, 16, 30, 0.97) 100%) !important;
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 28px 70px rgba(2, 8, 20, 0.52),
+    0 0 0 1px rgba(255, 255, 255, 0.025),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35) !important;
+}
+
+.contact-form::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: 23px;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg,
+      rgba(117, 167, 255, 0.08),
+      transparent 28%,
+      transparent 70%,
+      rgba(213, 255, 110, 0.025));
+  z-index: -1;
+}
+
+.contact-form label {
+  display: block;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contact-form input,
+.contact-form textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 9px;
+  color: var(--text);
+  background: rgba(27, 45, 73, 0.82) !important;
+  border: 1px solid rgba(117, 167, 255, 0.16) !important;
+  border-radius: 10px !important;
+  padding: 14px 15px !important;
+  outline: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    0 5px 18px rgba(0, 0, 0, 0.10);
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.contact-form input {
+  min-height: 50px;
+}
+
+.contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(190, 204, 226, 0.52);
+}
+
+.contact-form input:hover,
+.contact-form textarea:hover {
+  border-color: rgba(117, 167, 255, 0.30) !important;
+  background: rgba(31, 51, 82, 0.88) !important;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(117, 167, 255, 0.80) !important;
+  background: rgba(22, 39, 67, 0.96) !important;
+  box-shadow:
+    0 8px 25px rgba(117, 167, 255, 0.20),
+    0 0 0 1px rgba(117, 167, 255, 0.14),
+    inset 0 0 14px rgba(117, 167, 255, 0.07) !important;
+}
+
+.contact-form .button-primary {
+  margin-top: 8px;
+  border-radius: 12px !important;
+  box-shadow:
+    0 12px 30px rgba(117, 167, 255, 0.18),
+    0 0 24px rgba(213, 255, 110, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.contact-form small {
+  display: block;
+  margin-top: 12px;
+  color: rgba(166, 181, 207, 0.72);
+  line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+  .contact-form {
+    padding: 24px 20px;
+    border-radius: 20px !important;
+  }
+
+  .contact-form::before {
+    border-radius: 19px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 13px 14px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-form input,
+  .contact-form textarea {
+    transition: none;
+  }
+}
+
+
+/* ==========================================================================
+   EMAIL SECTION — CONSISTENT PREMIUM HOVER / FOCUS
+   Keeps the form visually stable before, on hover, and while typing.
+   ========================================================================== */
+
+.contact-form input,
+.contact-form textarea {
+  background: rgba(27, 45, 73, 0.82) !important;
+  border-color: rgba(117, 167, 255, 0.16) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    0 5px 18px rgba(0, 0, 0, 0.10) !important;
+  transform: none !important;
+}
+
+/* Hover: only a very small premium lift — no bright fill or glow */
+.contact-form input:hover,
+.contact-form textarea:hover {
+  background: rgba(29, 47, 76, 0.86) !important;
+  border-color: rgba(117, 167, 255, 0.24) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 6px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Focus/selected: preserve the same premium surface instead of creating
+   the strong blue halo seen in the focused screenshot. */
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  background: rgba(29, 47, 76, 0.90) !important;
+  border-color: rgba(117, 167, 255, 0.42) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 6px 22px rgba(0, 0, 0, 0.14) !important;
+  outline: none !important;
+  transform: none !important;
+}
+
+/* The form card itself must NOT glow/change when a field is selected. */
+.contact-form:focus-within {
+  border-color: rgba(117, 167, 255, 0.22) !important;
+  box-shadow:
+    0 28px 70px rgba(2, 8, 20, 0.52),
+    0 0 0 1px rgba(255, 255, 255, 0.025),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Keep the success button visually premium and stable while the form is active. */
+.contact-form .button-primary:hover,
+.contact-form .button-primary:focus,
+.contact-form .button-primary:focus-visible {
+  transform: translateY(-1px);
+}

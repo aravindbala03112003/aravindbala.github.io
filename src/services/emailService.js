@@ -1,6 +1,14 @@
 import emailjs from '@emailjs/browser';
-import { contactEmail, gmailComposeUrl } from '../data/contact';
+import { contactEmail } from '../data/contact';
 
+/*
+ * ============================================================
+ * EMAILJS CONFIGURATION
+ * ============================================================
+ *
+ * These values are injected by Vite during the GitHub Actions
+ * build from the GitHub repository secrets.
+ */
 export const emailJsConfig = {
   serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
   templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
@@ -8,59 +16,111 @@ export const emailJsConfig = {
   publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
 };
 
+/*
+ * EmailJS is ready only when the required browser-side
+ * configuration exists.
+ */
 export const isEmailJsReady = Boolean(
-  emailJsConfig.serviceId && emailJsConfig.templateId && emailJsConfig.publicKey
+  emailJsConfig.serviceId &&
+  emailJsConfig.templateId &&
+  emailJsConfig.publicKey
 );
 
+/*
+ * ============================================================
+ * INPUT SANITIZATION
+ * ============================================================
+ */
 export const sanitizeInput = (str) => {
-  if (typeof str !== 'string') return '';
-  return str.replace(/<[^>]*>?/gm, '').trim();
-};
-
-export const openGmailFallback = (formOrData) => {
-  let name = '';
-  let email = '';
-  let message = '';
-
-  if (formOrData instanceof HTMLFormElement) {
-    const fd = new FormData(formOrData);
-    name = sanitizeInput(fd.get('from_name'));
-    email = sanitizeInput(fd.get('reply_to'));
-    message = sanitizeInput(fd.get('message'));
-  } else if (formOrData && typeof formOrData === 'object') {
-    name = sanitizeInput(formOrData.from_name || formOrData.fromName);
-    email = sanitizeInput(formOrData.reply_to || formOrData.userEmail);
-    message = sanitizeInput(formOrData.message || formOrData.userMessage);
+  if (typeof str !== 'string') {
+    return '';
   }
 
-  const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
-  const url = gmailComposeUrl('Portfolio enquiry', body);
-  const draft = window.open(url, '_blank', 'noopener,noreferrer');
-  if (!draft) window.location.assign(url);
+  return str
+    .replace(/<[^>]*>?/gm, '')
+    .trim();
 };
 
-export async function sendContactEmail({ fromName, userEmail, userMessage }) {
+/*
+ * ============================================================
+ * SEND CONTACT EMAIL
+ * ============================================================
+ *
+ * Expected flow:
+ *
+ * Visitor
+ *   ↓
+ * Contact form
+ *   ↓
+ * EmailJS
+ *   ├── 1. Send message to Aravind's Gmail
+ *   └── 2. Send automatic confirmation to visitor
+ *
+ * IMPORTANT:
+ * There is intentionally NO Gmail compose/draft fallback here.
+ * If EmailJS fails, the function throws an error so the UI can
+ * clearly tell the visitor that sending failed.
+ */
+export async function sendContactEmail({
+  fromName,
+  userEmail,
+  userMessage,
+}) {
   const cleanName = sanitizeInput(fromName);
   const cleanEmail = sanitizeInput(userEmail);
   const cleanMessage = sanitizeInput(userMessage);
 
+  /*
+   * Validate form data.
+   */
   if (!cleanName || !cleanEmail || !cleanMessage) {
-    throw new Error('Please fill in your name, email, and message.');
+    throw new Error(
+      'Please fill in your name, email, and message.'
+    );
   }
 
+  /*
+   * Validate email configuration.
+   */
+  if (!isEmailJsReady) {
+    throw new Error(
+      'Email service is not configured.'
+    );
+  }
+
+  /*
+   * ==========================================================
+   * SUBMISSION TIME
+   * ==========================================================
+   */
   const now = new Date();
+
   const formattedTime =
-    now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) +
+    now.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    }) +
     ' (' +
-    now.toLocaleDateString([], { month: 'short', day: 'numeric' }) +
+    now.toLocaleDateString([], {
+      month: 'short',
+      day: 'numeric',
+    }) +
     ')';
 
-  if (!isEmailJsReady) {
-    openGmailFallback({ from_name: cleanName, reply_to: cleanEmail, message: cleanMessage });
-    return { status: 'draft', message: 'Opened Gmail draft' };
-  }
-
-  // 1. Notification email to portfolio owner
+  /*
+   * ==========================================================
+   * 1. SEND MESSAGE TO PORTFOLIO OWNER
+   * ==========================================================
+   *
+   * The Contact template receives these variables:
+   *
+   * {{from_name}}
+   * {{reply_to}}
+   * {{user_email}}
+   * {{to_email}}
+   * {{message}}
+   * {{submission_time}}
+   */
   await emailjs.send(
     emailJsConfig.serviceId,
     emailJsConfig.templateId,
@@ -72,35 +132,75 @@ export async function sendContactEmail({ fromName, userEmail, userMessage }) {
       message: cleanMessage,
       submission_time: formattedTime,
     },
-    { publicKey: emailJsConfig.publicKey }
+    {
+      publicKey: emailJsConfig.publicKey,
+    }
   );
 
-  // 2. Luxury Auto-Response confirmation email to the visitor
+  /*
+   * ==========================================================
+   * 2. AUTOMATIC VISITOR AUTO-REPLY
+   * ==========================================================
+   *
+   * This runs ONLY after the owner's email was successfully sent.
+   *
+   * The auto-reply template should use the visitor's email
+   * variable as its recipient.
+   */
+  let autoReplySent = false;
+
   if (
     emailJsConfig.autoReplyTemplateId &&
     emailJsConfig.autoReplyTemplateId !== emailJsConfig.templateId
   ) {
-    try {
-      await emailjs.send(
-        emailJsConfig.serviceId,
-        emailJsConfig.autoReplyTemplateId,
-        {
-          from_name: cleanName,
-          to_name: cleanName,
-          reply_to: contactEmail,
-          to_email: cleanEmail,
-          user_email: cleanEmail,
-          email: cleanEmail,
-          recipient_email: cleanEmail,
-          message: cleanMessage,
-          submission_time: formattedTime,
-        },
-        { publicKey: emailJsConfig.publicKey }
-      );
-    } catch (autoErr) {
-      console.warn('Auto-reply send warning:', autoErr);
-    }
+    await emailjs.send(
+      emailJsConfig.serviceId,
+      emailJsConfig.autoReplyTemplateId,
+      {
+        from_name: cleanName,
+        to_name: cleanName,
+
+        /*
+         * Visitor's email.
+         */
+        to_email: cleanEmail,
+        user_email: cleanEmail,
+        email: cleanEmail,
+        recipient_email: cleanEmail,
+
+        /*
+         * Portfolio owner's email.
+         */
+        reply_to: contactEmail,
+
+        /*
+         * Original message.
+         */
+        message: cleanMessage,
+
+        /*
+         * Submission timestamp.
+         */
+        submission_time: formattedTime,
+      },
+      {
+        publicKey: emailJsConfig.publicKey,
+      }
+    );
+
+    autoReplySent = true;
   }
 
-  return { status: 'sent', message: 'Your message was delivered successfully.' };
+  /*
+   * ==========================================================
+   * SUCCESS
+   * ==========================================================
+   */
+  return {
+    status: 'sent',
+    autoReplySent,
+    message: autoReplySent
+      ? 'Your message was delivered successfully.'
+      : 'Your message was delivered successfully. Auto-reply is not configured.',
+  };
 }
