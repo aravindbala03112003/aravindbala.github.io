@@ -15,7 +15,7 @@ export default function EmailPreviewModal({ isOpen, onClose, sampleName = 'Alex 
 
   const copyTemplateCode = async () => {
     try {
-      const res = await fetch('/email-template.html');
+      const res = await fetch(`${import.meta.env.BASE_URL}email-template.html`);
       const text = await res.text();
       await navigator.clipboard.writeText(text);
       setCopied(true);

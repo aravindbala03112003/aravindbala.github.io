@@ -16,7 +16,7 @@ export function downloadResumePdf() {
 
   // Web browser fallback
   const link = document.createElement('a');
-  link.href = '/resume.pdf';
+  link.href = `${import.meta.env.BASE_URL}resume.pdf`;
   link.download = 'Aravind_Bala_Resume.pdf';
   link.style.display = 'none';
   document.body.appendChild(link);

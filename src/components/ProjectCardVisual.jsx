@@ -3,27 +3,27 @@ import { motion } from 'framer-motion';
 
 const VIDEO_CONFIGS = {
   '01': {
-    src: '/gifs/Creating_product_animation_video_1080p_202609021652.mp4',
+    src: `${import.meta.env.BASE_URL}gifs/Creating_product_animation_video_1080p_202609021652.mp4`,
     heroClass: 'hero-eventease',
     label: 'EventEase Video Loop'
   },
   '02': {
-    src: '/gifs/Campus_vote_video_generation_prompt_202609021700.mp4',
+    src: `${import.meta.env.BASE_URL}gifs/Campus_vote_video_generation_prompt_202609021700.mp4`,
     heroClass: 'hero-campusvote',
     label: 'Campus Vote Video Loop'
   },
   '03': {
-    src: '/gifs/AI_video_generation_prompt_FinDesk_202609021727.mp4',
+    src: `${import.meta.env.BASE_URL}gifs/AI_video_generation_prompt_FinDesk_202609021727.mp4`,
     heroClass: 'hero-findesk',
     label: 'FinDesk Video Loop'
   },
   '04': {
-    src: '/gifs/Smart_travel_mode_video_animation_202609021732.mp4',
+    src: `${import.meta.env.BASE_URL}gifs/Smart_travel_mode_video_animation_202609021732.mp4`,
     heroClass: 'hero-smarttravel',
     label: 'Smart Travel Mode Video Loop'
   },
   '05': {
-    src: '/gifs/Research_paper_management_AI_video_202609021737.mp4',
+    src: `${import.meta.env.BASE_URL}gifs/Research_paper_management_AI_video_202609021737.mp4`,
     heroClass: 'hero-research',
     label: 'Research Paper Management Video Loop'
   }
