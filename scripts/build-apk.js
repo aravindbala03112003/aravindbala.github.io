@@ -379,6 +379,14 @@ public class MainActivity extends Activity {
                     path = path.substring(1);
                 }
 
+                // Strip repository base path prefix if present so www/assets can resolve cleanly
+                if (path.startsWith("aravindbala.github.io/")) {
+                    path = path.substring("aravindbala.github.io/".length());
+                }
+                if (path.isEmpty() || "/".equals(path)) {
+                    path = "index.html";
+                }
+
                 try {
                     InputStream is = getAssets().open("www/" + path);
                     String mimeType = getMimeType(path);
@@ -450,9 +458,7 @@ if (fs.existsSync(iconSrc)) {
 }
 
 console.log('=== Step 2: Building Web Production Bundle ===');
-// Run npm run build from C:/Users/Asus/Documents/portfolio
-const docPortfolio = 'C:\\\\Users\\\\Asus\\\\Documents\\\\portfolio';
-execSync('npm run build', { cwd: docPortfolio, stdio: 'inherit' });
+execSync('npm run build', { cwd: rootDir, stdio: 'inherit' });
 
 console.log('=== Step 3: Copying dist/ to Android Assets www/ ===');
 const distDir = path.join(rootDir, 'dist');

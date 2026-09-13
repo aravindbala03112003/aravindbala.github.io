@@ -19,7 +19,7 @@ export const emailJsConfig = {
   serviceId: cleanEnv(import.meta.env.VITE_EMAILJS_SERVICE_ID, 'service_o3uqjxf'),
   templateId: cleanEnv(import.meta.env.VITE_EMAILJS_TEMPLATE_ID, 'template_sdls3up'),
   autoReplyTemplateId: cleanEnv(import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID, 'template_84dy4nn'),
-  publicKey: cleanEnv(import.meta.env.VITE_EMAILJS_PUBLIC_KEY),
+  publicKey: cleanEnv(import.meta.env.VITE_EMAILJS_PUBLIC_KEY, 'vikiT2Tf4PATmJ-n2'),
 };
 
 /*

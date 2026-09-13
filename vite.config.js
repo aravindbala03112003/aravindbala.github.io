@@ -40,8 +40,12 @@ if (process.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID) {
   process.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID = targetAutoReplyTemplateId;
 }
 
+const targetPublicKey = 'vikiT2Tf4PATmJ-n2';
+
 if (process.env.VITE_EMAILJS_PUBLIC_KEY) {
   process.env.VITE_EMAILJS_PUBLIC_KEY = process.env.VITE_EMAILJS_PUBLIC_KEY.trim().replace(/^["']|["']$/g, '');
+} else {
+  process.env.VITE_EMAILJS_PUBLIC_KEY = targetPublicKey;
 }
 
 export default defineConfig({
