@@ -32,6 +32,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Validate EmailJS build secrets
+        run: |
+          node -e '
+            const required = [
+              "VITE_EMAILJS_SERVICE_ID",
+              "VITE_EMAILJS_TEMPLATE_ID",
+              "VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID",
+              "VITE_EMAILJS_PUBLIC_KEY"
+            ];
+            const missing = required.filter(k => !process.env[k] || process.env[k].trim() === "");
+            if (missing.length > 0) {
+              console.error("BUILD FAILED: Missing required EmailJS secrets: " + missing.join(", "));
+              process.exit(1);
+            }
+            console.log("EmailJS secrets verified.");
+          '
+        env:
+          VITE_EMAILJS_SERVICE_ID: ${{ secrets.VITE_EMAILJS_SERVICE_ID }}
+          VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_TEMPLATE_ID }}
+          VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID }}
+          VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
+
       - name: Build portfolio
         run: npm run build
         env:
@@ -39,6 +61,32 @@ jobs:
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_TEMPLATE_ID }}
           VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID }}
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
+
+      - name: Verify production bundle EmailJS template configuration
+        run: |
+          node -e '
+            const fs = require("fs");
+            const path = require("path");
+            const assetsDir = path.join("dist", "assets");
+            const jsFiles = fs.readdirSync(assetsDir).filter(f => f.endsWith(".js"));
+            let bundle = "";
+            for (const f of jsFiles) {
+              bundle += fs.readFileSync(path.join(assetsDir, f), "utf8");
+            }
+            if (!bundle.includes("template_sdls3up")) {
+              console.error("BUILD VERIFICATION FAILED: Bundle does not contain contact template_sdls3up!");
+              process.exit(1);
+            }
+            if (!bundle.includes("template_84dy4nn")) {
+              console.error("BUILD VERIFICATION FAILED: Bundle does not contain auto-reply template_84dy4nn!");
+              process.exit(1);
+            }
+            if (bundle.includes("template_sdl3sup") || bundle.includes("template_sdlssup")) {
+              console.error("BUILD VERIFICATION FAILED: Obsolete typo template ID found in production bundle!");
+              process.exit(1);
+            }
+            console.log("SUCCESS: Production bundle verified with template_sdls3up and template_84dy4nn.");
+          '
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5

@@ -7,26 +7,41 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Clean and normalize EmailJS environment variables at build time
+const targetContactTemplateId = 'template_sdls3up';
+const targetAutoReplyTemplateId = 'template_84dy4nn';
+const targetServiceId = 'service_o3uqjxf';
+
 if (process.env.VITE_EMAILJS_TEMPLATE_ID) {
-  process.env.VITE_EMAILJS_TEMPLATE_ID = process.env.VITE_EMAILJS_TEMPLATE_ID
-    .trim()
-    .replace(/^["']|["']$/g, '')
-    .replace('sdl3', 'sdls');
+  const cleanTemplate = process.env.VITE_EMAILJS_TEMPLATE_ID.trim().replace(/^["']|["']$/g, '');
+  if (
+    cleanTemplate === 'template_sdl3sup' ||
+    cleanTemplate === 'template_sdlssup' ||
+    cleanTemplate.includes('sdl3') ||
+    cleanTemplate.includes('sdlss') ||
+    !cleanTemplate
+  ) {
+    process.env.VITE_EMAILJS_TEMPLATE_ID = targetContactTemplateId;
+  } else {
+    process.env.VITE_EMAILJS_TEMPLATE_ID = cleanTemplate;
+  }
+} else {
+  process.env.VITE_EMAILJS_TEMPLATE_ID = targetContactTemplateId;
 }
+
 if (process.env.VITE_EMAILJS_SERVICE_ID) {
-  process.env.VITE_EMAILJS_SERVICE_ID = process.env.VITE_EMAILJS_SERVICE_ID
-    .trim()
-    .replace(/^["']|["']$/g, '');
+  process.env.VITE_EMAILJS_SERVICE_ID = process.env.VITE_EMAILJS_SERVICE_ID.trim().replace(/^["']|["']$/g, '');
+} else {
+  process.env.VITE_EMAILJS_SERVICE_ID = targetServiceId;
 }
+
 if (process.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID) {
-  process.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID = process.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID
-    .trim()
-    .replace(/^["']|["']$/g, '');
+  process.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID = process.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID.trim().replace(/^["']|["']$/g, '');
+} else {
+  process.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID = targetAutoReplyTemplateId;
 }
+
 if (process.env.VITE_EMAILJS_PUBLIC_KEY) {
-  process.env.VITE_EMAILJS_PUBLIC_KEY = process.env.VITE_EMAILJS_PUBLIC_KEY
-    .trim()
-    .replace(/^["']|["']$/g, '');
+  process.env.VITE_EMAILJS_PUBLIC_KEY = process.env.VITE_EMAILJS_PUBLIC_KEY.trim().replace(/^["']|["']$/g, '');
 }
 
 export default defineConfig({

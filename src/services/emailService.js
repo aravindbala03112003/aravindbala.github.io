@@ -15,17 +15,9 @@ const cleanEnv = (value, fallback = '') => {
   return clean || fallback;
 };
 
-const sanitizeTemplateId = (value, fallback = 'template_sdls3up') => {
-  const clean = cleanEnv(value, fallback);
-  if (clean.includes('sdl3')) {
-    return clean.replace('sdl3', 'sdls');
-  }
-  return clean;
-};
-
 export const emailJsConfig = {
   serviceId: cleanEnv(import.meta.env.VITE_EMAILJS_SERVICE_ID, 'service_o3uqjxf'),
-  templateId: sanitizeTemplateId(import.meta.env.VITE_EMAILJS_TEMPLATE_ID, 'template_sdls3up'),
+  templateId: cleanEnv(import.meta.env.VITE_EMAILJS_TEMPLATE_ID, 'template_sdls3up'),
   autoReplyTemplateId: cleanEnv(import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID, 'template_84dy4nn'),
   publicKey: cleanEnv(import.meta.env.VITE_EMAILJS_PUBLIC_KEY),
 };
