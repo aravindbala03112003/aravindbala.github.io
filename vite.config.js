@@ -6,6 +6,29 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Clean and normalize EmailJS environment variables at build time
+if (process.env.VITE_EMAILJS_TEMPLATE_ID) {
+  process.env.VITE_EMAILJS_TEMPLATE_ID = process.env.VITE_EMAILJS_TEMPLATE_ID
+    .trim()
+    .replace(/^["']|["']$/g, '')
+    .replace('sdl3', 'sdls');
+}
+if (process.env.VITE_EMAILJS_SERVICE_ID) {
+  process.env.VITE_EMAILJS_SERVICE_ID = process.env.VITE_EMAILJS_SERVICE_ID
+    .trim()
+    .replace(/^["']|["']$/g, '');
+}
+if (process.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID) {
+  process.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID = process.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID
+    .trim()
+    .replace(/^["']|["']$/g, '');
+}
+if (process.env.VITE_EMAILJS_PUBLIC_KEY) {
+  process.env.VITE_EMAILJS_PUBLIC_KEY = process.env.VITE_EMAILJS_PUBLIC_KEY
+    .trim()
+    .replace(/^["']|["']$/g, '');
+}
+
 export default defineConfig({
   root: __dirname,
 

@@ -7,3 +7,7 @@ dist/
 
 # Android project
 android/
+
+# Archives
+project.zip
+*.zip

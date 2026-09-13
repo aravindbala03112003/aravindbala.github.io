@@ -9,11 +9,25 @@ import { contactEmail } from '../data/contact';
  * These values are injected by Vite during the GitHub Actions
  * build from the GitHub repository secrets.
  */
+const cleanEnv = (value, fallback = '') => {
+  if (!value || typeof value !== 'string') return fallback;
+  const clean = value.trim().replace(/^["']|["']$/g, '');
+  return clean || fallback;
+};
+
+const sanitizeTemplateId = (value, fallback = 'template_sdls3up') => {
+  const clean = cleanEnv(value, fallback);
+  if (clean.includes('sdl3')) {
+    return clean.replace('sdl3', 'sdls');
+  }
+  return clean;
+};
+
 export const emailJsConfig = {
-  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-  autoReplyTemplateId: import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID,
-  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+  serviceId: cleanEnv(import.meta.env.VITE_EMAILJS_SERVICE_ID, 'service_o3uqjxf'),
+  templateId: sanitizeTemplateId(import.meta.env.VITE_EMAILJS_TEMPLATE_ID, 'template_sdls3up'),
+  autoReplyTemplateId: cleanEnv(import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID, 'template_84dy4nn'),
+  publicKey: cleanEnv(import.meta.env.VITE_EMAILJS_PUBLIC_KEY),
 };
 
 /*
