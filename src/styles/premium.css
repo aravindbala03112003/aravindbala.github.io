@@ -2022,13 +2022,6 @@ h1,h2,h3{font-weight:700;letter-spacing:-.055em}
   transform: translateX(-4px) scale(1.05) !important;
 }
 
-/* 5. Ambient Form Focus Halo */
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: var(--blue) !important;
-  box-shadow: 0 8px 25px rgba(117, 167, 255, 0.25), inset 0 0 10px rgba(117, 167, 255, 0.1) !important;
-  background: rgba(117, 167, 255, 0.04) !important;
-}
 
 /* ==========================================================================
    4 Ultra-Premium 3D & Interactive Graphics Styles
@@ -6985,31 +6978,6 @@ button.round-cta.conversation-portal:hover .portal-border-frame {
   box-shadow: 0 28px 60px rgba(3, 10, 27, 0.35), 0 0 30px rgba(117, 167, 255, 0.1);
 }
 
-/* ==========================================================================
-   Contact Section Form Focus Polish
-   ========================================================================== */
-
-.contact-form {
-  border-radius: 20px;
-  background: linear-gradient(145deg, rgba(14, 25, 45, 0.7) 0%, rgba(8, 15, 28, 0.9) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 20px 50px rgba(3, 10, 27, 0.25);
-}
-
-.contact-form input,
-.contact-form textarea {
-  transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
-  border-radius: 4px;
-  padding: 10px 8px;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: var(--blue);
-  background: rgba(117, 167, 255, 0.04);
-  box-shadow: 0 1px 0 var(--blue), 0 0 12px rgba(117, 167, 255, 0.15);
-}
 
 /* ==========================================================================
    Responsive Breakpoints & Reduced Motion for Enhancements
@@ -7752,78 +7720,144 @@ button.round-cta.conversation-portal:hover .portal-border-frame {
 
 
 /* ==========================================================================
-   EMAIL SECTION — ORIGINAL PREMIUM VISUAL RESTORATION
-   Visual-only override. EmailJS functionality and all other sections remain untouched.
+   EMAIL SECTION — FUTURISTIC ILLUMINATED GLASS CONTACT TERMINAL
+   Matches reference design with luminous cyan border, electric corner glow,
+   crisp field surfaces, and zero blur / transform on hover and focus.
    ========================================================================== */
 
 .contact-form {
   position: relative;
   z-index: 2;
-  padding: 30px 32px;
-  border: 1px solid rgba(117, 167, 255, 0.22) !important;
+  padding: 34px 36px;
   border-radius: 24px !important;
-  background:
-    linear-gradient(145deg,
-      rgba(17, 31, 54, 0.94) 0%,
-      rgba(8, 16, 30, 0.97) 100%) !important;
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
+  border: 1px solid rgba(56, 189, 248, 0.38) !important;
+  background: linear-gradient(150deg, rgba(12, 25, 48, 0.95) 0%, rgba(7, 16, 32, 0.98) 100%) !important;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transform: none !important;
+  filter: none !important;
   box-shadow:
-    0 28px 70px rgba(2, 8, 20, 0.52),
-    0 0 0 1px rgba(255, 255, 255, 0.025),
-    inset 0 1px 0 rgba(255, 255, 255, 0.09),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.35) !important;
+    0 0 0 1px rgba(56, 189, 248, 0.16),
+    0 25px 65px rgba(2, 8, 20, 0.72),
+    0 0 35px rgba(56, 189, 248, 0.18),
+    0 0 75px rgba(56, 189, 248, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4) !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 
+/* Luminous Electric Corner Accents: Vibrant Cyan Top-Left & Bottom-Right */
 .contact-form::before {
   content: '';
   position: absolute;
-  inset: 1px;
-  border-radius: 23px;
+  inset: -1px;
+  border-radius: 25px;
+  padding: 1.5px;
+  background: linear-gradient(135deg,
+    rgba(56, 189, 248, 0.95) 0%,
+    rgba(56, 189, 248, 0.45) 24%,
+    rgba(30, 64, 120, 0.12) 50%,
+    rgba(56, 189, 248, 0.45) 76%,
+    rgba(56, 189, 248, 0.92) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
   pointer-events: none;
-  background:
-    linear-gradient(135deg,
-      rgba(117, 167, 255, 0.08),
-      transparent 28%,
-      transparent 70%,
-      rgba(213, 255, 110, 0.025));
-  z-index: -1;
+  z-index: 1;
+  transition: opacity 0.3s ease;
 }
 
+/* Outer Ambient Radial Aura focused at corners */
+.contact-form::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 26px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.38) 0%, transparent 40%),
+    radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.28) 0%, transparent 35%);
+  z-index: 0;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+/* Hover: Strictly NO scale, NO movement, NO blur. Only subtly increases cyan luminosity. */
+.contact-form:hover {
+  transform: none !important;
+  filter: none !important;
+  border-color: rgba(56, 189, 248, 0.58) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.24),
+    0 28px 75px rgba(2, 8, 20, 0.76),
+    0 0 45px rgba(56, 189, 248, 0.26),
+    0 0 90px rgba(56, 189, 248, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.45) !important;
+}
+
+.contact-form:hover::after {
+  opacity: 1;
+}
+
+/* Focus / Focus-Within: Keeps the card completely stable and crisp */
+.contact-form:focus-within {
+  transform: none !important;
+  filter: none !important;
+  border-color: rgba(56, 189, 248, 0.48) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.20),
+    0 28px 75px rgba(2, 8, 20, 0.74),
+    0 0 40px rgba(56, 189, 248, 0.22),
+    0 0 85px rgba(56, 189, 248, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Field Labels */
 .contact-form label {
+  position: relative;
+  z-index: 2;
   display: block;
-  color: var(--muted);
+  color: #94a3b8;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  margin-bottom: 20px;
 }
 
+/* Clean Sharp Inputs & Textarea */
 .contact-form input,
 .contact-form textarea {
   display: block;
   width: 100%;
   box-sizing: border-box;
   margin-top: 9px;
-  color: var(--text);
-  background: rgba(27, 45, 73, 0.82) !important;
-  border: 1px solid rgba(117, 167, 255, 0.16) !important;
-  border-radius: 10px !important;
-  padding: 14px 15px !important;
+  color: #f8fafc;
+  font-family: var(--sans);
+  font-size: 14px;
+  background: rgba(22, 38, 64, 0.88) !important;
+  border: 1px solid rgba(117, 167, 255, 0.22) !important;
+  border-radius: 12px !important;
+  padding: 14px 16px !important;
   outline: none;
+  transform: none !important;
+  filter: none !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.045),
-    0 5px 18px rgba(0, 0, 0, 0.10);
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 4px 14px rgba(0, 0, 0, 0.18) !important;
   transition:
-    border-color 0.25s ease,
-    background-color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease !important;
 }
 
 .contact-form input {
-  min-height: 50px;
+  min-height: 52px;
 }
 
 .contact-form textarea {
@@ -7831,51 +7865,137 @@ button.round-cta.conversation-portal:hover .portal-border-frame {
   resize: vertical;
 }
 
+/* Futuristic Field Icons Matching Reference Design */
+.contact-form input[name="from_name"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  padding-left: 42px !important;
+}
+
+.contact-form input[name="reply_to"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='16' x='2' y='4' rx='2'/%3E%3Cpath d='m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  padding-left: 42px !important;
+}
+
+.contact-form textarea[name="message"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 15px 16px;
+  padding-left: 42px !important;
+}
+
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-  color: rgba(190, 204, 226, 0.52);
+  color: rgba(148, 163, 184, 0.55);
 }
 
+/* Field Hover */
 .contact-form input:hover,
 .contact-form textarea:hover {
-  border-color: rgba(117, 167, 255, 0.30) !important;
-  background: rgba(31, 51, 82, 0.88) !important;
+  border-color: rgba(56, 189, 248, 0.42) !important;
+  background: rgba(26, 44, 74, 0.92) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 6px 18px rgba(0, 0, 0, 0.22) !important;
 }
 
+/* Field Focus: Controlled Crisp Cyan Aura — Zero Transparency Drop, Zero Blur */
 .contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: rgba(117, 167, 255, 0.80) !important;
-  background: rgba(22, 39, 67, 0.96) !important;
+.contact-form textarea:focus,
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  border-color: rgba(56, 189, 248, 0.82) !important;
+  background-color: rgba(24, 42, 70, 0.96) !important;
   box-shadow:
-    0 8px 25px rgba(117, 167, 255, 0.20),
-    0 0 0 1px rgba(117, 167, 255, 0.14),
-    inset 0 0 14px rgba(117, 167, 255, 0.07) !important;
+    inset 0 0 16px rgba(56, 189, 248, 0.08),
+    0 0 0 1px rgba(56, 189, 248, 0.32),
+    0 0 20px rgba(56, 189, 248, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  outline: none !important;
+  transform: none !important;
 }
 
+/* Field Focus: Illuminated Icons */
+.contact-form input[name="from_name"]:focus {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
+}
+
+.contact-form input[name="reply_to"]:focus {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='16' x='2' y='4' rx='2'/%3E%3Cpath d='m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7'/%3E%3C/svg%3E");
+}
+
+.contact-form textarea[name="message"]:focus {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/%3E%3C/svg%3E");
+}
+
+/* Neon-Lime Send Message Button */
 .contact-form .button-primary {
-  margin-top: 8px;
+  position: relative;
+  z-index: 2;
+  margin-top: 10px;
+  min-height: 52px;
   border-radius: 12px !important;
+  background: var(--lime) !important;
+  color: #13200d !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
   box-shadow:
-    0 12px 30px rgba(117, 167, 255, 0.18),
-    0 0 24px rgba(213, 255, 110, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    0 10px 28px rgba(213, 255, 110, 0.28),
+    0 0 22px rgba(213, 255, 110, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
+/* Paper Plane Icon in Send Button matching Reference Design */
+.contact-form .button-primary::before {
+  content: '';
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  margin-right: 2px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='%2313200d' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='22' y1='2' x2='11' y2='13'/%3E%3Cpolygon points='22 2 15 22 11 13 2 9 22 2'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
+
+.contact-form .button-primary:hover,
+.contact-form .button-primary:focus,
+.contact-form .button-primary:focus-visible {
+  transform: translateY(-1px) !important;
+  box-shadow:
+    0 14px 34px rgba(213, 255, 110, 0.38),
+    0 0 28px rgba(213, 255, 110, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Status Text */
 .contact-form small {
+  position: relative;
+  z-index: 2;
   display: block;
-  margin-top: 12px;
-  color: rgba(166, 181, 207, 0.72);
+  margin-top: 14px;
+  color: rgba(148, 163, 184, 0.85);
+  font-size: 11px;
   line-height: 1.55;
+  text-align: center;
 }
 
 @media (max-width: 640px) {
   .contact-form {
-    padding: 24px 20px;
+    padding: 26px 20px;
     border-radius: 20px !important;
   }
 
   .contact-form::before {
-    border-radius: 19px;
+    border-radius: 21px;
   }
 
   .contact-form input,
@@ -7885,66 +8005,11 @@ button.round-cta.conversation-portal:hover .portal-border-frame {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .contact-form,
   .contact-form input,
-  .contact-form textarea {
-    transition: none;
+  .contact-form textarea,
+  .contact-form .button-primary {
+    transition: none !important;
+    transform: none !important;
   }
-}
-
-
-/* ==========================================================================
-   EMAIL SECTION — CONSISTENT PREMIUM HOVER / FOCUS
-   Keeps the form visually stable before, on hover, and while typing.
-   ========================================================================== */
-
-.contact-form input,
-.contact-form textarea {
-  background: rgba(27, 45, 73, 0.82) !important;
-  border-color: rgba(117, 167, 255, 0.16) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.045),
-    0 5px 18px rgba(0, 0, 0, 0.10) !important;
-  transform: none !important;
-}
-
-/* Hover: only a very small premium lift — no bright fill or glow */
-.contact-form input:hover,
-.contact-form textarea:hover {
-  background: rgba(29, 47, 76, 0.86) !important;
-  border-color: rgba(117, 167, 255, 0.24) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.055),
-    0 6px 20px rgba(0, 0, 0, 0.12) !important;
-}
-
-/* Focus/selected: preserve the same premium surface instead of creating
-   the strong blue halo seen in the focused screenshot. */
-.contact-form input:focus,
-.contact-form textarea:focus,
-.contact-form input:focus-visible,
-.contact-form textarea:focus-visible {
-  background: rgba(29, 47, 76, 0.90) !important;
-  border-color: rgba(117, 167, 255, 0.42) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 6px 22px rgba(0, 0, 0, 0.14) !important;
-  outline: none !important;
-  transform: none !important;
-}
-
-/* The form card itself must NOT glow/change when a field is selected. */
-.contact-form:focus-within {
-  border-color: rgba(117, 167, 255, 0.22) !important;
-  box-shadow:
-    0 28px 70px rgba(2, 8, 20, 0.52),
-    0 0 0 1px rgba(255, 255, 255, 0.025),
-    inset 0 1px 0 rgba(255, 255, 255, 0.09),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.35) !important;
-}
-
-/* Keep the success button visually premium and stable while the form is active. */
-.contact-form .button-primary:hover,
-.contact-form .button-primary:focus,
-.contact-form .button-primary:focus-visible {
-  transform: translateY(-1px);
 }

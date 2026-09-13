@@ -1877,9 +1877,9 @@
 }
 
 .contact-form {
-  transform-style: preserve-3d;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
   position: relative;
+  transform: none !important;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .contact-3d-orbital-halo {
@@ -1966,12 +1966,11 @@
 @media (hover: hover) and (pointer: fine) {
   .contact-form:focus-within,
   .contact-form:hover {
-    transform: translateY(-3px) translateZ(6px);
-    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.65), 0 0 28px rgba(117, 167, 255, 0.15);
+    transform: none !important;
   }
 
   .contact-form button[type="submit"]:hover {
-    transform: translateY(-2px) translateZ(8px);
+    transform: translateY(-1px);
     box-shadow: 0 8px 24px rgba(117, 167, 255, 0.35);
   }
 
