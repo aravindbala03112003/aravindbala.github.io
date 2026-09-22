@@ -133,9 +133,9 @@ export default function Hero() {
 
       <div className="container hero-inner">
         <div className="hero-copy">
-          <p className="eyebrow hero-intro"><span />Available for new opportunities</p>
-          <h1>Interfaces with<br /><em>intent</em>, code with<br />character<span className="period">.</span></h1>
-          <p className="hero-description">I’m <b>Aravind Bala</b>, a software developer building clear, resilient products where thoughtful interaction meets practical engineering.</p>
+          <p className="eyebrow hero-intro"><span />Available for new opportunities &bull; Puducherry, India</p>
+          <h1>Aravind Bala<span className="period">.</span><br /><em>Software Developer</em></h1>
+          <p className="hero-description">Interfaces with intent, code with character. I’m <b>Aravind Bala</b>, a software developer building clear, resilient web, mobile, and full-stack applications where thoughtful interaction meets practical engineering.</p>
           <div className="hero-buttons">
             <a className="button button-primary aurora-btn" href="#work" onClick={() => playSynthSound('whoosh')}>
               Explore selected work <ArrowUpRight />

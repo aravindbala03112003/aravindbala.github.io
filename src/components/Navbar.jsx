@@ -89,7 +89,7 @@ export default function Navbar({ active, onCommand }) {
       {/* Profile Photo Lightbox Modal */}
       {profileOpen && (
         <button className="profile-lightbox" onClick={() => setProfileOpen(false)} aria-label="Close profile photo">
-          <img src={`${import.meta.env.BASE_URL}images/profile/aravind-bala.jpg`} alt="Aravind Bala profile photo" />
+          <img src={`${import.meta.env.BASE_URL}images/profile/aravind-bala.jpg`} alt="Aravind Bala — Software Developer" />
           <span>Click anywhere to close</span>
         </button>
       )}

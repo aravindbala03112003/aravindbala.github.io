@@ -1,18 +1,21 @@
 // Aravind Bala Portfolio — Service Worker
-const CACHE_NAME = 'aravind-portfolio-v6';
+const CACHE_NAME = 'aravind-portfolio-v7';
+const BASE_PATH = self.location.pathname.replace(/\/sw\.js$/, '') || '';
+const withBase = (path) => `${BASE_PATH}${path}`.replace(/\/+/g, '/');
+
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.webmanifest',
-  '/favicon.svg',
-  '/favicon.png',
-  '/logo/portfolio-logo.png',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
-  '/icons/icon-maskable-512.png',
-  '/apple-touch-icon.png',
-  '/resume.pdf',
-  '/aravindbala_resume_page-0001.jpg'
+  withBase('/'),
+  withBase('/index.html'),
+  withBase('/manifest.webmanifest'),
+  withBase('/favicon.svg'),
+  withBase('/favicon.png'),
+  withBase('/logo/portfolio-logo.png'),
+  withBase('/icons/icon-192.png'),
+  withBase('/icons/icon-512.png'),
+  withBase('/icons/icon-maskable-512.png'),
+  withBase('/apple-touch-icon.png'),
+  withBase('/resume.pdf'),
+  withBase('/aravindbala_resume_page-0001.jpg')
 ];
 
 // Install Event: Cache critical shell assets
@@ -61,7 +64,7 @@ self.addEventListener('fetch', (event) => {
         .catch(async () => {
           const cached = await caches.match(request);
           if (cached) return cached;
-          const fallback = await caches.match('/index.html');
+          const fallback = await caches.match(withBase('/index.html'));
           return fallback || new Response('Offline', { status: 503, headers: { 'Content-Type': 'text/plain' } });
         })
     );

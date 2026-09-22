@@ -178,7 +178,8 @@ export default function About() {
       <SectionHeading eyebrow="A little context" title={<>A developer who sees the<br />whole <em>picture.</em></>} />
       <div className="about-layout">
         <div className="about-statement reveal">
-          <p>I care about the invisible details: the edge cases, the loading states, and the way a product feels in someone’s hands.</p>
+          <p>Hi, I’m <strong>Aravind Bala</strong>, a Software Developer based in Puducherry, India. I build purposeful web, mobile, and full-stack applications with clean architecture and modern engineering.</p>
+          <p>I care deeply about the invisible details: the edge cases, the loading states, system resilience, and the way a product feels in someone’s hands.</p>
           <a href="#contact" className="text-link">More about my approach <span>↗</span></a>
         </div>
         <div className="about-cards">
