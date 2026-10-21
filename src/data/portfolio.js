@@ -278,6 +278,36 @@ export const projects = [
       asset('/images/hotel-room-booking/Screenshot 2026-10-21 174541.png'),
     ],
   },
+
+  {
+    id: '10',
+    name: 'Online Vehicle Parking System',
+    type: 'Online vehicle parking management system',
+    category: 'ONLINE VEHICLE PARKING MANAGEMENT SYSTEM',
+    categories: ['Web', 'Systems'],
+    deviceType: 'web',
+    description:
+      'A streamlined parking management application for exploring available slots, making reservations, and managing parking details.',
+    modalDescription:
+      'An online vehicle parking management application designed to simplify parking-slot selection and reservation management through a clear, user-friendly interface.',
+    challenge:
+      'Eliminating parking congestion, manual entry logs, and bay allocation confusion with an intuitive digital reservation system and real-time bay occupancy visualizer.',
+    approach:
+      'Developed a responsive web interface using HTML, CSS, JavaScript, and MySQL, featuring interactive slot diagrams, lane-based bay selection, automated duration billing ($5/hr), and ticket verification.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'MySQL'],
+    color: 'orange',
+    mark: 'VP',
+    metric: '56 Bays',
+    metricText: 'live slot tracking',
+    screenshots: [
+      asset('/images/vehicle-parking/Screenshot 2026-10-21 181402.png'),
+      asset('/images/vehicle-parking/Screenshot 2026-10-21 181430.png'),
+      asset('/images/vehicle-parking/Screenshot 2026-10-21 181440.png'),
+      asset('/images/vehicle-parking/Screenshot 2026-10-21 181500.png'),
+      asset('/images/vehicle-parking/Screenshot 2026-10-21 181447.png'),
+      asset('/images/vehicle-parking/Screenshot 2026-10-21 181409.png'),
+    ],
+  },
 ];
 
 export const skillGroups = [

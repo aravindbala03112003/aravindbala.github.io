@@ -49,6 +49,12 @@ const VIDEO_CONFIGS = {
     poster: `${import.meta.env.BASE_URL}images/hotel-room-booking/Screenshot 2026-10-21 174341.png`,
     heroClass: 'hero-aurahaven',
     label: 'Aura Heaven Video Loop'
+  },
+  '10': {
+    src: `${import.meta.env.BASE_URL}gifs/Vehicle_parking_management_syste…_1080p_20261021130048_gwr_video_mvp.mp4`,
+    poster: `${import.meta.env.BASE_URL}images/vehicle-parking/Screenshot 2026-10-21 181402.png`,
+    heroClass: 'hero-vehicleparking',
+    label: 'Online Vehicle Parking System Video Loop'
   }
 };
 
@@ -141,6 +147,16 @@ function ProjectMotif({ id, isHovered }) {
             <span className="motif-dot dot-amber" />
             <span className="motif-code">HOTEL SUITES // MERN</span>
             <span className="motif-sub">RESERVATION ENGINE</span>
+          </div>
+        </div>
+      );
+    case '10':
+      return (
+        <div className={`project-bespoke-motif motif-parking ${isHovered ? 'active' : ''}`} aria-hidden="true">
+          <div className="motif-badge-glass">
+            <span className="motif-dot dot-orange" />
+            <span className="motif-code">PARKING BAY // MYSQL</span>
+            <span className="motif-sub">56-SLOT VISUALIZER</span>
           </div>
         </div>
       );

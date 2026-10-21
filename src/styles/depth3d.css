@@ -416,6 +416,11 @@
   box-shadow: 0 0 8px #f59e0b;
 }
 
+.dot-orange {
+  background: #ff5722;
+  box-shadow: 0 0 8px #ff5722;
+}
+
 .chip-left {
   top: 18%;
   left: 4%;
@@ -1287,6 +1292,10 @@
 
 .motif-aurahaven .motif-badge-glass {
   border-color: rgba(245, 158, 11, 0.45);
+}
+
+.motif-parking .motif-badge-glass {
+  border-color: rgba(255, 87, 34, 0.45);
 }
 
 .project-card:hover .project-bespoke-motif {
