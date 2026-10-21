@@ -43,6 +43,12 @@ const VIDEO_CONFIGS = {
     poster: `${import.meta.env.BASE_URL}images/barber-shop/Screenshot 2026-10-21 171910.png`,
     heroClass: 'hero-barbershop',
     label: 'Barber Shop Video Loop'
+  },
+  '09': {
+    src: `${import.meta.env.BASE_URL}gifs/Hotel_room_booking_system_video_20261021125732_gwr_video_mvp.mp4`,
+    poster: `${import.meta.env.BASE_URL}images/hotel-room-booking/Screenshot 2026-10-21 174341.png`,
+    heroClass: 'hero-aurahaven',
+    label: 'Aura Heaven Video Loop'
   }
 };
 
@@ -125,6 +131,16 @@ function ProjectMotif({ id, isHovered }) {
             <span className="motif-dot dot-amber" />
             <span className="motif-code">SALON BOOKING // PHP</span>
             <span className="motif-sub">APPOINTMENT ENGINE</span>
+          </div>
+        </div>
+      );
+    case '09':
+      return (
+        <div className={`project-bespoke-motif motif-aurahaven ${isHovered ? 'active' : ''}`} aria-hidden="true">
+          <div className="motif-badge-glass">
+            <span className="motif-dot dot-amber" />
+            <span className="motif-code">HOTEL SUITES // MERN</span>
+            <span className="motif-sub">RESERVATION ENGINE</span>
           </div>
         </div>
       );

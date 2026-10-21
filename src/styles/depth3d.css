@@ -1285,6 +1285,10 @@
   border-color: rgba(245, 158, 11, 0.45);
 }
 
+.motif-aurahaven .motif-badge-glass {
+  border-color: rgba(245, 158, 11, 0.45);
+}
+
 .project-card:hover .project-bespoke-motif {
   transform: translateY(-2px) translateZ(28px) scale(1.04);
 }

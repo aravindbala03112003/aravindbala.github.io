@@ -247,6 +247,37 @@ export const projects = [
       asset('/images/barber-shop/Screenshot 2026-10-21 172003.png'),
     ],
   },
+
+  {
+    id: '09',
+    name: 'Aura Heaven',
+    type: 'Hotel room booking system',
+    category: 'HOTEL ROOM BOOKING SYSTEM',
+    categories: ['Web', 'Systems'],
+    deviceType: 'web',
+    description:
+      'A modern hotel room booking application designed to simplify room discovery and reservation management through an elegant user experience.',
+    modalDescription:
+      'Aura Heaven is a hotel room booking application designed to provide a convenient way to explore accommodation options, review room details, and manage room reservations through a streamlined digital experience.',
+    challenge:
+      'Streamlining multi-tier hotel room reservations, dynamic date-based price calculations, and real-time inventory tracking into a friction-free booking journey for guests and hoteliers.',
+    approach:
+      'Engineered a full-stack booking system with React, Node.js, Express, and MongoDB, featuring search-and-filter discovery, room amenity breakdowns, guest authentication, and an administrative control suite for inventory and revenue analytics.',
+    tags: ['Figma (UI/UX)', 'React', 'Node.js', 'Express.js', 'MongoDB'],
+    color: 'gold',
+    mark: 'AH',
+    metric: '100%',
+    metricText: 'instant booking',
+    screenshots: [
+      asset('/images/hotel-room-booking/Screenshot 2026-10-21 174341.png'),
+      asset('/images/hotel-room-booking/Screenshot 2026-10-21 174355.png'),
+      asset('/images/hotel-room-booking/Screenshot 2026-10-21 174510.png'),
+      asset('/images/hotel-room-booking/Screenshot 2026-10-21 174426.png'),
+      asset('/images/hotel-room-booking/Screenshot 2026-10-21 174407.png'),
+      asset('/images/hotel-room-booking/Screenshot 2026-10-21 174533.png'),
+      asset('/images/hotel-room-booking/Screenshot 2026-10-21 174541.png'),
+    ],
+  },
 ];
 
 export const skillGroups = [

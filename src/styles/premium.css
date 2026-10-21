@@ -1696,6 +1696,17 @@ h1,h2,h3{font-weight:700;letter-spacing:-.055em}
   background: radial-gradient(circle at center, #261a0c 0%, #0d0904 100%);
 }
 
+/* --------------------------------------------------------------------------
+   09. Aura Heaven Hero — Luxury Hotel Room Booking World
+   -------------------------------------------------------------------------- */
+.hero-aurahaven {
+  background: radial-gradient(circle at center, #1f180d 0%, #0a0804 100%);
+}
+
+.project-gold .art-glow {
+  background: #f59e0b;
+}
+
 
 /* ==========================================================================
    Luxury Auto-Response Email Preview Modal Styles
