@@ -203,7 +203,6 @@ export const projects = [
     mark: 'EH',
     metric: '100%',
     metricText: 'SLA ticket tracking',
-    video: asset('/gifs/EduHelp_ticket_resolution_animat…_1080p_20261021124733_gwr_video_mvp.mp4'),
     screenshots: [
       asset('/images/edu-help/Screenshot 2026-10-21 162605.png'),
       asset('/images/edu-help/Screenshot 2026-10-21 162616.png'),
