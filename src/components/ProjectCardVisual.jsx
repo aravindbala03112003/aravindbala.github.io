@@ -31,6 +31,12 @@ const VIDEO_CONFIGS = {
     src: `${import.meta.env.BASE_URL}gifs/Food_recommendation_system_anima…_1080p_20261021123412_gwr_video_mvp.mp4`,
     heroClass: 'hero-foodrecommender',
     label: 'Food Recommender Video Loop'
+  },
+  '07': {
+    src: `${import.meta.env.BASE_URL}gifs/EduHelp_ticket_resolution_animat…_1080p_20261021124733_gwr_video_mvp.mp4`,
+    poster: `${import.meta.env.BASE_URL}images/edu-help/Screenshot 2026-10-21 162605.png`,
+    heroClass: 'hero-eduhelp',
+    label: 'EDU-HELP Video Loop'
   }
 };
 
@@ -96,6 +102,16 @@ function ProjectMotif({ id, isHovered }) {
           </div>
         </div>
       );
+    case '07':
+      return (
+        <div className={`project-bespoke-motif motif-eduhelp ${isHovered ? 'active' : ''}`} aria-hidden="true">
+          <div className="motif-badge-glass">
+            <span className="motif-dot dot-cyan" />
+            <span className="motif-code">STUDENT DESK // SLA</span>
+            <span className="motif-sub">TICKET LIFECYCLE</span>
+          </div>
+        </div>
+      );
     default:
       return null;
   }
@@ -144,6 +160,7 @@ export default function ProjectCardVisual({ project, isHovered, mousePos = { x: 
       <motion.video
         ref={videoRef}
         src={config.src}
+        poster={config.poster}
         autoPlay
         loop
         muted

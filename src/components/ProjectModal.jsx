@@ -88,6 +88,33 @@ export default function ProjectModal({ project, onClose, triggerRef }) {
             {/* Interactive Smartphone & Laptop Device Mockup Viewer */}
             <DeviceViewer project={project} />
 
+            {/* Dedicated Project Animation Section (Outside Device Viewer) */}
+            {project.video && (
+              <section className="modal-animation-section" aria-label="Project Animation">
+                <div className="modal-animation-header">
+                  <div className="modal-animation-title-group">
+                    <span className="modal-animation-badge">VIDEO DEMO</span>
+                    <h3 className="modal-animation-heading">Project Animation</h3>
+                  </div>
+                  <span className="modal-animation-subtitle">Resolution & Ticket Workflow Walkthrough</span>
+                </div>
+                <div className="modal-animation-media-container">
+                  <video
+                    src={project.video}
+                    controls
+                    playsInline
+                    muted
+                    loop
+                    preload="metadata"
+                    className="modal-animation-video"
+                    aria-label={`${project.name} resolution walkthrough animation`}
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </section>
+            )}
+
             <div className="modal-footer">
               <div className="modal-grid">
                 <div>

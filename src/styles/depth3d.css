@@ -1272,6 +1272,10 @@
   border-color: rgba(52, 211, 153, 0.35);
 }
 
+.motif-eduhelp .motif-badge-glass {
+  border-color: rgba(56, 189, 248, 0.45);
+}
+
 .project-card:hover .project-bespoke-motif {
   transform: translateY(-2px) translateZ(28px) scale(1.04);
 }

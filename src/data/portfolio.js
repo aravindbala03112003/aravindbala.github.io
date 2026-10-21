@@ -182,6 +182,41 @@ export const projects = [
       asset('/images/food-recommender/User Login1.png'),
     ],
   },
+
+  {
+    id: '07',
+    name: 'EDU-HELP',
+    type: 'Student support system',
+    category: 'Student Support and Administrative Ticket Management System',
+    categories: ['Web', 'Systems'],
+    deviceType: 'web',
+    description:
+      'A student support platform for raising, tracking, and resolving administrative requests through a structured ticket management workflow.',
+    modalDescription:
+      'EDU-HELP is a student support and administrative ticket management application that helps users raise requests for issues such as ID cards, hall tickets, fee receipts, and other administrative concerns. Administrators can review requests, manage tickets, and update their status to help students track progress toward resolution.',
+    challenge:
+      'Eliminating institutional bottlenecks, delayed student inquiries, and untracked administrative resolutions across fragmented campus offices.',
+    approach:
+      'Engineered an SLA-governed ticket lifecycle platform with deterministic turnaround countdowns, role-based isolation (Student, Staff, Manager), real-time audit threads, and executive capacity analytics.',
+    tags: ['React', 'Node.js', 'Express.js', 'PostgreSQL'],
+    color: 'cyan',
+    mark: 'EH',
+    metric: '100%',
+    metricText: 'SLA ticket tracking',
+    video: asset('/gifs/EduHelp_ticket_resolution_animat…_1080p_20261021124733_gwr_video_mvp.mp4'),
+    screenshots: [
+      asset('/images/edu-help/Screenshot 2026-10-21 162605.png'),
+      asset('/images/edu-help/Screenshot 2026-10-21 162616.png'),
+      asset('/images/edu-help/Screenshot 2026-10-21 162632.png'),
+      asset('/images/edu-help/Screenshot 2026-10-21 162642.png'),
+      asset('/images/edu-help/Screenshot 2026-10-21 162654.png'),
+      asset('/images/edu-help/Screenshot 2026-10-21 162707.png'),
+      asset('/images/edu-help/Screenshot 2026-10-21 162714.png'),
+      asset('/images/edu-help/Screenshot 2026-10-21 162800.png'),
+      asset('/images/edu-help/Screenshot 2026-10-21 162807.png'),
+      asset('/images/edu-help/Screenshot 2026-10-21 162827.png'),
+    ],
+  },
 ];
 
 export const skillGroups = [
