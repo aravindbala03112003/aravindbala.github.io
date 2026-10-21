@@ -37,6 +37,12 @@ const VIDEO_CONFIGS = {
     poster: `${import.meta.env.BASE_URL}images/edu-help/Screenshot 2026-10-21 162605.png`,
     heroClass: 'hero-eduhelp',
     label: 'EDU-HELP Video Loop'
+  },
+  '08': {
+    src: `${import.meta.env.BASE_URL}gifs/Barbershop_appointment_booking_s…_1080p_20261021125224_gwr_video_mvp.mp4`,
+    poster: `${import.meta.env.BASE_URL}images/barber-shop/Screenshot 2026-10-21 171910.png`,
+    heroClass: 'hero-barbershop',
+    label: 'Barber Shop Video Loop'
   }
 };
 
@@ -109,6 +115,16 @@ function ProjectMotif({ id, isHovered }) {
             <span className="motif-dot dot-cyan" />
             <span className="motif-code">STUDENT DESK // SLA</span>
             <span className="motif-sub">TICKET LIFECYCLE</span>
+          </div>
+        </div>
+      );
+    case '08':
+      return (
+        <div className={`project-bespoke-motif motif-barber ${isHovered ? 'active' : ''}`} aria-hidden="true">
+          <div className="motif-badge-glass">
+            <span className="motif-dot dot-amber" />
+            <span className="motif-code">SALON BOOKING // PHP</span>
+            <span className="motif-sub">APPOINTMENT ENGINE</span>
           </div>
         </div>
       );

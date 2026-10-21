@@ -1,5 +1,5 @@
 // Aravind Bala Portfolio — Service Worker
-const CACHE_NAME = 'aravind-portfolio-v10';
+const CACHE_NAME = 'aravind-portfolio-v11';
 const BASE_PATH = self.location.pathname.replace(/\/sw\.js$/, '') || '';
 const withBase = (path) => `${BASE_PATH}${path}`.replace(/\/+/g, '/');
 

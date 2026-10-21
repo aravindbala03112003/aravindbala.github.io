@@ -1689,6 +1689,13 @@ h1,h2,h3{font-weight:700;letter-spacing:-.055em}
   background: radial-gradient(circle at center, #0a1e38 0%, #030a14 100%);
 }
 
+/* --------------------------------------------------------------------------
+   08. Barber Shop Hero — Luxury Salon Booking World
+   -------------------------------------------------------------------------- */
+.hero-barbershop {
+  background: radial-gradient(circle at center, #261a0c 0%, #0d0904 100%);
+}
+
 
 /* ==========================================================================
    Luxury Auto-Response Email Preview Modal Styles

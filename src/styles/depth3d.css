@@ -411,6 +411,11 @@
   box-shadow: 0 0 8px #34d399;
 }
 
+.dot-amber {
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+}
+
 .chip-left {
   top: 18%;
   left: 4%;
@@ -1274,6 +1279,10 @@
 
 .motif-eduhelp .motif-badge-glass {
   border-color: rgba(56, 189, 248, 0.45);
+}
+
+.motif-barber .motif-badge-glass {
+  border-color: rgba(245, 158, 11, 0.45);
 }
 
 .project-card:hover .project-bespoke-motif {

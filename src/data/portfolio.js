@@ -216,6 +216,37 @@ export const projects = [
       asset('/images/edu-help/Screenshot 2026-10-21 162827.png'),
     ],
   },
+
+  {
+    id: '08',
+    name: 'Barber Shop',
+    type: 'Barber shop booking system',
+    category: 'BARBER SHOP BOOKING SYSTEM',
+    categories: ['Web', 'Systems'],
+    deviceType: 'web',
+    description:
+      'An online appointment booking system that helps customers explore barber services and schedule appointments through a streamlined interface.',
+    modalDescription:
+      'An online barber shop booking application designed to simplify appointment scheduling and provide a convenient way for customers to explore barber services, pricing tiers, and manage their appointments with ease.',
+    challenge:
+      'Replacing manual phone-based appointments and disjointed salon scheduling with an intuitive, automated booking flow that prevents double-booking.',
+    approach:
+      'Designed a high-conversion booking interface in Figma and implemented it with PHP, MySQL, and vanilla JavaScript, featuring dynamic service selection, real-time time-slot allocation, and appointment management.',
+    tags: ['Figma (UI/UX)', 'HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
+    color: 'orange',
+    mark: 'BS',
+    metric: '100%',
+    metricText: 'online scheduling',
+    screenshots: [
+      asset('/images/barber-shop/Screenshot 2026-10-21 171910.png'),
+      asset('/images/barber-shop/Screenshot 2026-10-21 171929.png'),
+      asset('/images/barber-shop/Screenshot 2026-10-21 171935.png'),
+      asset('/images/barber-shop/Screenshot 2026-10-21 171942.png'),
+      asset('/images/barber-shop/Screenshot 2026-10-21 171951.png'),
+      asset('/images/barber-shop/Screenshot 2026-10-21 171958.png'),
+      asset('/images/barber-shop/Screenshot 2026-10-21 172003.png'),
+    ],
+  },
 ];
 
 export const skillGroups = [
