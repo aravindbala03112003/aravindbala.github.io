@@ -1298,6 +1298,10 @@
   border-color: rgba(255, 87, 34, 0.45);
 }
 
+.motif-portfolio .motif-badge-glass {
+  border-color: rgba(6, 182, 212, 0.45);
+}
+
 .project-card:hover .project-bespoke-motif {
   transform: translateY(-2px) translateZ(28px) scale(1.04);
 }

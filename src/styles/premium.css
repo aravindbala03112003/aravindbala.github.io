@@ -1714,6 +1714,13 @@ h1,h2,h3{font-weight:700;letter-spacing:-.055em}
   background: radial-gradient(circle at center, #26120b 0%, #0c0603 100%);
 }
 
+/* --------------------------------------------------------------------------
+   11. Personal Portfolio Hero — Flutter Cross-Platform Mobile Engine
+   -------------------------------------------------------------------------- */
+.hero-personalportfolio {
+  background: radial-gradient(circle at center, #061928 0%, #030c14 100%);
+}
+
 
 /* ==========================================================================
    Luxury Auto-Response Email Preview Modal Styles

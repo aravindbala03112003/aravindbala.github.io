@@ -308,6 +308,47 @@ export const projects = [
       asset('/images/vehicle-parking/Screenshot 2026-10-21 181409.png'),
     ],
   },
+
+  {
+    id: '11',
+    name: 'Personal Portfolio',
+    type: 'Personal portfolio mobile application',
+    category: 'PERSONAL PORTFOLIO MOBILE APPLICATION',
+    categories: ['Mobile'],
+    deviceType: 'mobile',
+    description:
+      'A responsive personal portfolio mobile application built with Flutter to deliver immersive project exploration, interactive 3D widgets, and streamlined contact.',
+    modalDescription:
+      'PERSONAL PORTFOLIO is a modern cross-platform mobile application engineered in Flutter, translating the desktop portfolio experience into a native mobile journey with smooth animations, interactive telemetry counters, and responsive case-study navigation.',
+    challenge:
+      'Translating a rich multi-layered desktop web experience with 3D depth, video loops, and dynamic layouts into a fluid, battery-efficient, 60fps native Flutter mobile experience.',
+    approach:
+      'Engineered using Flutter and Dart with clean component architecture, adaptive layouts for various phone aspect ratios, interactive self-intro video presentation, and custom tactile touch interactions.',
+    tags: ['Flutter'],
+    color: 'cyan',
+    mark: 'PP',
+    metric: '60 FPS',
+    metricText: 'native Flutter UI',
+    screenshots: [
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.54 PM (1).jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.54 PM (2).jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.54 PM.jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.53 PM (2).jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.51 PM (2).jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.53 PM (1).jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.53 PM.jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.52 PM (1).jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.52 PM.jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.52 PM (3).jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.52 PM (2).jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.51 PM (1).jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.51 PM.jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.50 PM (2).jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.50 PM.jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.50 PM (1).jpeg'),
+      asset('/photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.49 PM.jpeg'),
+    ],
+  },
 ];
 
 export const skillGroups = [

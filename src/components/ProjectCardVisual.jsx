@@ -55,6 +55,12 @@ const VIDEO_CONFIGS = {
     poster: `${import.meta.env.BASE_URL}images/vehicle-parking/Screenshot 2026-10-21 181402.png`,
     heroClass: 'hero-vehicleparking',
     label: 'Online Vehicle Parking System Video Loop'
+  },
+  '11': {
+    src: `${import.meta.env.BASE_URL}gifs/Software_developer_portfolio_int…_1080p_20261021183821_gwr_video_mvp.mp4`,
+    poster: `${import.meta.env.BASE_URL}photos/port-folio/WhatsApp Image 2026-10-21 at 6.27.54 PM (1).jpeg`,
+    heroClass: 'hero-personalportfolio',
+    label: 'Personal Portfolio Video Loop'
   }
 };
 
@@ -157,6 +163,16 @@ function ProjectMotif({ id, isHovered }) {
             <span className="motif-dot dot-orange" />
             <span className="motif-code">PARKING BAY // MYSQL</span>
             <span className="motif-sub">56-SLOT VISUALIZER</span>
+          </div>
+        </div>
+      );
+    case '11':
+      return (
+        <div className={`project-bespoke-motif motif-portfolio ${isHovered ? 'active' : ''}`} aria-hidden="true">
+          <div className="motif-badge-glass">
+            <span className="motif-dot dot-cyan" />
+            <span className="motif-code">FLUTTER // MOBILE ENGINE</span>
+            <span className="motif-sub">CROSS-PLATFORM APP</span>
           </div>
         </div>
       );
