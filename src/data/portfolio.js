@@ -168,12 +168,6 @@ export const projects = [
     metricText: 'nutrition & review records',
     screenshots: [
       asset('/images/food-recommender/User dashboard.png'),
-      {
-        src: asset('/gifs/Food_recommendation_system_anima…_1080p_20261021123412_gwr_video_mvp.mp4'),
-        thumb: asset('/images/food-recommender/User dashboard.png'),
-        isVideo: true,
-        title: 'Holographic Selection Animation',
-      },
       asset('/images/food-recommender/User dashboard inputs.png'),
       asset('/images/food-recommender/Goal recommender.png'),
       asset('/images/food-recommender/KNN+SVD.png'),
