@@ -406,6 +406,11 @@
   box-shadow: 0 0 8px #a855f7;
 }
 
+.dot-emerald {
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+}
+
 .chip-left {
   top: 18%;
   left: 4%;
@@ -1261,6 +1266,10 @@
 
 .motif-research .motif-badge-glass {
   border-color: rgba(168, 85, 247, 0.35);
+}
+
+.motif-food .motif-badge-glass {
+  border-color: rgba(52, 211, 153, 0.35);
 }
 
 .project-card:hover .project-bespoke-motif {

@@ -82,7 +82,7 @@ export default function ProjectModal({ project, onClose, triggerRef }) {
             <div className="modal-header">
               <p className="eyebrow"><span />Case study / {project.id}</p>
               <h2>{project.name}</h2>
-              <p className="modal-description">{project.description}</p>
+              <p className="modal-description">{project.modalDescription || project.description}</p>
             </div>
 
             {/* Interactive Smartphone & Laptop Device Mockup Viewer */}
@@ -92,11 +92,11 @@ export default function ProjectModal({ project, onClose, triggerRef }) {
               <div className="modal-grid">
                 <div>
                   <small>Challenge</small>
-                  <p>Turn a complex workflow into a clear experience people can trust and use without training.</p>
+                  <p>{project.challenge || 'Turn a complex workflow into a clear experience people can trust and use without training.'}</p>
                 </div>
                 <div>
                   <small>Approach</small>
-                  <p>Created a responsive, component-led product architecture with useful feedback at every important decision.</p>
+                  <p>{project.approach || 'Created a responsive, component-led product architecture with useful feedback at every important decision.'}</p>
                 </div>
               </div>
 

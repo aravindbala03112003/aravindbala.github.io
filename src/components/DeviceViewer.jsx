@@ -57,6 +57,7 @@ export default function DeviceViewer({ project }) {
   const safeIndex = Math.min(Math.max(0, currentIndex), screenshots.length - 1);
   const currentItem = screenshots[safeIndex];
   const currentImage = typeof currentItem === 'string' ? currentItem : currentItem?.src;
+  const isItemVideo = Boolean(typeof currentItem === 'object' && currentItem?.isVideo);
   const activeDeviceType = typeof currentItem === 'string'
     ? project?.deviceType
     : (currentItem?.type || project?.deviceType);
@@ -64,23 +65,41 @@ export default function DeviceViewer({ project }) {
 
   const formattedCount = `${String(safeIndex + 1).padStart(2, '0')} / ${String(screenshots.length).padStart(2, '0')}`;
 
-  // Shared image element for both device types
-  const renderScreenImage = (altPrefix) => (
+  // Shared screen content element for both device types (supports image and video)
+  const renderScreenContent = (altPrefix) => (
     <AnimatePresence mode="sync" initial={false}>
-      <motion.img
-        key={`${project.id}-${safeIndex}`}
-        src={currentImage}
-        alt={`${project.name} ${altPrefix} screen ${safeIndex + 1}`}
-        className="device-screen-img"
-        loading="eager"
-        decoding="async"
-        draggable={false}
-        onError={() => setImgError(true)}
-        initial={{ opacity: 0.3 }}
-        animate={{ opacity: imgError ? 0 : 1 }}
-        exit={{ opacity: 0.3 }}
-        transition={{ duration: 0.2 }}
-      />
+      {isItemVideo ? (
+        <motion.video
+          key={`${project.id}-${safeIndex}`}
+          src={currentImage}
+          autoPlay
+          loop
+          muted
+          playsInline
+          controls
+          className="device-screen-img"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          initial={{ opacity: 0.3 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0.3 }}
+          transition={{ duration: 0.2 }}
+        />
+      ) : (
+        <motion.img
+          key={`${project.id}-${safeIndex}`}
+          src={currentImage}
+          alt={`${project.name} ${altPrefix} screen ${safeIndex + 1}`}
+          className="device-screen-img"
+          loading="eager"
+          decoding="async"
+          draggable={false}
+          onError={() => setImgError(true)}
+          initial={{ opacity: 0.3 }}
+          animate={{ opacity: imgError ? 0 : 1 }}
+          exit={{ opacity: 0.3 }}
+          transition={{ duration: 0.2 }}
+        />
+      )}
     </AnimatePresence>
   );
 
@@ -106,9 +125,9 @@ export default function DeviceViewer({ project }) {
           /* iPhone 16-Style Smartphone Mockup */
           <div className="mockup-phone">
             <div className="phone-bezel">
-              <div className="phone-screen" onClick={() => setIsZoomed(true)}>
+              <div className="phone-screen" onClick={() => !isItemVideo && setIsZoomed(true)}>
                 <div className="phone-dynamic-island" />
-                {renderScreenImage('mobile')}
+                {renderScreenContent('mobile')}
                 <div className="phone-glare" />
               </div>
               <div className="phone-home-indicator" />
@@ -119,8 +138,8 @@ export default function DeviceViewer({ project }) {
           <div className="mockup-laptop">
             <div className="laptop-top">
               <div className="laptop-camera-dot" />
-              <div className="laptop-screen" onClick={() => setIsZoomed(true)}>
-                {renderScreenImage('web')}
+              <div className="laptop-screen" onClick={() => !isItemVideo && setIsZoomed(true)}>
+                {renderScreenContent('web')}
                 <div className="laptop-glare" />
               </div>
             </div>
@@ -152,15 +171,35 @@ export default function DeviceViewer({ project }) {
 
         <div className="device-thumbnails-strip" ref={thumbnailsRef}>
           {screenshots.map((img, idx) => {
-            const thumbSrc = typeof img === 'string' ? img : img.src;
+            const thumbSrc = typeof img === 'string' ? img : (img.thumb || img.src);
+            const isVid = Boolean(typeof img === 'object' && img.isVideo);
             return (
               <button
-                key={`${thumbSrc}-${idx}`}
+                key={`${typeof img === 'string' ? img : img.src}-${idx}`}
                 className={`device-thumb ${idx === safeIndex ? 'active' : ''}`}
                 onClick={() => setCurrentIndex(idx)}
                 aria-label={`Select screenshot ${idx + 1}`}
+                style={{ position: 'relative' }}
               >
                 <img src={thumbSrc} alt={`Thumb ${idx + 1}`} loading="lazy" draggable={false} />
+                {isVid && (
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      background: 'rgba(0, 0, 0, 0.45)',
+                      color: '#34d399',
+                      fontSize: '11px',
+                      borderRadius: 'inherit'
+                    }}
+                  >
+                    ▶
+                  </span>
+                )}
               </button>
             );
           })}
@@ -178,12 +217,24 @@ export default function DeviceViewer({ project }) {
             onClick={() => setIsZoomed(false)}
           >
             <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-              <img
-                src={currentImage}
-                alt={`${project.name} enlarged preview`}
-                onClick={() => setIsZoomed(false)}
-                draggable={false}
-              />
+              {isItemVideo ? (
+                <video
+                  src={currentImage}
+                  controls
+                  autoPlay
+                  loop
+                  playsInline
+                  style={{ maxWidth: '90vw', maxHeight: '82vh', borderRadius: '12px' }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              ) : (
+                <img
+                  src={currentImage}
+                  alt={`${project.name} enlarged preview`}
+                  onClick={() => setIsZoomed(false)}
+                  draggable={false}
+                />
+              )}
               <div className="lightbox-hint">Click anywhere to return (Esc)</div>
             </div>
           </motion.div>

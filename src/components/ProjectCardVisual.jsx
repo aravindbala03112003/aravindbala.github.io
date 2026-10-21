@@ -26,6 +26,11 @@ const VIDEO_CONFIGS = {
     src: `${import.meta.env.BASE_URL}gifs/Research_paper_management_AI_video_202609021737.mp4`,
     heroClass: 'hero-research',
     label: 'Research Paper Management Video Loop'
+  },
+  '06': {
+    src: `${import.meta.env.BASE_URL}gifs/Food_recommendation_system_anima…_1080p_20261021123412_gwr_video_mvp.mp4`,
+    heroClass: 'hero-foodrecommender',
+    label: 'Food Recommender Video Loop'
   }
 };
 
@@ -78,6 +83,16 @@ function ProjectMotif({ id, isHovered }) {
             <span className="motif-dot dot-purple" />
             <span className="motif-code">CITATION MESH // AI</span>
             <span className="motif-sub">98.4% SEMANTIC MATCH</span>
+          </div>
+        </div>
+      );
+    case '06':
+      return (
+        <div className={`project-bespoke-motif motif-food ${isHovered ? 'active' : ''}`} aria-hidden="true">
+          <div className="motif-badge-glass">
+            <span className="motif-dot dot-emerald" />
+            <span className="motif-code">DIETARY AI // KNN+SVD</span>
+            <span className="motif-sub">120K RECS • SHAP ML</span>
           </div>
         </div>
       );

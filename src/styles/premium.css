@@ -1675,6 +1675,13 @@ h1,h2,h3{font-weight:700;letter-spacing:-.055em}
   100% { transform: rotate(360deg); }
 }
 
+/* --------------------------------------------------------------------------
+   06. Food Recommender Hero — Intelligent Nutrition World
+   -------------------------------------------------------------------------- */
+.hero-foodrecommender {
+  background: radial-gradient(circle at center, #06231c 0%, #020d0a 100%);
+}
+
 /* ==========================================================================
    Luxury Auto-Response Email Preview Modal Styles
    ========================================================================== */

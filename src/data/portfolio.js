@@ -146,6 +146,48 @@ export const projects = [
       asset('/images/research-papers/06-postgresql.jpg'),
     ],
   },
+
+  {
+    id: '06',
+    name: 'Food Recommender',
+    type: 'Food recommendation system',
+    categories: ['Web', 'Systems'],
+    deviceType: 'web',
+    description:
+      'Personalized food discovery through an intelligent recommendation system, presented in a clean and accessible interface.',
+    modalDescription:
+      'An intelligent food recommendation platform engineered to deliver personalized dietary guidance. Combines collaborative filtering (KNN & SVD), content-based NLP (TF-IDF & BERT), and health-aware ML models with SHAP explainability across 120,000 real nutrition and review records.',
+    challenge:
+      'Personalizing food choices across complex health conditions, dietary restrictions, and caloric goals while avoiding cold-start limitations.',
+    approach:
+      'Engineered a multi-algorithm pipeline combining KNN collaborative filtering, SVD matrix factorization, and GNNs with SHAP explainability analysis.',
+    tags: ['Python', 'HTML', 'CSS', 'KNN', 'SVD', 'BERT', 'CNN', 'GNN'],
+    color: 'emerald',
+    mark: 'FR',
+    metric: '120K',
+    metricText: 'nutrition & review records',
+    screenshots: [
+      asset('/images/food-recommender/User dashboard.png'),
+      {
+        src: asset('/gifs/Food_recommendation_system_anima…_1080p_20261021123412_gwr_video_mvp.mp4'),
+        thumb: asset('/images/food-recommender/User dashboard.png'),
+        isVideo: true,
+        title: 'Holographic Selection Animation',
+      },
+      asset('/images/food-recommender/User dashboard inputs.png'),
+      asset('/images/food-recommender/Goal recommender.png'),
+      asset('/images/food-recommender/KNN+SVD.png'),
+      asset('/images/food-recommender/Existing Recommendation Final.png'),
+      asset('/images/food-recommender/Comparison graph.png'),
+      asset('/images/food-recommender/Daily Nutrition.png'),
+      asset('/images/food-recommender/Budget graph.png'),
+      asset('/images/food-recommender/Dataset.png'),
+      asset('/images/food-recommender/Performance Matrics2.png'),
+      asset('/images/food-recommender/Admin Dashboard.png'),
+      asset('/images/food-recommender/Admin Dashboard Model.png'),
+      asset('/images/food-recommender/User Login1.png'),
+    ],
+  },
 ];
 
 export const skillGroups = [
