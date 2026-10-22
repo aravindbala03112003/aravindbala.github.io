@@ -1,5 +1,5 @@
 const asset = (path) =>
-  `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
+  `${import.meta.env?.BASE_URL || '/'}${path.replace(/^\/+/, '')}`;
 
 export const navLinks = ['home', 'about', 'work', 'skills', 'experience', 'contact'];
 
@@ -13,6 +13,9 @@ export const projects = [
     description:
       'A unified platform for discovering events and booking university spaces without the admin chaos.',
     tags: ['React', 'Node.js', 'MongoDB'],
+    liveUrl: 'https://frontend-eta-rouge-22.vercel.app',
+    liveLabel: 'OPEN LIVE PROJECT ↗',
+    liveType: 'web',
     color: 'violet',
     mark: 'EE',
     metric: '48%',
@@ -47,6 +50,9 @@ export const projects = [
     description:
       'A location-aware Android voting experience with secure student-ID scanning, campus geofencing, and broadcast updates for trusted election management.',
     tags: ['Java', 'Firebase', 'ML Kit', 'Geofencing', 'Broadcast Receiver'],
+    liveUrl: 'https://github.com/aravindbala03112003/student-vote-app/releases/download/v1.0.0/CampusVote-v1.0.0.apk',
+    liveLabel: 'DOWNLOAD ANDROID APP ↓',
+    liveType: 'apk',
     color: 'blue',
     mark: 'CV',
     metric: '100%',
@@ -81,6 +87,9 @@ export const projects = [
     description:
       'A responsive administration workspace that makes university finance operations clear and accountable.',
     tags: ['PHP', 'MySQL', 'Responsive UI'],
+    liveUrl: 'https://budget-management-system-tau.vercel.app',
+    liveLabel: 'OPEN LIVE PROJECT ↗',
+    liveType: 'web',
     color: 'orange',
     mark: 'FD',
     metric: '3x',
@@ -105,6 +114,9 @@ export const projects = [
     description:
       'An Android app that detects airplane mode changes and sends travel-status alerts with an optional location link to trusted family members.',
     tags: ['Java', 'XML', 'Broadcast Receiver'],
+    liveUrl: 'https://github.com/aravindbala03112003/smart-travel-mode/releases/download/v1.0.0/app-release.apk',
+    liveLabel: 'DOWNLOAD ANDROID APP ↓',
+    liveType: 'apk',
     color: 'blue',
     mark: 'ST',
     metric: 'Auto',
@@ -132,6 +144,9 @@ export const projects = [
     description:
       'A full-stack research-paper management workspace where users can create, search, view, update, and delete paper records, with server-side pagination and PostgreSQL persistence.',
     tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'CRUD'],
+    liveUrl: 'https://crud-operations-bice-eight.vercel.app',
+    liveLabel: 'OPEN LIVE PROJECT ↗',
+    liveType: 'web',
     color: 'violet',
     mark: 'RP',
     metric: 'CRUD',
@@ -162,6 +177,9 @@ export const projects = [
     approach:
       'Engineered a multi-algorithm pipeline combining KNN collaborative filtering, SVD matrix factorization, and GNNs with SHAP explainability analysis.',
     tags: ['Python', 'HTML', 'CSS', 'KNN', 'SVD', 'BERT', 'CNN', 'GNN'],
+    liveUrl: 'https://personalized-food-recommender-muafuvcqrmz4j9x28dusft.streamlit.app/',
+    liveLabel: 'OPEN LIVE PROJECT ↗',
+    liveType: 'web',
     color: 'emerald',
     mark: 'FR',
     metric: '120K',
@@ -199,6 +217,9 @@ export const projects = [
     approach:
       'Engineered an SLA-governed ticket lifecycle platform with deterministic turnaround countdowns, role-based isolation (Student, Staff, Manager), real-time audit threads, and executive capacity analytics.',
     tags: ['React', 'Node.js', 'Express.js', 'PostgreSQL'],
+    liveUrl: 'https://aravindbala03112003.github.io/eduhelp-student-support/',
+    liveLabel: 'OPEN LIVE PROJECT ↗',
+    liveType: 'web',
     color: 'cyan',
     mark: 'EH',
     metric: '100%',
@@ -233,6 +254,9 @@ export const projects = [
     approach:
       'Designed a high-conversion booking interface in Figma and implemented it with PHP, MySQL, and vanilla JavaScript, featuring dynamic service selection, real-time time-slot allocation, and appointment management.',
     tags: ['Figma (UI/UX)', 'HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL'],
+    liveUrl: 'https://barber-shop-six-lyart.vercel.app',
+    liveLabel: 'OPEN LIVE PROJECT ↗',
+    liveType: 'web',
     color: 'orange',
     mark: 'BS',
     metric: '100%',
@@ -264,6 +288,9 @@ export const projects = [
     approach:
       'Engineered a full-stack booking system with React, Node.js, Express, and MongoDB, featuring search-and-filter discovery, room amenity breakdowns, guest authentication, and an administrative control suite for inventory and revenue analytics.',
     tags: ['Figma (UI/UX)', 'React', 'Node.js', 'Express.js', 'MongoDB'],
+    liveUrl: 'https://room-booking-system-psi.vercel.app',
+    liveLabel: 'OPEN LIVE PROJECT ↗',
+    liveType: 'web',
     color: 'gold',
     mark: 'AH',
     metric: '100%',
@@ -295,6 +322,9 @@ export const projects = [
     approach:
       'Developed a responsive web interface using HTML, CSS, JavaScript, and MySQL, featuring interactive slot diagrams, lane-based bay selection, automated duration billing ($5/hr), and ticket verification.',
     tags: ['HTML', 'CSS', 'JavaScript', 'MySQL'],
+    liveUrl: 'https://park-my-spot.vercel.app',
+    liveLabel: 'OPEN LIVE PROJECT ↗',
+    liveType: 'web',
     color: 'orange',
     mark: 'VP',
     metric: '56 Bays',
@@ -325,6 +355,9 @@ export const projects = [
     approach:
       'Engineered using Flutter and Dart with clean component architecture, adaptive layouts for various phone aspect ratios, interactive self-intro video presentation, and custom tactile touch interactions.',
     tags: ['Flutter'],
+    liveUrl: null, // Integrated in main navigation bar Download APK button
+    liveLabel: null,
+    liveType: 'mobile',
     color: 'cyan',
     mark: 'PP',
     metric: '60 FPS',
@@ -413,3 +446,5 @@ export const timeline = [
     photos: [asset('/images/timeline/bca-certificate.jpeg')],
   },
 ];
+
+export { projectLinks, liveProjectLinks, getProjectLiveConfig } from './projectLinks.js';

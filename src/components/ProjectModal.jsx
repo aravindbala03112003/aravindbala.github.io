@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight } from './Icons';
 import DeviceViewer from './DeviceViewer';
+import OpenLiveProjectButton from './OpenLiveProjectButton';
 
 export default function ProjectModal({ project, onClose, triggerRef }) {
   const modalRef = useRef(null);
@@ -78,6 +79,9 @@ export default function ProjectModal({ project, onClose, triggerRef }) {
             >
               Close ✕
             </button>
+
+            {/* Premium Open Live Project / Download Android App button */}
+            <OpenLiveProjectButton project={project} />
 
             <div className="modal-header">
               <p className="eyebrow"><span />Case study / {project.id}</p>

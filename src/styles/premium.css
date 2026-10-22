@@ -8060,3 +8060,319 @@ button.round-cta.conversation-portal:hover .portal-border-frame {
     transform: none !important;
   }
 }
+
+/* ==========================================================================
+   Premium "OPEN LIVE PROJECT" & "DOWNLOAD ANDROID APP" Modal Button
+   ========================================================================== */
+
+.project-modal .modal-header {
+  padding-right: clamp(210px, 28vw, 260px);
+}
+
+.open-live-project-btn {
+  position: absolute;
+  top: 50px;
+  right: 14px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 6px 12px 6px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  isolation: isolate;
+  overflow: hidden;
+  max-width: 240px;
+  box-sizing: border-box;
+
+  /* Sophisticated gradient background matching portfolio theme */
+  background: linear-gradient(
+    135deg,
+    rgba(14, 27, 56, 0.94) 0%,
+    rgba(9, 18, 40, 0.98) 100%
+  );
+  
+  /* Subtle luminous border */
+  border: 1px solid rgba(117, 167, 255, 0.38);
+
+  /* Controlled neon glow & layered depth */
+  box-shadow:
+    0 4px 16px rgba(3, 9, 20, 0.6),
+    0 0 14px rgba(117, 167, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  /* Typography */
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #f4f6fb;
+  line-height: 1;
+
+  transition:
+    transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.22s ease;
+}
+
+/* Specific styling for APK download button */
+.open-live-project-btn.is-apk {
+  border-color: rgba(56, 189, 248, 0.42);
+  box-shadow:
+    0 4px 16px rgba(3, 9, 20, 0.6),
+    0 0 14px rgba(56, 189, 248, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Luminous glowing backdrop on hover */
+.open-live-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(117, 167, 255, 0.45),
+    rgba(56, 189, 248, 0.4),
+    rgba(213, 255, 110, 0.22)
+  );
+  opacity: 0;
+  z-index: -1;
+  filter: blur(6px);
+  transition: opacity 0.28s ease;
+  pointer-events: none;
+}
+
+/* Continuous light sweep / highlight shimmer */
+.open-live-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 15%,
+    rgba(255, 255, 255, 0.12) 42%,
+    rgba(117, 167, 255, 0.26) 52%,
+    rgba(213, 255, 110, 0.18) 60%,
+    transparent 80%
+  );
+  transform: translateX(-160%);
+  animation: open-live-shimmer-sweep 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes open-live-shimmer-sweep {
+  0% {
+    transform: translateX(-160%);
+  }
+  30%, 100% {
+    transform: translateX(160%);
+  }
+}
+
+/* Live / Download Status Indicator Dot */
+.open-live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow:
+    0 0 6px rgba(213, 255, 110, 0.95),
+    0 0 12px rgba(213, 255, 110, 0.65);
+  flex-shrink: 0;
+  animation: open-live-dot-pulse 2.4s ease-in-out infinite;
+}
+
+.open-live-project-btn.is-apk .open-live-dot {
+  background: #38bdf8;
+  box-shadow:
+    0 0 6px rgba(56, 189, 248, 0.95),
+    0 0 12px rgba(56, 189, 248, 0.65);
+}
+
+@keyframes open-live-dot-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+    filter: drop-shadow(0 0 4px rgba(213, 255, 110, 0.85));
+  }
+}
+
+/* Button Text */
+.open-live-text {
+  position: relative;
+  z-index: 2;
+  white-space: nowrap;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #f4f6fb;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Icon Box & Icon */
+.open-live-icon-box {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.open-live-project-btn.is-apk .open-live-icon-box {
+  color: #38bdf8;
+}
+
+.open-live-icon {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   Hover & Focus-Visible States
+   ========================================================================== */
+
+.open-live-project-btn:hover {
+  transform: translateY(-1.5px);
+  border-color: rgba(117, 167, 255, 0.8);
+  box-shadow:
+    0 8px 24px rgba(3, 9, 20, 0.7),
+    0 0 20px rgba(117, 167, 255, 0.38),
+    0 0 32px rgba(56, 189, 248, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  background: linear-gradient(
+    135deg,
+    rgba(18, 35, 74, 0.96) 0%,
+    rgba(12, 24, 52, 0.98) 100%
+  );
+}
+
+.open-live-project-btn.is-apk:hover {
+  border-color: rgba(56, 189, 248, 0.85);
+  box-shadow:
+    0 8px 24px rgba(3, 9, 20, 0.7),
+    0 0 22px rgba(56, 189, 248, 0.42),
+    0 0 32px rgba(139, 108, 255, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.open-live-project-btn:hover .open-live-glow {
+  opacity: 0.9;
+}
+
+.open-live-project-btn:hover .open-live-icon-box {
+  color: #ffffff;
+}
+
+/* External Link diagonal movement on hover */
+.open-live-project-btn.is-web:hover .open-live-icon {
+  transform: translate(2px, -2px);
+}
+
+/* Download APK downward movement on hover */
+.open-live-project-btn.is-apk:hover .open-live-icon {
+  transform: translateY(2px);
+}
+
+/* Active / Pressed State */
+.open-live-project-btn:active,
+.open-live-project-btn.is-pressing {
+  transform: translateY(0.5px) scale(0.97);
+  box-shadow:
+    0 2px 8px rgba(3, 9, 20, 0.65),
+    0 0 10px rgba(117, 167, 255, 0.25);
+}
+
+/* Accessible Keyboard Focus Indicator */
+.open-live-project-btn:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+  box-shadow: 0 0 16px rgba(213, 255, 110, 0.7);
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+
+@media (max-height: 850px) {
+  .open-live-project-btn {
+    top: 44px;
+    right: 12px;
+    padding: 5px 10px 5px 9px;
+    font-size: 10px;
+    border-radius: 7px;
+  }
+  .open-live-icon {
+    width: 11px;
+    height: 11px;
+  }
+}
+
+@media (max-height: 720px) {
+  .open-live-project-btn {
+    top: 39px;
+    right: 12px;
+    padding: 4px 9px;
+    font-size: 9.5px;
+  }
+}
+
+@media (max-width: 640px) {
+  .project-modal .modal-header {
+    padding-right: 150px;
+  }
+
+  .open-live-project-btn {
+    top: 38px;
+    right: 10px;
+    padding: 4.5px 8px 4.5px 7px;
+    font-size: 8.5px;
+    gap: 5px;
+    border-radius: 6px;
+    letter-spacing: 0.02em;
+    max-width: 175px;
+  }
+  .open-live-dot {
+    width: 4px;
+    height: 4px;
+  }
+  .open-live-icon {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .open-live-project-btn,
+  .open-live-icon,
+  .open-live-dot,
+  .open-live-glow {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .open-live-shimmer {
+    display: none !important;
+  }
+}
+
+
