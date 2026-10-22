@@ -124,7 +124,7 @@ export default function DeviceViewer({ project }) {
           </div>
         ) : (
           /* Laptop / MacBook Mockup */
-          <div className="mockup-laptop">
+          <div className="mockup-laptop laptop-device">
             <div className="laptop-top">
               <div className="laptop-camera-dot" />
               <div className="laptop-screen" onClick={() => setIsZoomed(true)}>

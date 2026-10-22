@@ -1318,15 +1318,19 @@
 }
 
 .mockup-phone,
-.mockup-laptop {
+.mockup-laptop,
+.laptop-device {
   transform-style: preserve-3d;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
 }
 
 .phone-screen,
 .laptop-screen {
-  transform-style: preserve-3d;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+  transform-style: flat !important;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.35);
+  overflow: hidden !important;
+  isolation: isolate;
+  contain: paint;
 }
 
 .phone-glare,
@@ -1334,9 +1338,9 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 40%, transparent 60%);
-  mix-blend-mode: overlay;
-  z-index: 10;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 35%, transparent 60%);
+  z-index: 5;
+  border-radius: inherit;
 }
 
 /* --------------------------------------------------------------------------
