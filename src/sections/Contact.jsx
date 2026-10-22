@@ -8,6 +8,7 @@ import {
   sendContactEmail,
   isEmailJsReady,
   sanitizeInput,
+  isValidEmail,
 } from '../services/emailService';
 import { openContactForm } from '../utils/contactNavigation';
 
@@ -15,19 +16,23 @@ export default function Contact() {
   const { playSynthSound } = useSound();
 
   const [state, setState] = useState('idle');
+  const [errorMessage, setErrorMessage] = useState('');
   const [showPreview, setShowPreview] = useState(false);
   const [replyEmail, setReplyEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
 
   const submit = async (event) => {
     event.preventDefault();
 
-    // Prevent accidental double submissions.
-    if (Date.now() - lastSubmitTime < 5000) {
+    // Prevent accidental double clicks or concurrent submissions
+    if (isSubmitting || state === 'sending') {
       return;
     }
 
-    setLastSubmitTime(Date.now());
+    if (Date.now() - lastSubmitTime < 3000) {
+      return;
+    }
 
     const form = event.currentTarget;
     const data = new FormData(form);
@@ -36,33 +41,44 @@ export default function Contact() {
     const userEmail = sanitizeInput(data.get('reply_to'));
     const userMessage = sanitizeInput(data.get('message'));
 
-    // Validate required fields.
+    // Validate required fields
     if (!fromName || !userEmail || !userMessage) {
+      setErrorMessage('Please fill in your name, email, and message.');
       setState('error');
       return;
     }
 
-    // EmailJS must be configured.
+    // Validate email address format
+    if (!isValidEmail(userEmail)) {
+      setErrorMessage('Please enter a valid email address.');
+      setState('error');
+      return;
+    }
+
+    // EmailJS must be configured
     if (!isEmailJsReady) {
       console.error('EmailJS is not configured.');
+      setErrorMessage('Email service is temporarily unavailable. Please try again later.');
       setState('error');
       return;
     }
 
+    setLastSubmitTime(Date.now());
+    setIsSubmitting(true);
     setState('sending');
+    setErrorMessage('');
 
     try {
-      playSynthSound('success');
-
       const result = await sendContactEmail({
         fromName,
         userEmail,
         userMessage,
       });
 
-      // Only clear the form after successful delivery.
+      // Clear the form after successful notification delivery so message isn't resent
       form.reset();
       setReplyEmail('');
+      playSynthSound('success');
 
       if (result.autoReplySent) {
         setState('sent');
@@ -71,11 +87,10 @@ export default function Contact() {
       }
     } catch (error) {
       console.error('Contact email submission error:', error);
-
-      // IMPORTANT:
-      // Never open Gmail or create a draft.
-      // The visitor stays on the portfolio.
+      setErrorMessage(error?.message || 'We could not send your message right now. Please try again.');
       setState('error');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -94,11 +109,11 @@ export default function Contact() {
     state === 'sending'
       ? 'Sending your message securely…'
       : state === 'sent'
-        ? 'Your message was delivered successfully. Check your inbox for the luxury auto-response.'
+        ? 'Your message was delivered successfully! A confirmation email has been sent to your inbox.'
         : state === 'sent-no-reply'
-          ? 'Your message was delivered successfully.'
+          ? 'Your inquiry was delivered to Aravind! (Automatic acknowledgment email could not be sent to your inbox, but your message was received successfully.)'
           : state === 'error'
-            ? 'We could not send your message right now. Please try again.'
+            ? (errorMessage || 'We could not send your message right now. Please try again.')
             : 'Your message is delivered securely through EmailJS with instant auto-response.';
 
   return (
@@ -187,6 +202,12 @@ export default function Contact() {
             required
             autoComplete="name"
             placeholder="What should I call you?"
+            onChange={() => {
+              if (state === 'error') {
+                setState('idle');
+                setErrorMessage('');
+              }
+            }}
           />
         </label>
 
@@ -204,6 +225,7 @@ export default function Contact() {
 
               if (state === 'error') {
                 setState('idle');
+                setErrorMessage('');
               }
             }}
             placeholder="Where should I reply?"
@@ -221,6 +243,7 @@ export default function Contact() {
             onChange={() => {
               if (state === 'error') {
                 setState('idle');
+                setErrorMessage('');
               }
             }}
           />
@@ -228,7 +251,7 @@ export default function Contact() {
 
         <button
           className="button button-primary"
-          disabled={state === 'sending'}
+          disabled={state === 'sending' || isSubmitting}
           type="submit"
         >
           {buttonText}
