@@ -165,10 +165,6 @@ export default function About() {
 
       {/* Layer 3: Foreground Floating Telemetry Glass Chips (Differential Scroll) */}
       <div className="about-floating-telemetry" aria-hidden="true">
-        <div className="telemetry-chip chip-right">
-          <span className="telemetry-dot dot-lime" />
-          <span>🚀 Micro-Interactions & Fluid 3D UI</span>
-        </div>
         <div className="telemetry-chip chip-bottom">
           <span className="telemetry-dot dot-purple" />
           <span>🔒 Zero-Trust Resilient APIs</span>
