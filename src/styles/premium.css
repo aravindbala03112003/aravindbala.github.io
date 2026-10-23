@@ -7957,9 +7957,15 @@ button.round-cta.conversation-portal:hover .portal-border-frame {
 }
 
 /* Field Labels */
-.contact-form label {
+.contact-form label,
+.contact-field-label {
   position: relative;
   z-index: 2;
+  display: block;
+  margin-bottom: 22px;
+}
+
+.contact-label-text {
   display: block;
   color: #94a3b8;
   font-family: var(--mono);
@@ -7967,7 +7973,19 @@ button.round-cta.conversation-portal:hover .portal-border-frame {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 9px;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.contact-field-label:focus-within .contact-label-text {
+  color: #7dd3fc;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.45);
+}
+
+.contact-input-wrapper {
+  position: relative;
+  width: 100%;
+  display: block;
 }
 
 /* Clean Sharp Inputs & Textarea */
@@ -7976,24 +7994,24 @@ button.round-cta.conversation-portal:hover .portal-border-frame {
   display: block;
   width: 100%;
   box-sizing: border-box;
-  margin-top: 9px;
+  margin-top: 0 !important;
   color: #f8fafc;
   font-family: var(--sans);
   font-size: 14px;
-  background: rgba(22, 38, 64, 0.88) !important;
+  background: rgba(20, 36, 62, 0.88) !important;
   border: 1px solid rgba(117, 167, 255, 0.22) !important;
   border-radius: 12px !important;
-  padding: 14px 16px !important;
+  padding: 14px 18px 14px 52px !important;
   outline: none;
   transform: none !important;
   filter: none !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    0 4px 14px rgba(0, 0, 0, 0.18) !important;
+    0 4px 14px rgba(0, 0, 0, 0.2) !important;
   transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease,
-    box-shadow 0.2s ease !important;
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease !important;
 }
 
 .contact-form input {
@@ -8003,28 +8021,6 @@ button.round-cta.conversation-portal:hover .portal-border-frame {
 .contact-form textarea {
   min-height: 120px;
   resize: vertical;
-}
-
-/* Futuristic Field Icons Matching Reference Design */
-.contact-form input[name="from_name"] {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: 15px center;
-  padding-left: 42px !important;
-}
-
-.contact-form input[name="reply_to"] {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='16' x='2' y='4' rx='2'/%3E%3Cpath d='m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: 15px center;
-  padding-left: 42px !important;
-}
-
-.contact-form textarea[name="message"] {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: 15px 16px;
-  padding-left: 42px !important;
 }
 
 .contact-form input::placeholder,
@@ -8058,17 +8054,304 @@ button.round-cta.conversation-portal:hover .portal-border-frame {
   transform: none !important;
 }
 
-/* Field Focus: Illuminated Icons */
-.contact-form input[name="from_name"]:focus {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
+/* ==========================================================================
+   Premium Electrifying Animated Icons Inside Input & Textarea
+   ========================================================================== */
+
+.electric-field-icon {
+  position: absolute;
+  left: 17px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  user-select: none;
+  z-index: 3;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.contact-form input[name="reply_to"]:focus {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='16' x='2' y='4' rx='2'/%3E%3Cpath d='m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7'/%3E%3C/svg%3E");
+/* Textarea Icon: Vertically aligned with the first line of text */
+.contact-textarea-wrapper .electric-field-icon {
+  top: 15px;
+  transform: none;
 }
 
-.contact-form textarea[name="message"]:focus {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/%3E%3C/svg%3E");
+/* SVG Icon Base */
+.electric-svg-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  color: #94a3b8;
+  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.35));
+  transition:
+    color 0.28s ease,
+    filter 0.28s ease,
+    transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  z-index: 2;
+}
+
+/* Dynamic Radial Aura Glow */
+.electric-aura-glow {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, rgba(56, 189, 248, 0.08) 45%, transparent 70%);
+  opacity: 0.65;
+  transition: opacity 0.35s ease, transform 0.35s ease, background 0.35s ease;
+  animation: electricAuraBreathing 4s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Lime-Green Energy Spark Bead */
+.electric-lime-spark {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #c8f049;
+  box-shadow: 0 0 6px #c8f049, 0 0 10px rgba(200, 240, 73, 0.65);
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.75;
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  animation: electricSparkPulse 2.8s ease-in-out infinite;
+}
+
+.electric-name-icon .electric-lime-spark {
+  bottom: 0px;
+  right: -1px;
+}
+
+.electric-email-icon .electric-lime-spark {
+  top: 1px;
+  right: -2px;
+}
+
+.electric-message-icon .electric-lime-spark {
+  top: 0px;
+  right: -1px;
+}
+
+/* 1. Name Field: Rotating Energy Arc Ring */
+.electric-arc-ring {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px dashed rgba(56, 189, 248, 0.35);
+  border-top-color: #c8f049;
+  border-right-color: rgba(56, 189, 248, 0.7);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+  animation: electricArcSpin 7s linear infinite;
+  transition: opacity 0.3s ease, border-color 0.3s ease, filter 0.3s ease;
+}
+
+/* 2. Email Field: Light Sweep Beam */
+.electric-sweep-beam {
+  position: absolute;
+  inset: -2px;
+  border-radius: 4px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.electric-sweep-beam::after {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -80%;
+  width: 40%;
+  height: 220%;
+  background: linear-gradient(115deg, transparent 20%, rgba(56, 189, 248, 0.75) 50%, rgba(200, 240, 73, 0.6) 65%, transparent 80%);
+  transform: rotate(25deg);
+  animation: electricEnvelopeSweep 4.5s ease-in-out infinite;
+}
+
+/* 3. Message Field: Expanding Energy Ripple */
+.electric-ripple-ring {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.4;
+  animation: electricMessageRipple 3.6s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+  transition: border-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* ==========================================================================
+   Interaction States: Hover, Focus, and Filled
+   ========================================================================== */
+
+/* HOVER STATE */
+.contact-input-wrapper:hover .electric-svg-icon {
+  color: #38bdf8;
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.65));
+}
+
+.contact-input-wrapper:hover .electric-aura-glow {
+  opacity: 0.85;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, rgba(200, 240, 73, 0.12) 40%, transparent 70%);
+}
+
+.contact-input-wrapper:hover .electric-arc-ring {
+  opacity: 0.8;
+  border-color: rgba(56, 189, 248, 0.6);
+  border-top-color: #c8f049;
+}
+
+.contact-input-wrapper:hover .electric-sweep-beam {
+  opacity: 0.75;
+}
+
+.contact-input-wrapper:hover .electric-ripple-ring {
+  opacity: 0.65;
+  border-color: rgba(56, 189, 248, 0.55);
+}
+
+.contact-input-wrapper:hover .electric-lime-spark {
+  opacity: 1;
+  box-shadow: 0 0 8px #c8f049, 0 0 14px rgba(200, 240, 73, 0.8);
+}
+
+/* FOCUS STATE (Active Electrifying State) */
+.contact-input-wrapper:focus-within .electric-svg-icon {
+  color: #ffffff;
+  filter: drop-shadow(0 0 8px #38bdf8) drop-shadow(0 0 14px rgba(56, 189, 248, 0.8));
+  transform: scale(1.08);
+}
+
+.contact-input-wrapper:focus-within .electric-aura-glow {
+  opacity: 1;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.55) 0%, rgba(200, 240, 73, 0.22) 45%, transparent 75%);
+  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.7));
+  transform: scale(1.15);
+}
+
+.contact-input-wrapper:focus-within .electric-arc-ring {
+  opacity: 1;
+  border-color: rgba(56, 189, 248, 0.9);
+  border-top-color: #c8f049;
+  border-width: 1.2px;
+  animation-duration: 2.2s;
+  filter: drop-shadow(0 0 5px #38bdf8);
+}
+
+.contact-input-wrapper:focus-within .electric-sweep-beam {
+  opacity: 1;
+}
+
+.contact-input-wrapper:focus-within .electric-sweep-beam::after {
+  animation-duration: 2s;
+  background: linear-gradient(115deg, transparent 15%, rgba(56, 189, 248, 0.95) 50%, #c8f049 65%, transparent 85%);
+}
+
+.contact-input-wrapper:focus-within .electric-ripple-ring {
+  opacity: 0.9;
+  border-color: rgba(200, 240, 73, 0.7);
+  animation-duration: 1.8s;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+.contact-input-wrapper:focus-within .electric-lime-spark {
+  opacity: 1;
+  transform: scale(1.2);
+  box-shadow: 0 0 10px #c8f049, 0 0 18px rgba(200, 240, 73, 0.9);
+}
+
+/* FILLED STATE (When input contains text) */
+.contact-input-wrapper:has(input:not(:placeholder-shown)) .electric-svg-icon,
+.contact-input-wrapper:has(textarea:not(:placeholder-shown)) .electric-svg-icon {
+  color: #38bdf8;
+  filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.5));
+}
+
+.contact-input-wrapper:has(input:not(:placeholder-shown)) .electric-lime-spark,
+.contact-input-wrapper:has(textarea:not(:placeholder-shown)) .electric-lime-spark {
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   Keyframe Animations
+   ========================================================================== */
+
+@keyframes electricAuraBreathing {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.08);
+    opacity: 0.8;
+  }
+}
+
+@keyframes electricArcSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes electricEnvelopeSweep {
+  0%, 15% {
+    left: -100%;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  55% {
+    left: 140%;
+    opacity: 0;
+  }
+  100% {
+    left: 140%;
+    opacity: 0;
+  }
+}
+
+@keyframes electricMessageRipple {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.8;
+  }
+  60% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+@keyframes electricSparkPulse {
+  0%, 100% {
+    transform: scale(0.9);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
 }
 
 /* Neon-Lime Send Message Button */
@@ -8140,7 +8423,27 @@ button.round-cta.conversation-portal:hover .portal-border-frame {
 
   .contact-form input,
   .contact-form textarea {
-    padding: 13px 14px !important;
+    padding: 13px 14px 13px 48px !important;
+  }
+
+  .electric-field-icon {
+    left: 14px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .contact-textarea-wrapper .electric-field-icon {
+    top: 14px;
+  }
+
+  .electric-svg-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .electric-arc-ring {
+    width: 23px;
+    height: 23px;
   }
 }
 
@@ -8151,6 +8454,19 @@ button.round-cta.conversation-portal:hover .portal-border-frame {
   .contact-form .button-primary {
     transition: none !important;
     transform: none !important;
+  }
+
+  .electric-aura-glow,
+  .electric-arc-ring,
+  .electric-sweep-beam::after,
+  .electric-ripple-ring,
+  .electric-lime-spark {
+    animation: none !important;
+  }
+
+  .electric-field-icon,
+  .electric-svg-icon {
+    transition: none !important;
   }
 }
 

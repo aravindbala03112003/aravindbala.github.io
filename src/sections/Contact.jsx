@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { contactEmail } from '../data/contact';
 import SectionHeading from '../components/SectionHeading';
 import { ArrowUpRight, Mail } from '../components/Icons';
+import { LuUserRound, LuMail, LuMessageSquareText } from 'react-icons/lu';
 import EmailPreviewModal from '../components/EmailPreviewModal';
 import { useSound } from '../context/SoundContext';
 import {
@@ -194,59 +195,80 @@ export default function Contact() {
         className="contact-form reveal"
         onSubmit={submit}
       >
-        <label>
-          Your name
-
-          <input
-            name="from_name"
-            required
-            autoComplete="name"
-            placeholder="What should I call you?"
-            onChange={() => {
-              if (state === 'error') {
-                setState('idle');
-                setErrorMessage('');
-              }
-            }}
-          />
+        <label className="contact-field-label">
+          <span className="contact-label-text">Your name</span>
+          <div className="contact-input-wrapper">
+            <div className="electric-field-icon electric-name-icon" aria-hidden="true">
+              <span className="electric-aura-glow" />
+              <span className="electric-arc-ring" />
+              <span className="electric-lime-spark" />
+              <LuUserRound className="electric-svg-icon" />
+            </div>
+            <input
+              name="from_name"
+              required
+              autoComplete="name"
+              placeholder="What should I call you?"
+              onChange={() => {
+                if (state === 'error') {
+                  setState('idle');
+                  setErrorMessage('');
+                }
+              }}
+            />
+          </div>
         </label>
 
-        <label>
-          Your email
+        <label className="contact-field-label">
+          <span className="contact-label-text">Your email</span>
+          <div className="contact-input-wrapper">
+            <div className="electric-field-icon electric-email-icon" aria-hidden="true">
+              <span className="electric-aura-glow" />
+              <span className="electric-sweep-beam" />
+              <span className="electric-lime-spark" />
+              <LuMail className="electric-svg-icon" />
+            </div>
+            <input
+              name="reply_to"
+              required
+              type="email"
+              autoComplete="email"
+              value={replyEmail}
+              onChange={(event) => {
+                setReplyEmail(event.target.value);
 
-          <input
-            name="reply_to"
-            required
-            type="email"
-            autoComplete="email"
-            value={replyEmail}
-            onChange={(event) => {
-              setReplyEmail(event.target.value);
-
-              if (state === 'error') {
-                setState('idle');
-                setErrorMessage('');
-              }
-            }}
-            placeholder="Where should I reply?"
-          />
+                if (state === 'error') {
+                  setState('idle');
+                  setErrorMessage('');
+                }
+              }}
+              placeholder="Where should I reply?"
+            />
+          </div>
         </label>
 
-        <label>
-          Tell me a little about it
-
-          <textarea
-            name="message"
-            required
-            placeholder="A new project, a role, or a note…"
-            rows="4"
-            onChange={() => {
-              if (state === 'error') {
-                setState('idle');
-                setErrorMessage('');
-              }
-            }}
-          />
+        <label className="contact-field-label">
+          <span className="contact-label-text">Tell me a little about it</span>
+          <div className="contact-input-wrapper contact-textarea-wrapper">
+            <div className="electric-field-icon electric-message-icon" aria-hidden="true">
+              <span className="electric-aura-glow" />
+              <span className="electric-ripple-ring" />
+              <span className="electric-lime-spark" />
+              <LuMessageSquareText className="electric-svg-icon" />
+            </div>
+            <textarea
+              name="message"
+              required
+              placeholder="A new project, a role, or a note…"
+              rows="4"
+              onChange={() => {
+                if (state === 'error') {
+                  setState('idle');
+                  setErrorMessage('');
+                }
+              }}
+            />
+          </div>
         </label>
 
         <button
