@@ -2,5 +2,5 @@ import MuseumCertificateViewer from './MuseumCertificateViewer';
 
 export default function TimelineModal({ item, onClose }) {
   if (!item) return null;
-  return <MuseumCertificateViewer item={item} onClose={onClose} />;
+  return <MuseumCertificateViewer key={item.title} item={item} onClose={onClose} />;
 }

@@ -160,6 +160,7 @@ export default function Experience() {
                   <span className="timeline-place">{item.place}</span>
                   <TimelineDocBtn
                     index={index}
+                    label={item.btnLabel || 'VIEW DOCUMENT'}
                     onClick={() => handleSelect(item)}
                   />
                 </div>

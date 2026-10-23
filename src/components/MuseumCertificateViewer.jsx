@@ -13,6 +13,12 @@ export default function MuseumCertificateViewer({ item, onClose }) {
 
   const scrollYRef = useRef(0);
 
+  // Reset active page index and zoom state when changing documents
+  useEffect(() => {
+    setActiveIdx(0);
+    setIsZoomed(false);
+  }, [item]);
+
   // Lock background body/html scroll and prevent all vertical movement in document viewer
   useEffect(() => {
     if (!item) return;
@@ -107,9 +113,11 @@ export default function MuseumCertificateViewer({ item, onClose }) {
   };
 
   const handleDownload = () => {
+    const extMatch = currentPhoto?.match(/\.(png|jpe?g|webp|svg)($|\?)/i);
+    const ext = extMatch ? extMatch[1] : 'jpg';
     const link = document.createElement('a');
     link.href = currentPhoto;
-    link.download = `${item.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}-document-${activeIdx + 1}.jpeg`;
+    link.download = `${item.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}-document-${activeIdx + 1}.${ext}`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

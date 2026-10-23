@@ -413,9 +413,7 @@ export const timeline = [
     title: 'MCA - Master of Computer Applications',
     place: 'Building deeper systems thinking through product-led engineering.',
     photos: [
-      asset('/images/timeline/mca-semester-1.jpeg'),
-      asset('/images/timeline/mca-semester-2.jpeg'),
-      asset('/images/timeline/mca-semester-3.jpeg'),
+      asset('/images/timeline/mca-consolidated-marksheet.jpg'),
     ],
   },
   {
@@ -444,6 +442,14 @@ export const timeline = [
     place:
       'A foundation in software development and computer science.',
     photos: [asset('/images/timeline/bca-certificate.jpeg')],
+  },
+  {
+    year: '2022',
+    title: 'Junior Grade English Typewriting Certificate',
+    place:
+      'Successfully completed the Junior Grade Typewriting English examination at 30 words per minute, achieving First Class in the Government Technical Examinations, Tamil Nadu, held in February 2022.',
+    photos: [asset('/images/timeline/junior-english-typewriting-certificate.png')],
+    btnLabel: 'VIEW CERTIFICATE',
   },
 ];
 

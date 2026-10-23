@@ -9,7 +9,7 @@ import React from 'react';
  * 3: Software Development Training -> 'data-flow'
  * 4: BCA -> 'digital-archive'
  */
-export default function TimelineDocBtn({ index, onClick }) {
+export default function TimelineDocBtn({ index, label = 'VIEW DOCUMENT', onClick }) {
   const configs = [
     { type: 'scan', label: 'Academic Scan' },
     { type: 'code', label: 'Code Reveal' },
@@ -28,7 +28,7 @@ export default function TimelineDocBtn({ index, onClick }) {
         // Allow click directly on button or bubbling to parent timeline row
         onClick?.();
       }}
-      aria-label={`View Document - ${config.label}`}
+      aria-label={`${label} - ${config.label}`}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
@@ -113,7 +113,7 @@ export default function TimelineDocBtn({ index, onClick }) {
 
       {/* 2. Text Label */}
       <span className="doc-label-wrap">
-        <span className="doc-label-text">VIEW DOCUMENT</span>
+        <span className="doc-label-text">{label}</span>
         {/* Subtle Underline or Base Glow */}
         <span className="doc-accent-line" />
       </span>
