@@ -19,6 +19,9 @@ export default function Navbar({ active, onCommand }) {
       playSynthSound('click');
     } catch (_) {}
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('nav-section-visit', { detail: { id } }));
+    }
     setOpen(false);
   };
 

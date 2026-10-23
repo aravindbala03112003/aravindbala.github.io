@@ -801,11 +801,82 @@
 }
 
 /* --------------------------------------------------------------------------
-   05. TOOLKIT / SKILLS — 3D DEPTH CARDS (Section 6)
+   05. TOOLKIT / SKILLS — 3D DEPTH CARDS & ONE-TIME 3D FLIP ENTRANCE
    -------------------------------------------------------------------------- */
 .skills-grid {
   perspective: 1200px;
   transform-style: preserve-3d;
+}
+
+/* Outer Card Flip Perspective Wrapper */
+.skill-card-flip-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Inner 3D Rotation Element (Independent from inner card hover transforms) */
+.skill-card-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-origin: center center;
+  transform: rotateY(-80deg) translateZ(-25px);
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--card-flip-delay, 0ms);
+}
+
+/* Instant reset when leaving viewport (avoids visible backwards flip offscreen) */
+.skill-card-flip-wrap:not(.is-flipped) .skill-card-flip-inner {
+  transition: none !important;
+  transform: rotateY(-80deg) translateZ(-25px);
+  opacity: 0;
+}
+
+/* Synchronized 3D Flip Entrance (settles at identity normal front-facing) */
+.skill-card-flip-wrap.is-flipped .skill-card-flip-inner {
+  transform: rotateY(0deg) translateZ(0);
+  opacity: 1;
+}
+
+/* Card fills the flip wrapper seamlessly without layout shift */
+.skill-card-flip-inner > .skill-group {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 640px) {
+  .skill-card-flip-wrap {
+    min-height: 225px;
+  }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .skill-card-flip-wrap,
+  .skill-card-flip-inner {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
 }
 
 .skill-group {
