@@ -6,20 +6,30 @@ export default function Preloader() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Respect prefers-reduced-motion
+    // Respect prefers-reduced-motion immediately
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setLoading(false);
       return;
     }
 
-    // Check if user already saw preloader in this tab session
-    const hasLoaded = sessionStorage.getItem('portfolio-session-preloaded');
-    const targetDuration = hasLoaded ? 400 : 900;
-    const intervalTime = hasLoaded ? 16 : 28;
+    // Safely check session storage with try-catch
+    let hasLoaded = false;
+    try {
+      hasLoaded = Boolean(sessionStorage.getItem('portfolio-session-preloaded'));
+    } catch (_) {}
+
+    // Strict safety timer: unmount within 800ms max unconditionally
+    const safetyTimer = setTimeout(() => {
+      setProgress(100);
+      setLoading(false);
+    }, hasLoaded ? 350 : 800);
+
+    const intervalTime = hasLoaded ? 14 : 24;
+    const increment = hasLoaded ? 10 : 5;
 
     let currentVal = 0;
     const timer = setInterval(() => {
-      currentVal += hasLoaded ? 8 : 4;
+      currentVal += increment;
       if (currentVal >= 100) {
         currentVal = 100;
         setProgress(100);
@@ -29,7 +39,7 @@ export default function Preloader() {
           try {
             sessionStorage.setItem('portfolio-session-preloaded', 'true');
           } catch (_) {}
-        }, 180);
+        }, 120);
       } else {
         setProgress(currentVal);
       }
@@ -37,59 +47,48 @@ export default function Preloader() {
 
     return () => {
       clearInterval(timer);
+      clearTimeout(safetyTimer);
     };
   }, []);
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       {loading && (
         <motion.div
           className="preloader-cinematic"
-          initial={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 1 }}
           exit={{
+            opacity: 0,
             y: '-100%',
-            transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+            transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] },
           }}
+          style={{ pointerEvents: loading ? 'auto' : 'none' }}
         >
           {/* Background Ambient Grid & Glow */}
           <div className="preloader-bg-ambient" aria-hidden="true" />
 
           <div className="preloader-content">
             {/* Top Monogram Mark */}
-            <motion.div
-              className="preloader-monogram"
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
-            >
+            <div className="preloader-monogram">
               <div className="preloader-logo-ring">
                 <img
                   src={`${import.meta.env.BASE_URL}logo/portfolio-logo.png`}
                   alt="Aravind Bala"
                   className="preloader-logo-img"
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
                 />
                 <span className="preloader-ring-pulse" />
               </div>
-            </motion.div>
+            </div>
 
             {/* Kinetic Typography Name Reveal */}
             <div className="preloader-title-wrap">
-              <motion.h1
-                className="preloader-title"
-                initial={{ y: 24, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              >
+              <h1 className="preloader-title">
                 ARAVIND BALA
-              </motion.h1>
-              <motion.p
-                className="preloader-subtitle"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.25 }}
-              >
+              </h1>
+              <p className="preloader-subtitle">
                 SOFTWARE DEVELOPER &bull; FULL-STACK
-              </motion.p>
+              </p>
             </div>
 
             {/* Progress Tracker & Numerical Counter */}
@@ -106,7 +105,7 @@ export default function Preloader() {
 
               {/* Progress Line Bar */}
               <div className="preloader-bar-track">
-                <motion.div
+                <div
                   className="preloader-bar-fill"
                   style={{ width: `${progress}%` }}
                 />

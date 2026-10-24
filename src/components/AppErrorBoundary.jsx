@@ -8,7 +8,33 @@ export default class AppErrorBoundary extends Component {
     console.error('AppErrorBoundary caught error:', error, errorInfo);
   }
   render() {
-    if (this.state.hasError) return <main className="app-recovery"><p className="eyebrow"><span />Portfolio</p><h1>Something interrupted the experience.</h1><p>Please refresh the page. If it persists, use the contact link below.</p><a className="button button-primary" href={gmailComposeUrl()} target="_blank" rel="noreferrer">Email Aravind</a></main>;
+    if (this.state.hasError) {
+      return (
+        <main className="app-recovery">
+          <p className="eyebrow"><span />Portfolio Recovery</p>
+          <h1>Something interrupted the experience.</h1>
+          <p>Please reload to restore the session. If it persists, contact Aravind directly.</p>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginTop: '20px', flexWrap: 'wrap' }}>
+            <button
+              className="button button-outline"
+              onClick={() => {
+                try {
+                  sessionStorage.clear();
+                  localStorage.clear();
+                } catch (_) {}
+                window.location.reload();
+              }}
+            >
+              Reload Experience
+            </button>
+            <a className="button button-primary" href={gmailComposeUrl()} target="_blank" rel="noreferrer">
+              Email Aravind
+            </a>
+          </div>
+        </main>
+      );
+    }
     return this.props.children;
   }
 }
+

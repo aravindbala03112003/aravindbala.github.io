@@ -63,6 +63,8 @@ export default defineConfig({
         '**/.vercel/**',
         '**/dist/**',
         '**/tmp/**',
+        '**/tmp*/**',
+        '**/tmp-chrome*/**',
         '**/*.zip',
         '**/*.apk',
         '**/android/**',

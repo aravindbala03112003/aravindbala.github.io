@@ -20,6 +20,14 @@ createRoot(document.getElementById('root')).render(
   </StrictMode>,
 );
 
+// Auto-recover from Vite dynamic preload errors (stale chunks after deployment)
+if (typeof window !== 'undefined') {
+  window.addEventListener('vite:preloadError', (event) => {
+    console.warn('Vite preload error detected, auto-reloading page for fresh assets...', event);
+    window.location.reload();
+  });
+}
+
 // Register PWA Service Worker (unregister in dev to prevent stale caching)
 if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
   if (import.meta.env.DEV) {

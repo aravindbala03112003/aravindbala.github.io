@@ -48,6 +48,13 @@ export default function HeroScene3D() {
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.25;
       container.appendChild(renderer.domElement);
+
+      const handleContextLost = (e) => {
+        e.preventDefault();
+        console.warn('HeroScene3D WebGL context lost; switching to fallback');
+        setWebGLSupported(false);
+      };
+      renderer.domElement.addEventListener('webglcontextlost', handleContextLost, false);
     } catch (e) {
       console.warn('WebGL Renderer failed to initialize:', e);
       setWebGLSupported(false);
@@ -84,15 +91,12 @@ export default function HeroScene3D() {
 
     // 1. Central Futuristic Crystal Core (Icosahedron)
     const coreGeometry = new THREE.IcosahedronGeometry(1.4, 0);
-    const coreMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x0e244d,
-      emissive: 0x1d4ed8,
-      emissiveIntensity: 0.35,
-      roughness: 0.1,
+    const coreMaterial = new THREE.MeshStandardMaterial({
+      color: 0x11284d,
+      emissive: 0x0284c7,
+      emissiveIntensity: 0.45,
+      roughness: 0.2,
       metalness: 0.85,
-      transmission: 0.5,
-      ior: 1.5,
-      thickness: 1.2,
       wireframe: false,
     });
     const coreMesh = new THREE.Mesh(coreGeometry, coreMaterial);
@@ -282,7 +286,14 @@ export default function HeroScene3D() {
         rootGroup.position.y = Math.sin(elapsedTime * 1.1) * 0.14;
       }
 
-      renderer.render(scene, camera);
+      try {
+        renderer.render(scene, camera);
+      } catch (err) {
+        console.warn('HeroScene3D render error, fallback enabled:', err);
+        setWebGLSupported(false);
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        return;
+      }
     };
 
     animate();

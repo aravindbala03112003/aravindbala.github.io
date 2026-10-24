@@ -1,11 +1,9 @@
 // Aravind Bala Portfolio — Service Worker
-const CACHE_NAME = 'aravind-portfolio-v18';
+const CACHE_NAME = 'aravind-portfolio-v22';
 const BASE_PATH = self.location.pathname.replace(/\/sw\.js$/, '') || '';
 const withBase = (path) => `${BASE_PATH}${path}`.replace(/\/+/g, '/');
 
 const STATIC_ASSETS = [
-  withBase('/'),
-  withBase('/index.html'),
   withBase('/manifest.webmanifest'),
   withBase('/favicon.svg'),
   withBase('/favicon.png'),
@@ -18,22 +16,24 @@ const STATIC_ASSETS = [
   withBase('/aravindbala_resume_page-0001.jpg')
 ];
 
-// Install Event: Cache critical shell assets
+// Install Event: Skip waiting immediately to take over stale workers
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(STATIC_ASSETS);
-    }).then(() => self.skipWaiting())
+    })
   );
 });
 
-// Activate Event: Clear older cache versions & claim clients
+// Activate Event: Clear all older cache versions & claim clients
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
         keys.map((key) => {
           if (key !== CACHE_NAME) {
+            console.log('[SW] Purging outdated cache:', key);
             return caches.delete(key);
           }
         })

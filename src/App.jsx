@@ -20,7 +20,7 @@ import { useActiveSection } from './hooks/useActiveSection';
 import { useGlobal3DMouse } from './hooks/useGlobal3DMouse';
 import { navLinks } from './data/portfolio';
 
-const Preloader = lazy(() => import('./components/Preloader'));
+import Preloader from './components/Preloader';
 const Testimonials = lazy(() => import('./sections/Testimonials'));
 
 export default function App() {
@@ -78,9 +78,7 @@ export default function App() {
 
   return (
     <AppErrorBoundary>
-      <Suspense fallback={null}>
-        <Preloader />
-      </Suspense>
+      <Preloader />
       <Cursor />
       <ScrollProgress />
       <Navbar active={active} onCommand={() => setCommandOpen(true)} />

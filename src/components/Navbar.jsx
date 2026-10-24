@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSound } from '../context/SoundContext';
 import { navLinks } from '../data/portfolio';
 import DownloadApkButton from './DownloadApkButton';
