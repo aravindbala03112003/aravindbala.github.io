@@ -14,6 +14,17 @@ export default function Navbar({ active, onCommand }) {
 
   const { isInstalled, hasNativePrompt, triggerInstall } = usePwaInstall();
 
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && open) {
+        setOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [open]);
+
   const visit = (id) => {
     try {
       playSynthSound('click');
@@ -52,7 +63,7 @@ export default function Navbar({ active, onCommand }) {
               <span className="brand-label">Aravind <b>Bala</b></span><i />
             </button>
           </div>
-          <div className={`nav-links ${open ? 'is-open' : ''}`}>
+          <div id="primary-navigation" className={`nav-links ${open ? 'is-open' : ''}`}>
             {navLinks.slice(1).map((link) => (
               <button className={active === link ? 'active' : ''} onClick={() => visit(link)} key={link}>
                 {link}
@@ -79,7 +90,13 @@ export default function Navbar({ active, onCommand }) {
                 playSound={playSynthSound}
               />
             </div>
-            <button className={`menu-button ${open ? 'is-active' : ''}`} onClick={() => setOpen(!open)} aria-label="Open menu">
+            <button
+              className={`menu-button ${open ? 'is-active' : ''}`}
+              onClick={() => setOpen(!open)}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
+              aria-controls="primary-navigation"
+            >
               <i /><i /><i />
             </button>
           </div>

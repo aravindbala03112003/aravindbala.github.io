@@ -53,8 +53,20 @@ export default function Work() {
           ))}
         </div>
         <div className="work-more reveal">
-          <p>More experiments, explorations, and open-source work on GitHub.</p>
-          <a className="text-link" href="#contact">View all projects <span>↗</span></a>
+          <p>More experiments, explorations, and open-source systems on GitHub.</p>
+          <div className="work-more-actions">
+            <a
+              className="text-link"
+              href="https://github.com/ARAVINDBALA3?tab=repositories"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View all repositories on GitHub <span>↗</span>
+            </a>
+            <a className="text-link" href="#contact">
+              Discuss a custom project <span>→</span>
+            </a>
+          </div>
         </div>
       </div>
       <ProjectModal project={selected} onClose={handleClose} triggerRef={triggerRef} />
