@@ -45,7 +45,7 @@ export default function Navbar({ active, onCommand }) {
     // Directly trigger download of the actual Android APK file
     const link = document.createElement('a');
     link.href = `${import.meta.env.BASE_URL}aravindbala-portfolio.apk`;
-    link.download = 'aravindbala-portfolio-v2.0.0.apk';
+    link.download = 'aravindbala-portfolio-v2.0.1.apk';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
