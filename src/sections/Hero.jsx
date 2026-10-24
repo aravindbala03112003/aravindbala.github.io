@@ -77,7 +77,7 @@ export default function Hero() {
     } catch (_) {}
     const link = document.createElement('a');
     link.href = `${import.meta.env.BASE_URL}aravindbala-portfolio.apk`;
-    link.download = 'aravindbala-portfolio.apk';
+    link.download = 'aravindbala-portfolio-v2.0.0.apk';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

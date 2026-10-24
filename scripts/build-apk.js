@@ -121,8 +121,8 @@ android {
         applicationId "com.aravindbala.portfolio"
         minSdk 24
         targetSdk 35
-        versionCode 1
-        versionName "1.0.0"
+        versionCode 2
+        versionName "2.0.0"
     }
 
     buildTypes {
@@ -517,6 +517,14 @@ fs.copyFileSync(builtApk, targetPublicApk);
 fs.copyFileSync(builtApk, targetDistApk);
 
 const apkStats = fs.statSync(targetPublicApk);
+const sizeMB = apkStats.size / (1024 * 1024);
 console.log(`\n🎉 SUCCESS! Standalone APK built and published:`);
 console.log(`File: ${targetPublicApk}`);
-console.log(`Size: ${(apkStats.size / (1024 * 1024)).toFixed(2)} MB`);
+console.log(`Size: ${sizeMB.toFixed(2)} MB (${apkStats.size} bytes)`);
+console.log(`Target Download Filename: aravindbala-portfolio-v2.0.0.apk`);
+
+if (apkStats.size > 50 * 1024 * 1024) {
+  throw new Error(`❌ CRITICAL: Final APK size (${sizeMB.toFixed(2)} MB) exceeds 50 MB limit!`);
+} else {
+  console.log(`✅ VERIFIED: APK size is within the 50 MB limit!`);
+}
