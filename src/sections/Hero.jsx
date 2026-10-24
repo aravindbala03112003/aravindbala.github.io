@@ -263,10 +263,6 @@ export default function Hero() {
               Scroll to discover <span className="scroll-prompt-arrow"><ArrowDown /></span>
             </a>
           </div>
-
-          <p className="hero-location" aria-hidden="true">
-            11.94° N, 79.80° E &bull; Puducherry, IN
-          </p>
         </div>
       </div>
 

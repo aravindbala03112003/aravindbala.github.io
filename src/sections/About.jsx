@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import SectionHeading from '../components/SectionHeading';
-import AboutFlowIllustration from '../components/AboutFlowIllustration';
 
 const STATS_DATA = [
   {
@@ -177,8 +176,6 @@ export default function About() {
         <div className="about-statement reveal">
           <p>Hi, I’m <strong>Aravind Bala</strong>, a Software Developer based in Puducherry, India. I build purposeful web, mobile, and full-stack applications with clean architecture and modern engineering.</p>
           <p>I care deeply about the invisible details: the edge cases, the loading states, system resilience, and the way a product feels in someone’s hands.</p>
-          
-          <AboutFlowIllustration />
 
           <a href="#contact" className="text-link">More about my approach <span>↗</span></a>
         </div>
