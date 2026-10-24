@@ -203,7 +203,7 @@ export default function HeroScene3D() {
     const particlePoints = new THREE.Points(particleGeometry, particleMaterial);
     scene.add(particlePoints);
 
-    // ====== INTERACTIVE POINTER LISTENER ======
+    // ====== INTERACTIVE POINTER & TOUCH LISTENER ======
     let mouseX = 0;
     let mouseY = 0;
     let targetX = 0;
@@ -217,7 +217,19 @@ export default function HeroScene3D() {
       targetY = y * 1.2;
     };
 
+    const handleTouchMove = (e) => {
+      if (e.touches && e.touches[0]) {
+        const touch = e.touches[0];
+        const rect = container.getBoundingClientRect();
+        const x = (touch.clientX - rect.left) / rect.width - 0.5;
+        const y = (touch.clientY - rect.top) / rect.height - 0.5;
+        targetX = x * 1.4;
+        targetY = y * 1.4;
+      }
+    };
+
     window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    container.addEventListener('touchmove', handleTouchMove, { passive: true });
 
     // ====== RESIZE HANDLER ======
     const handleResize = () => {
@@ -278,9 +290,11 @@ export default function HeroScene3D() {
         particlePoints.rotation.y = elapsedTime * 0.03;
         particlePoints.rotation.x = elapsedTime * 0.015;
 
-        // Overall root tilt response
-        rootGroup.rotation.y = mouseX * 0.65;
-        rootGroup.rotation.x = -mouseY * 0.65;
+        // Overall root tilt response with organic autonomous idle sway
+        const idleSwayX = Math.sin(elapsedTime * 0.45) * 0.12;
+        const idleSwayY = Math.cos(elapsedTime * 0.35) * 0.08;
+        rootGroup.rotation.y = (mouseX + idleSwayX) * 0.65;
+        rootGroup.rotation.x = (-mouseY + idleSwayY) * 0.65;
 
         // Gentle floating respiration
         rootGroup.position.y = Math.sin(elapsedTime * 1.1) * 0.14;
@@ -302,6 +316,7 @@ export default function HeroScene3D() {
     return () => {
       observer.disconnect();
       window.removeEventListener('pointermove', handlePointerMove);
+      container.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('resize', handleResize);
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
 
