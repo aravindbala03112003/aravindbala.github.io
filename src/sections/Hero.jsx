@@ -169,7 +169,7 @@ export default function Hero() {
                 playSynthSound('pop');
                 openContactForm({ focus: true });
               }}
-              aria-label="Contact Aravind Bala"
+              aria-label="Contact Me — Send message to Aravind Bala"
             >
               <Mail /> Contact Me
             </button>
@@ -180,7 +180,7 @@ export default function Hero() {
               href={`${import.meta.env.BASE_URL}resume.pdf`}
               download="Aravind_Bala_Resume.pdf"
               onClick={handleResumeClick}
-              aria-label="Download Aravind Bala Resume PDF and open preview"
+              aria-label="Download Resume — PDF and preview"
               role="button"
             >
               <span className="hud-border-circuit" aria-hidden="true" />
@@ -212,7 +212,7 @@ export default function Hero() {
             <button
               className="button button-ghost hero-apk-btn"
               onClick={handleDownloadApk}
-              aria-label="Download Standalone Android APK for Aravind Bala Portfolio"
+              aria-label="Download APK — Standalone Android App"
             >
               <svg className="apk-svg-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-1.0001 0-.5515.4482-.9997.9993-.9997.5512 0 .9997.4482.9997.9997 0 .5515-.4485 1.0001-.9997 1.0001m-11.046 0c-.5511 0-.9993-.4486-.9993-1.0001 0-.5515.4482-.9997.9993-.9997.5512 0 .9997.4482.9997.9997 0 .5515-.4485 1.0001-.9997 1.0001m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.411 13.8533 8.08 12 8.08s-3.5902.331-5.1368.8707L4.8409 5.4477a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3432-4.1021-2.6889-7.5743-6.1185-9.4396" />

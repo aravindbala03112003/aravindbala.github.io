@@ -225,11 +225,10 @@ export default function ProjectCardVisual({ project, isHovered, mousePos = { x: 
         ref={videoRef}
         src={config.src}
         poster={config.poster}
-        autoPlay
         loop
         muted
         playsInline
-        preload="auto"
+        preload="none"
         aria-label={config.label}
         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         animate={{ rotateX, rotateY, scale: isHovered ? 1.04 : 1 }}

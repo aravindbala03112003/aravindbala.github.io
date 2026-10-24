@@ -135,15 +135,6 @@ export default function Experience() {
                   isActive ? 'is-active' : ''
                 }`}
                 onClick={() => handleSelect(item)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleSelect(item);
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-                aria-label={`${item.year} - ${item.title}`}
                 key={item.title}
               >
                 <p className="timeline-year">{item.year}</p>

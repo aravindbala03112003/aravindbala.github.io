@@ -59,7 +59,7 @@ export default function Navbar({ active, onCommand }) {
             <button className="profile-avatar-button brand-logo-button" onClick={() => visit('home')} aria-label="Aravind Bala Portfolio Logo">
               <span className="profile-avatar brand-logo-wrap"><img src={`${import.meta.env.BASE_URL}logo/portfolio-logo.png`} alt="Aravind Bala Logo" /></span>
             </button>
-            <button className="brand-name" onClick={() => visit('home')} aria-label="Go home">
+            <button className="brand-name" onClick={() => visit('home')} aria-label="Aravind Bala — Home">
               <span className="brand-label">Aravind <b>Bala</b></span><i />
             </button>
           </div>
@@ -78,7 +78,7 @@ export default function Navbar({ active, onCommand }) {
             </div>
           </div>
           <div className="nav-actions">
-            <button className="command-trigger" onClick={onCommand} aria-label="Open command palette">⌘K</button>
+            <button className="command-trigger" onClick={onCommand} aria-label="⌘K — Open command palette">⌘K</button>
             <SelfIntroNavBtn
               onOpenModal={() => setSelfIntroOpen(true)}
               playSound={playSynthSound}

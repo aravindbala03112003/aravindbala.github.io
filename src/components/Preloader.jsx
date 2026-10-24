@@ -18,14 +18,14 @@ export default function Preloader() {
       hasLoaded = Boolean(sessionStorage.getItem('portfolio-session-preloaded'));
     } catch (_) {}
 
-    // Strict safety timer: unmount within 800ms max unconditionally
+    // Strict safety timer: unmount within 480ms max unconditionally
     const safetyTimer = setTimeout(() => {
       setProgress(100);
       setLoading(false);
-    }, hasLoaded ? 350 : 800);
+    }, hasLoaded ? 220 : 480);
 
-    const intervalTime = hasLoaded ? 14 : 24;
-    const increment = hasLoaded ? 10 : 5;
+    const intervalTime = hasLoaded ? 10 : 16;
+    const increment = hasLoaded ? 12 : 8;
 
     let currentVal = 0;
     const timer = setInterval(() => {

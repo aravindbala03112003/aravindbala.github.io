@@ -178,15 +178,6 @@ export default function Services() {
                 onMouseEnter={() => setHoveredId(service.id)}
                 onMouseLeave={() => setHoveredId(null)}
                 onClick={() => handleCardClick(service)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleCardClick(service);
-                  }
-                }}
-                aria-label={`${service.title} — ${service.description}. Click to discuss.`}
               >
                 {/* Ambient Hover Spotlight */}
                 <div className="service-card-ambient-glow" aria-hidden="true" />
@@ -205,7 +196,7 @@ export default function Services() {
                       e.stopPropagation();
                       handleCardClick(service);
                     }}
-                    aria-label={`Inquire about ${service.title}`}
+                    aria-label={`Discuss ${service.title}`}
                   >
                     <span>Discuss</span>
                     <ArrowUpRight />

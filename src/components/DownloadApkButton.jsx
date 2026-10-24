@@ -49,7 +49,7 @@ export default function DownloadApkButton({ onInstallClick, isInstalled, playSou
         isInstalled ? 'is-installed' : ''
       }`}
       onClick={handleClick}
-      aria-label="Download Aravind Bala Portfolio Android APK"
+      aria-label={isInstalled ? 'App Installed — Portfolio Android App' : 'Download APK — Portfolio Android App'}
       title="Download Android APK"
     >
       <span className="download-apk-shimmer" aria-hidden="true" />

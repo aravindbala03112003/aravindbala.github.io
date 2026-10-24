@@ -172,7 +172,7 @@ export default function Contact() {
           type="button"
           className="email-link email-btn-reset"
           onClick={() => openContactForm({ focus: true })}
-          aria-label="Start email in contact form"
+          aria-label={`Email ${contactEmail} — open contact form`}
         >
           <Mail />
           {contactEmail}

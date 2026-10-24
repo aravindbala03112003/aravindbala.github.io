@@ -2746,6 +2746,9 @@ h1,h2,h3{font-weight:700;letter-spacing:-.055em}
 
 .timeline-place {
   display: block !important;
+  color: #94a3b8 !important;
+  font-size: 0.95rem;
+  margin-top: 4px;
 }
 
 .timeline-doc-btn {

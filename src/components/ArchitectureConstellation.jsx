@@ -125,7 +125,7 @@ export default function ArchitectureConstellation() {
             <span className="arch-status-dot" />
             <span>INTERACTIVE SYSTEM PIPELINE</span>
           </div>
-          <h4 className="arch-title">Full-Stack Data Flow & Architecture Topology</h4>
+          <h3 className="arch-title">Full-Stack Data Flow & Architecture Topology</h3>
         </div>
         <div className="arch-flow-filters" role="tablist" aria-label="Architecture filters">
           {FLOW_FILTERS.map((f) => (
